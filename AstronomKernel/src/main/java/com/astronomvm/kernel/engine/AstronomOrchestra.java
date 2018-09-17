@@ -1,6 +1,7 @@
 package com.astronomvm.kernel.engine;
 
 import com.astronomvm.component.BaseComponent;
+import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.output.ResultStorage;
 import com.astronomvm.core.meta.AstronomMetaFlow;
 import com.astronomvm.core.meta.StepMeta;
@@ -10,9 +11,10 @@ import com.astronomvm.kernel.workflow.AstronomWorkflow;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AstronomOrchestra implements ComponentExecutionListener{
+public class AstronomOrchestra {
 
     private ResultStorage resultStorage;
 
@@ -50,17 +52,11 @@ public class AstronomOrchestra implements ComponentExecutionListener{
 
     private void executeStep(AstronomWorkflow workflow,StepMeta step){
         BaseComponent component = workflow.getComponentByName(step.getComponentMeta().getName());
-        ComponentExecutor componentExecutor = new ComponentExecutor(this);
-        componentExecutor.execute(component,step.getInputParameters());
+        ComponentExecutor componentExecutor = new ComponentExecutor();
+        Optional<ResultSet> resultSetOption = componentExecutor.execute(component,step.getInputParameters());
+        if(resultSetOption.isPresent()){
+            this.resultStorage.addStepResult(step,resultSetOption.get());
+        }
     }
 
-    @Override
-    public void onStartComponentExecution() {
-
-    }
-
-    @Override
-    public void onFinishComponentExecution() {
-
-    }
 }
