@@ -18,7 +18,7 @@ public class WokflowBuilder {
     }
 
     public static AstronomWorkflow buildWorkflow(AstronomMetaFlow astronomMetaFlow){
-        AstronomWorkflow astronomWorkflow = new AstronomWorkflow();
+        AstronomWorkflow astronomWorkflow = new AstronomWorkflow(astronomMetaFlow);
         astronomMetaFlow.getStepMetaList().stream().forEach(step -> {
             try {
                 BaseComponent component = ComponentFactory.getInstance().buildComponent(step.getComponentMeta().getName());
