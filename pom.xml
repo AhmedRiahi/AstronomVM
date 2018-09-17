@@ -18,6 +18,7 @@
         <module>AstronomCore</module>
         <module>CSVFileLoaderComponent</module>
         <module>AstonomDesigner</module>
+        <module>AstronomAPI</module>
     </modules>
 
 
