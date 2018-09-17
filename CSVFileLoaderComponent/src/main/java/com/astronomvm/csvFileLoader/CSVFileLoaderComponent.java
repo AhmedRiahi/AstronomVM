@@ -7,7 +7,9 @@ public class CSVFileLoaderComponent extends BaseComponent {
 
 
     public ComponentMeta getComponentMeta() {
-        return null;
+        ComponentMeta componentMeta = new ComponentMeta();
+        componentMeta.setName("CSVFileLoaderComponent");
+        return componentMeta;
     }
 
     public void execute() {

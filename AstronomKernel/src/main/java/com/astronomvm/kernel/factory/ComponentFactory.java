@@ -1,7 +1,7 @@
 package com.astronomvm.kernel.factory;
 
 import com.astronomvm.component.BaseComponent;
-import com.astronomvm.kernel.component.ComponentsRegistryBoard;
+import com.astronomvm.kernel.spi.ComponentsRegistryBoard;
 
 public class ComponentFactory {
 

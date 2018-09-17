@@ -21,11 +21,7 @@ public class AstronomOrchestra implements ComponentExecutionListener{
         HashMap<Integer,List<StepMeta>> stepsIndex = this.buildWorkflowExecutionOrder(workflow.getAstronomMetaFlow());
         stepsIndex.values().stream().forEach(level -> {
             List<StepMeta> steps = stepsIndex.get(level);
-            steps.stream().forEach(step ->{
-                BaseComponent component = workflow.getComponentByName(step.getComponentMeta().getName());
-                ComponentExecutor componentExecutor = new ComponentExecutor(this);
-                componentExecutor.execute(component,step.getInputParameters());
-            });
+            steps.stream().forEach(step ->this.executeStep(workflow,step));
         });
     }
 
@@ -51,9 +47,16 @@ public class AstronomOrchestra implements ComponentExecutionListener{
         return stepsIndex;
     }
 
+
+    private void executeStep(AstronomWorkflow workflow,StepMeta step){
+        BaseComponent component = workflow.getComponentByName(step.getComponentMeta().getName());
+        ComponentExecutor componentExecutor = new ComponentExecutor(this);
+        componentExecutor.execute(component,step.getInputParameters());
+    }
+
     @Override
     public void onStartComponentExecution() {
-        
+
     }
 
     @Override

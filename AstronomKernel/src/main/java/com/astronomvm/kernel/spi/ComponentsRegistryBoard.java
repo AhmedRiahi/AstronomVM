@@ -1,6 +1,4 @@
-package com.astronomvm.kernel.component;
-
-import com.astronomvm.component.BaseComponent;
+package com.astronomvm.kernel.spi;
 
 import java.util.HashMap;
 import java.util.Map;
