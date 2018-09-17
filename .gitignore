@@ -4,3 +4,6 @@ CSVFileLoaderComponent/target/*
 AstronomKernel/target/*
 AstronomCore/target/*
 AstronomComponent/target/*
+*.iml
+AstonomDesigner/target/*
+*.log

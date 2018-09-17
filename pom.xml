@@ -13,6 +13,7 @@
         <module>AstronomKernel</module>
         <module>AstronomCore</module>
         <module>FileLoaderComponent</module>
+        <module>AstonomDesigner</module>
     </modules>
 
 
