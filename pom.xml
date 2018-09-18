@@ -19,6 +19,7 @@
         <module>CSVFileLoaderComponent</module>
         <module>AstonomDesigner</module>
         <module>AstronomAPI</module>
+        <module>RowFilterComponent</module>
     </modules>
 
 
