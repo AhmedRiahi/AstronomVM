@@ -21,9 +21,9 @@ public class AstronomOrchestra {
 
     public void play(AstronomWorkflow workflow){
         HashMap<Integer,List<StepMeta>> stepsIndex = this.buildWorkflowExecutionOrder(workflow.getAstronomMetaFlow());
-        stepsIndex.values().stream().forEach(level -> {
+        stepsIndex.values().forEach(level -> {
             List<StepMeta> steps = stepsIndex.get(level);
-            steps.stream().forEach(step ->this.executeStep(workflow,step));
+            steps.forEach(step ->this.executeStep(workflow,step));
         });
     }
 
@@ -33,14 +33,12 @@ public class AstronomOrchestra {
         List<Transition> currentTransitions = metaFlow.getTransitions();
         final AtomicInteger level = new AtomicInteger(0);
         while(!currentSteps.isEmpty()){
-            currentSteps.stream().forEach(step -> {
+            currentSteps.forEach(step -> {
                 boolean stepInTargetTransition = currentTransitions.stream().anyMatch(transition -> transition.getTarget().equals(step));
                 if(!stepInTargetTransition){
                     currentSteps.remove(step);
                     currentTransitions.removeIf(transition -> transition.getSource().equals(step));
-                    if(stepsIndex.get(level.get()) == null){
-                        stepsIndex.put(level.get(),new ArrayList<>());
-                    }
+                    stepsIndex.putIfAbsent(level.get(),new ArrayList<>());
                     stepsIndex.get(level.get()).add(step);
                 }
             });
@@ -54,9 +52,8 @@ public class AstronomOrchestra {
         BaseComponent component = workflow.getComponentByName(step.getComponentMeta().getName());
         ComponentExecutor componentExecutor = new ComponentExecutor();
         Optional<ResultSet> resultSetOption = componentExecutor.execute(component,step.getInputParameters());
-        if(resultSetOption.isPresent()){
-            this.resultStorage.addStepResult(step,resultSetOption.get());
-        }
+        resultSetOption.ifPresent(result -> this.resultStorage.addStepResult(step,resultSetOption.get()));
+
     }
 
 }
