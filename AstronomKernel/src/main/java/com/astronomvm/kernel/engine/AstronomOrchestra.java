@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class AstronomOrchestra {
 
-    private ResultStorage resultStorage;
+    private ResultStorage resultStorage = new ResultStorage();
 
 
     public void play(AstronomWorkflow workflow){

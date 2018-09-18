@@ -21,7 +21,7 @@ public class ComponentsLoader {
         while(iterator.hasNext()){
             System.out.println("Registering new component");
             BaseComponent component = iterator.next();
-            ComponentsRegistryBoard.getInstance().registerComponent(component.getComponentMeta().getName(),component.getClass());
+            ComponentsRegistryBoard.getInstance().registerComponent(component.getComponentMeta(),component.getClass());
         }
     }
 }

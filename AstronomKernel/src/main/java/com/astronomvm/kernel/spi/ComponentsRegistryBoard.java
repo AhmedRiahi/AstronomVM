@@ -1,5 +1,7 @@
 package com.astronomvm.kernel.spi;
 
+import com.astronomvm.core.meta.ComponentMeta;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +10,7 @@ public class ComponentsRegistryBoard {
 
     private static final ComponentsRegistryBoard instance = new ComponentsRegistryBoard();
 
-    private Map<String,Class> componentMap = new HashMap<>();
+    private Map<ComponentMeta,Class> componentMap = new HashMap<>();
 
     private ComponentsRegistryBoard(){}
 
@@ -16,12 +18,12 @@ public class ComponentsRegistryBoard {
         return ComponentsRegistryBoard.instance;
     }
 
-    public void registerComponent(String name,Class clazz){
-        this.componentMap.put(name,clazz);
+    public void registerComponent(ComponentMeta componentMeta,Class clazz){
+        this.componentMap.put(componentMeta,clazz);
     }
 
     public Class getComponentClass(String name){
-        return this.componentMap.get(name);
+        return this.componentMap.values().stream().filter(componentMeta -> componentMeta.getName().equals(name)).findAny().get();
     }
 
 }
