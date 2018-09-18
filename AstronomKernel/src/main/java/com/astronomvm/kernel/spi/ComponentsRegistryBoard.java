@@ -4,6 +4,7 @@ import com.astronomvm.core.meta.ComponentMeta;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 
 public class ComponentsRegistryBoard {
@@ -23,7 +24,11 @@ public class ComponentsRegistryBoard {
     }
 
     public Class getComponentClass(String name){
-        return this.componentMap.values().stream().filter(componentMeta -> componentMeta.getName().equals(name)).findAny().get();
+        return this.componentMap.entrySet().stream().filter(entry -> entry.getKey().getName().equals(name)).findAny().get().getValue();
+    }
+
+    public Set<ComponentMeta> getAllRegisteredComponents(){
+        return this.componentMap.keySet();
     }
 
 }

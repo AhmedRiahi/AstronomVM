@@ -2,11 +2,11 @@ package com.astronomvm.core.meta;
 
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 public class ComponentMeta {
 
     private String name;
-    private List<ParameterMeta> parameterMetas;
+    private Set<ParameterMeta> parameterMetas;
 }
