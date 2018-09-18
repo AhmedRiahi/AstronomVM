@@ -8,10 +8,16 @@ import com.astronomvm.core.meta.ComponentMeta;
 import java.util.Optional;
 
 public class RowFilterComponent extends BaseComponent {
-    
+
+
+
     @Override
     public ComponentMeta getComponentMeta() {
-        return null;
+        ComponentMeta componentMeta = new ComponentMeta();
+
+        
+
+        return componentMeta;
     }
 
     @Override
