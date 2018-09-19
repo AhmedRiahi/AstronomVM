@@ -10,4 +10,10 @@ public class AstronomObject {
     public AstronomObject(Object underlying){
         this.underlying = underlying;
     }
+
+
+    public String toString(){
+        return this.underlying.toString();
+    }
+
 }

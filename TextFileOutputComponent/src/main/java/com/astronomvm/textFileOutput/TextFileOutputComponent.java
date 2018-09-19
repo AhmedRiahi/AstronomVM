@@ -25,7 +25,7 @@ public class TextFileOutputComponent extends BaseComponent {
     @Override
     public ComponentMeta getComponentMeta() {
         ComponentMeta componentMeta = new ComponentMeta();
-        componentMeta.setName("CSV_FILE_LOADER");
+        componentMeta.setName("TEXT_FILE_OUTPUT");
 
         ParameterMeta filePathParameterMeta = new ParameterMeta();
         filePathParameterMeta.setName(FILE_PATH_PARAMETER_NAME);
