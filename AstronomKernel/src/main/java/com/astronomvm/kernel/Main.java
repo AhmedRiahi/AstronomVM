@@ -18,6 +18,8 @@ public class Main {
         AstronomMetaFlow astronomMetaFlow = new AstronomMetaFlow();
 
         astronomMetaFlow.addStepMeta(buildCSVLoaderMetaStep());
+        astronomMetaFlow.addStepMeta(buildRowFilterMetaStep());
+        astronomMetaFlow.addStepMeta(buildTextOutputMetaStep());
         AstronomEngine.getInstance().executeWorkflow(astronomMetaFlow);
     }
 
@@ -32,4 +34,31 @@ public class Main {
         stepMeta.setComponentMeta(componentMeta);
         return stepMeta;
     }
+
+    public static StepMeta buildRowFilterMetaStep(){
+        StepMeta stepMeta = new StepMeta();
+        ComponentMeta componentMeta = new ComponentMeta();
+        componentMeta.setName("ROW_FILTER");
+
+        stepMeta.getInputParameters().addParameter(new InputParameter("FILTER_COLUMN",new AstronomObject("C:\\astronomvm\\test.txt")));
+        stepMeta.getInputParameters().addParameter(new InputParameter("FILTER_OPERATOR",new AstronomObject(";")));
+        stepMeta.getInputParameters().addParameter(new InputParameter("FILTER_VALUE",new AstronomObject("Astro")));
+        stepMeta.getInputParameters().addParameter(new InputParameter("INPUT_FLOW",new AstronomObject("csv_flow")));
+        stepMeta.setComponentMeta(componentMeta);
+        return stepMeta;
+    }
+
+    public static StepMeta buildTextOutputMetaStep(){
+        StepMeta stepMeta = new StepMeta();
+        ComponentMeta componentMeta = new ComponentMeta();
+        componentMeta.setName("TEXT_FILE_OUTPUT");
+
+        stepMeta.getInputParameters().addParameter(new InputParameter("FILE_PATH",new AstronomObject("C:\\astronomvm\\out.txt")));
+        stepMeta.getInputParameters().addParameter(new InputParameter("SEPARATOR",new AstronomObject(";")));
+        stepMeta.getInputParameters().addParameter(new InputParameter("INPUT_FLOW",new AstronomObject("csv_flow")));
+        stepMeta.setComponentMeta(componentMeta);
+        return stepMeta;
+    }
+
+
 }

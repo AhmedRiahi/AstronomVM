@@ -20,7 +20,7 @@ public class RowFilterComponent extends BaseComponent {
 
     private static final String INPUT_FLOW_PARAMETER_NAME = "INPUT_FLOW";
     private static final String FILTER_COLUMN_PARAMETER_NAME = "FILTER_COLUMN";
-    private static final String FILTER_OPERATOR_PARAMETER_NAME = "FILTER_COLUMN";
+    private static final String FILTER_OPERATOR_PARAMETER_NAME = "FILTER_OPERATOR";
     private static final String FILTER_VALUE_PARAMETER_NAME = "FILTER_VALUE";
 
 

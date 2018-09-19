@@ -5,17 +5,21 @@ import com.astronomvm.component.exception.ComponentException;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.output.ResultStorage;
+import com.astronomvm.core.data.row.DataType;
 import com.astronomvm.core.meta.AstronomMetaFlow;
+import com.astronomvm.core.meta.ParameterMeta;
 import com.astronomvm.core.meta.StepMeta;
 import com.astronomvm.core.meta.Transition;
 import com.astronomvm.kernel.workflow.AstronomWorkflow;
 
+import javax.xml.crypto.Data;
 import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class AstronomOrchestra {
 
@@ -57,6 +61,10 @@ public class AstronomOrchestra {
         BaseComponent component = workflow.getComponentByName(step.getComponentMeta().getName());
         ComponentExecutor componentExecutor = new ComponentExecutor();
         try {
+            List<ParameterMeta> resultSetParameterMetas = step.getComponentMeta().getParameterMetas().stream().filter(parameterMeta -> parameterMeta.getType().equals(DataType.RESULT_SET)).collect(Collectors.toList());
+            resultSetParameterMetas.stream().forEach(parameterMeta -> {
+                //TODO
+            });
             ResultFlow resultFlow = componentExecutor.execute(component,step.getInputParameters());
             this.resultStorage.addStepResult(step,resultFlow);
         } catch (ComponentException e) {
