@@ -7,9 +7,17 @@ import com.astronomvm.kernel.workflow.AstronomWorkflow;
 public class AstronomEngine {
 
 
-    private AstronomOrchestra astronomOrchestra;
+    private final static AstronomEngine instance = new AstronomEngine();
+
+    private AstronomEngine(){}
+
+    public static AstronomEngine getInstance(){
+        return AstronomEngine.instance;
+    }
+
 
     public void executeWorkflow(AstronomMetaFlow flow){
+        AstronomOrchestra astronomOrchestra = new AstronomOrchestra();
         AstronomWorkflow astronomWorkflow = WokflowBuilder.getInstance().buildWorkflow(flow);
         astronomOrchestra.play(astronomWorkflow);
     }

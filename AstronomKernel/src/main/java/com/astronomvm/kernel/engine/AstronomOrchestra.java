@@ -24,7 +24,7 @@ public class AstronomOrchestra {
 
     public void play(AstronomWorkflow workflow){
         HashMap<Integer,List<StepMeta>> stepsIndex = this.buildWorkflowExecutionOrder(workflow.getAstronomMetaFlow());
-        stepsIndex.values().forEach(level -> {
+        stepsIndex.keySet().forEach(level -> {
             List<StepMeta> steps = stepsIndex.get(level);
             steps.forEach(step ->this.executeStep(workflow,step));
         });
@@ -36,15 +36,17 @@ public class AstronomOrchestra {
         List<Transition> currentTransitions = metaFlow.getTransitions();
         final AtomicInteger level = new AtomicInteger(0);
         while(!currentSteps.isEmpty()){
+            List<StepMeta> processedSteps = new ArrayList<>();
             currentSteps.forEach(step -> {
                 boolean stepInTargetTransition = currentTransitions.stream().anyMatch(transition -> transition.getTarget().equals(step));
                 if(!stepInTargetTransition){
-                    currentSteps.remove(step);
+                    processedSteps.add(step);
                     currentTransitions.removeIf(transition -> transition.getSource().equals(step));
                     stepsIndex.putIfAbsent(level.get(),new ArrayList<>());
                     stepsIndex.get(level.get()).add(step);
                 }
             });
+            currentSteps.removeAll(processedSteps);
             level.incrementAndGet();
         }
         return stepsIndex;
