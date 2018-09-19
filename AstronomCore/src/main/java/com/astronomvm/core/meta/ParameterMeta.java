@@ -8,4 +8,5 @@ public class ParameterMeta {
 
     private String name;
     private DataType type;
+    private boolean userInput = true;
 }
