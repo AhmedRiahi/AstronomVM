@@ -1,10 +1,9 @@
-package com.astronomvm.core.data;
+package com.astronomvm.core.data.row;
 
 import lombok.Data;
 
 @Data
 public class Column {
 
-    private String name;
     private AstronomObject value;
 }

@@ -1,4 +1,4 @@
-package com.astronomvm.core.data;
+package com.astronomvm.core.data.row;
 
 public class AstronomObject {
 
