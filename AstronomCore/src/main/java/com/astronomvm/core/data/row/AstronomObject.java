@@ -1,5 +1,8 @@
-package com.astronomvm.core.data;
+package com.astronomvm.core.data.row;
 
+import lombok.Data;
+
+@Data
 public class AstronomObject {
 
     private Object underlying;
