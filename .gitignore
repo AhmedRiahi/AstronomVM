@@ -7,3 +7,6 @@ AstronomComponent/target/*
 *.iml
 AstonomDesigner/target/*
 *.log
+AstronomAPI/target/*
+RowFilterComponent/target/*
+TextFileOutputComponent/target/*

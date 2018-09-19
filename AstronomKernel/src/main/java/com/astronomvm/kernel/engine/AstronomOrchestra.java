@@ -1,6 +1,8 @@
 package com.astronomvm.kernel.engine;
 
 import com.astronomvm.component.BaseComponent;
+import com.astronomvm.component.exception.ComponentException;
+import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.output.ResultStorage;
 import com.astronomvm.core.meta.AstronomMetaFlow;
@@ -8,6 +10,7 @@ import com.astronomvm.core.meta.StepMeta;
 import com.astronomvm.core.meta.Transition;
 import com.astronomvm.kernel.workflow.AstronomWorkflow;
 
+import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,8 +54,13 @@ public class AstronomOrchestra {
     private void executeStep(AstronomWorkflow workflow,StepMeta step){
         BaseComponent component = workflow.getComponentByName(step.getComponentMeta().getName());
         ComponentExecutor componentExecutor = new ComponentExecutor();
-        Optional<ResultSet> resultSetOption = componentExecutor.execute(component,step.getInputParameters());
-        resultSetOption.ifPresent(result -> this.resultStorage.addStepResult(step,resultSetOption.get()));
+        try {
+            ResultFlow resultFlow = componentExecutor.execute(component,step.getInputParameters());
+            this.resultStorage.addStepResult(step,resultFlow);
+        } catch (ComponentException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

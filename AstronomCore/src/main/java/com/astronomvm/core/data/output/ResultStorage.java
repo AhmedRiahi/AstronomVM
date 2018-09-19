@@ -8,9 +8,9 @@ import java.util.Map;
 @Data
 public class ResultStorage {
 
-    private Map<StepMeta,ResultSet> stepResults;
+    private Map<StepMeta,ResultFlow> stepResults;
 
-    public void addStepResult(StepMeta stepMeta,ResultSet resultSet){
-        this.stepResults.put(stepMeta,resultSet);
+    public void addStepResult(StepMeta stepMeta,ResultFlow resultFlow){
+        this.stepResults.put(stepMeta,resultFlow);
     }
 }
