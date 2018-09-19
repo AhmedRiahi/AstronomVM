@@ -10,3 +10,4 @@ AstonomDesigner/target/*
 AstronomAPI/target/*
 RowFilterComponent/target/*
 TextFileOutputComponent/target/*
+*.jar

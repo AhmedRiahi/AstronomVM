@@ -19,8 +19,8 @@ public class ComponentsLoader {
         ServiceLoader<BaseComponent> loaders = ServiceLoader.load(BaseComponent.class);
         Iterator<BaseComponent> iterator = loaders.iterator();
         while(iterator.hasNext()){
-            System.out.println("Registering new component");
             BaseComponent component = iterator.next();
+            System.out.println("Registering new component "+component.getComponentMeta().getName());
             ComponentsRegistryBoard.getInstance().registerComponent(component.getComponentMeta(),component.getClass());
         }
     }
