@@ -24,8 +24,10 @@ import java.util.stream.Collectors;
 public class AstronomOrchestra {
 
     private ResultStorage resultStorage = new ResultStorage();
+    private List<IOrchestraListener> orchestraListeners = new ArrayList<>();
 
     public void play(AstronomWorkflow workflow){
+        orchestraListeners.parallelStream().forEach(IOrchestraListener::onOrchestraStartEvent);
         HashMap<Integer,List<StepMeta>> stepsIndex = this.buildWorkflowExecutionOrder(workflow.getAstronomMetaFlow());
         stepsIndex.keySet().forEach(level -> {
             List<StepMeta> steps = stepsIndex.get(level);
@@ -78,6 +80,10 @@ public class AstronomOrchestra {
             ResultSet inputFlowResultSet = resultSetMap.get(inputFlowName);
             stepMeta.getInputParameters().addParameter(new InputParameter(inputFlowName,new AstronomObject(inputFlowResultSet)));
         });
+    }
+
+    public void subscribeOrchestraListener(IOrchestraListener orchestraListener){
+        this.orchestraListeners.add(orchestraListener);
     }
 
 }
