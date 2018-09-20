@@ -2,6 +2,8 @@ package com.astronomvm.kernel;
 
 import com.astronomvm.core.data.input.InputParameter;
 import com.astronomvm.core.data.row.AstronomObject;
+import com.astronomvm.core.data.row.DataType;
+import com.astronomvm.core.data.row.RowHeader;
 import com.astronomvm.core.meta.*;
 import com.astronomvm.kernel.engine.AstronomEngine;
 import com.astronomvm.kernel.spi.ComponentsLoader;
@@ -34,6 +36,10 @@ public class Main {
         stepMeta.getInputParameters().addParameter(new InputParameter("FILE_PATH",new AstronomObject("C:\\astronomvm\\test.txt")));
         stepMeta.getInputParameters().addParameter(new InputParameter("SEPARATOR",new AstronomObject(";")));
         stepMeta.getInputParameters().addParameter(new InputParameter("OUTPUT_FLOW",new AstronomObject("csv_flow")));
+        RowHeader rowHeader = new RowHeader();
+        rowHeader.addColumn("Name", DataType.INPUT_FLOW_NAME.STRING);
+        rowHeader.addColumn("Job", DataType.INPUT_FLOW_NAME.STRING);
+        stepMeta.getInputParameters().addParameter(new InputParameter("ROW_HEADER",new AstronomObject(rowHeader)));
         stepMeta.setComponentMeta(componentMeta);
         return stepMeta;
     }
@@ -58,7 +64,7 @@ public class Main {
 
         stepMeta.getInputParameters().addParameter(new InputParameter("FILE_PATH",new AstronomObject("C:\\astronomvm\\out.txt")));
         stepMeta.getInputParameters().addParameter(new InputParameter("SEPARATOR",new AstronomObject(";")));
-        stepMeta.getInputParameters().addParameter(new InputParameter("INPUT_FLOW",new AstronomObject("csv_flow")));
+        stepMeta.getInputParameters().addParameter(new InputParameter("INPUT_FLOW_NAME",new AstronomObject("VALID")));
         stepMeta.setComponentMeta(componentMeta);
         return stepMeta;
     }

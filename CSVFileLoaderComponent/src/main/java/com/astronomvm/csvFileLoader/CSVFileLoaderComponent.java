@@ -2,10 +2,7 @@ package com.astronomvm.csvFileLoader;
 
 import com.astronomvm.component.BaseComponent;
 import com.astronomvm.component.exception.ComponentException;
-import com.astronomvm.core.data.row.AstronomObject;
-import com.astronomvm.core.data.row.Column;
-import com.astronomvm.core.data.row.DataType;
-import com.astronomvm.core.data.row.Row;
+import com.astronomvm.core.data.row.*;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.meta.ComponentMeta;
@@ -15,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
@@ -23,6 +21,7 @@ public class CSVFileLoaderComponent extends BaseComponent {
     private static final String FILE_PATH_PARAMETER_NAME = "FILE_PATH";
     private static final String SEPARATOR_PARAMETER_NAME = "SEPARATOR";
     private static final String OUTPUT_FLOW_NAME_PARAMETER_NAME = "OUTPUT_FLOW";
+    private static final String ROW_HEADER_PARAMETER_NAME = "ROW_HEADER";
 
     public ComponentMeta getComponentMeta() {
         ComponentMeta componentMeta = new ComponentMeta();
@@ -51,6 +50,8 @@ public class CSVFileLoaderComponent extends BaseComponent {
         String filePath = this.inputParameters.getParameterByName(FILE_PATH_PARAMETER_NAME).getValue().toString();
         String separator = this.inputParameters.getParameterByName(SEPARATOR_PARAMETER_NAME).getValue().toString();
         String outputFlowName = this.inputParameters.getParameterByName(OUTPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
+        RowHeader rowHeader = (RowHeader) this.inputParameters.getParameterByName(ROW_HEADER_PARAMETER_NAME).getValue().getUnderlying();
+        resultSet.setRowHeader(rowHeader);
         try {
             Stream<String> stream = Files.lines(Paths.get(filePath));
             stream.forEachOrdered(line -> {

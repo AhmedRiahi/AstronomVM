@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 public class TextFileOutputComponent extends BaseComponent {
 
 
-    private static final String INPUT_FLOW_PARAMETER_NAME = "INPUT_FLOW";
+    private static final String INPUT_FLOW_NAME_PARAMETER_NAME = "INPUT_FLOW_NAME";
     private static final String FILE_PATH_PARAMETER_NAME = "FILE_PATH";
     private static final String SEPARATOR_PARAMETER_NAME = "SEPARATOR";
 
@@ -35,15 +35,20 @@ public class TextFileOutputComponent extends BaseComponent {
         separatorParameterMeta.setName(SEPARATOR_PARAMETER_NAME);
         separatorParameterMeta.setType(DataType.STRING);
 
+        ParameterMeta inputFlowNameParameterMeta = new ParameterMeta();
+        inputFlowNameParameterMeta.setName(INPUT_FLOW_NAME_PARAMETER_NAME);
+        inputFlowNameParameterMeta.setType(DataType.INPUT_FLOW_NAME);
+
         componentMeta.addParameterMeta(filePathParameterMeta);
         componentMeta.addParameterMeta(separatorParameterMeta);
+        componentMeta.addParameterMeta(inputFlowNameParameterMeta);
         return componentMeta;
     }
 
     @Override
     public ResultFlow execute() throws ComponentException {
-
-        ResultSet inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(INPUT_FLOW_PARAMETER_NAME).getValue().getUnderlying();
+        String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
+        ResultSet inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
         String filePath = this.inputParameters.getParameterByName(FILE_PATH_PARAMETER_NAME).getValue().toString();
         String separator = this.inputParameters.getParameterByName(SEPARATOR_PARAMETER_NAME).getValue().toString();
 
