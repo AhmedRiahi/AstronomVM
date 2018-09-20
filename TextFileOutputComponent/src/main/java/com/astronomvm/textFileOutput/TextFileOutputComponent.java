@@ -55,6 +55,9 @@ public class TextFileOutputComponent extends BaseComponent {
         File file = new File(filePath);
 
         try {
+            if(file.exists()){
+                file.delete();
+            }
             if(file.createNewFile()){
                 Path path = Paths.get(filePath);
 
@@ -69,8 +72,9 @@ public class TextFileOutputComponent extends BaseComponent {
                             }
                         });
                         try {
-                            writer.write("\n");
+                            writer.newLine();
                         } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     });
                 }
