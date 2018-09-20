@@ -1,5 +1,6 @@
 package com.astronomvm.core.data.row;
 
+import com.astronomvm.core.data.astonomType.DataType;
 import com.astronomvm.core.exception.ColumnNotFoundException;
 import lombok.Data;
 

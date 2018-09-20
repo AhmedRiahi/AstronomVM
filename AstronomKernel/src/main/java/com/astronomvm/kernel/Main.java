@@ -2,7 +2,7 @@ package com.astronomvm.kernel;
 
 import com.astronomvm.core.data.input.InputParameter;
 import com.astronomvm.core.data.row.AstronomObject;
-import com.astronomvm.core.data.row.DataType;
+import com.astronomvm.core.data.astonomType.DataType;
 import com.astronomvm.core.data.row.RowHeader;
 import com.astronomvm.core.meta.*;
 import com.astronomvm.kernel.engine.AstronomEngine;

@@ -2,6 +2,7 @@ package com.astronomvm.csvFileLoader;
 
 import com.astronomvm.component.BaseComponent;
 import com.astronomvm.component.exception.ComponentException;
+import com.astronomvm.core.data.astonomType.DataType;
 import com.astronomvm.core.data.row.*;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
@@ -12,8 +13,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class CSVFileLoaderComponent extends BaseComponent {

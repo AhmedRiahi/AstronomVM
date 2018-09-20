@@ -5,7 +5,7 @@ import com.astronomvm.component.exception.ComponentException;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.row.AstronomObject;
-import com.astronomvm.core.data.row.DataType;
+import com.astronomvm.core.data.astonomType.DataType;
 import com.astronomvm.core.data.row.Row;
 import com.astronomvm.core.meta.ComponentMeta;
 import com.astronomvm.core.meta.ParameterMeta;

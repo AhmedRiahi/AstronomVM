@@ -1,6 +1,6 @@
 package com.astronomvm.core.meta;
 
-import com.astronomvm.core.data.row.DataType;
+import com.astronomvm.core.data.astonomType.DataType;
 import lombok.Data;
 
 @Data

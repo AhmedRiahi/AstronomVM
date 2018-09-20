@@ -7,18 +7,15 @@ import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.output.ResultStorage;
 import com.astronomvm.core.data.row.AstronomObject;
-import com.astronomvm.core.data.row.DataType;
+import com.astronomvm.core.data.astonomType.DataType;
 import com.astronomvm.core.meta.AstronomMetaFlow;
 import com.astronomvm.core.meta.ParameterMeta;
 import com.astronomvm.core.meta.StepMeta;
 import com.astronomvm.core.meta.Transition;
 import com.astronomvm.kernel.workflow.AstronomWorkflow;
 
-import javax.xml.crypto.Data;
-import javax.xml.transform.Result;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.LogManager;
 import java.util.stream.Collectors;
 
 public class AstronomOrchestra {
