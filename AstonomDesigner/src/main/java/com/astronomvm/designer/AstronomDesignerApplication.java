@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan
 @SpringBootApplication
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class,HibernateJpaAutoConfiguration.class})
 public class AstronomDesignerApplication {
 
     public static void main(String[] args){

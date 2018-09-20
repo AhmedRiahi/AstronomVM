@@ -20,6 +20,7 @@
         <module>AstonomDesigner</module>
         <module>RowFilterComponent</module>
         <module>TextFileOutputComponent</module>
+        <module>AstronomAPI</module>
     </modules>
 
 
