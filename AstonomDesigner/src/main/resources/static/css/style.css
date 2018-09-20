@@ -1,0 +1,53 @@
+.entity-menubar{
+	background: black;
+}
+
+
+.sidebar-nav li.active{
+	background-color: #337ab7;
+}
+
+.sidebar-nav li.active a{
+	color: white;
+}
+
+
+::-webkit-scrollbar {
+    width: 0.5em;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+
+li.list-group-item{
+	cursor: pointer;
+}
+
+
+.selectedNode{
+	stroke: black;
+    stroke-width: 3px;
+}
+
+
+.link{
+	stroke: black;
+    stroke-width: 2;
+}
+
+
+.icon-button{
+	cursor: pointer;
+}
+
+
+.big-icon{
+	font-size: 20px;
+}

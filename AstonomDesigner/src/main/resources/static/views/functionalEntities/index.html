@@ -1,0 +1,64 @@
+<div class='row' style="padding:20px">
+	<div class="col-md-2">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white">
+					<div class="card-header">
+						Functional Entities
+					</div>
+					<div class="card-body bg-white text-dark" style="padding: 0px;">
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item" 
+								ng-repeat="functionalEntity in functionalEntities" 
+								ng-click="selectEntity(functionalEntity)">
+								{{functionalEntity.name}}
+								<i class="icon-button fas fa-minus-circle text-danger pull-right" ng-click="deleteEntity(functionalEntity)"></i>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-5">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white">
+					<div class="card-header">
+						Functional Entity Properties
+						<div class=pull-right>
+							<button class="btn btn-success btn-sm" ng-click="addField()">
+								<i class="fas fa-plus"></i> Add Field
+							</button>
+							<button class="btn btn-success btn-sm" ng-click="createEntity()">Save</button>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="card-body bg-white text-dark">
+						<div class="form-group">
+							<label>Entity Name</label>
+							<input type="text" class="form-control" ng-model="currentEntity.name">
+						</div>
+						<div class="form-row" ng-repeat="field in currentEntity.fields">
+							<div class="form-group col-md-4">
+								<label ng-show="$index == 0">Field Name</label>
+								<input type="text" class="form-control" ng-model="field.name">
+							</div>
+							<div class="form-group col-md-4">
+								<label ng-show="$index == 0">Field Type</label>
+								<input type="text" class="form-control" ng-model="field.type">
+							</div>
+							<div class="form-group col-md-4">
+								<label ng-show="$index == 0">Is Primary key ?</label>
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" ng-model="field.isPrimaryKey" id="defaultCheck1">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

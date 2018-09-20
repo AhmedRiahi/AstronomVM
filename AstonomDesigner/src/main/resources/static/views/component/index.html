@@ -1,0 +1,53 @@
+<div class='row' style="padding:20px">
+	<div class="col-md-3">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white">
+					<div class="card-header">
+						Astronom Components
+					</div>
+					<div class="card-body bg-white text-dark">
+						<label>Component Name</label>
+						<input type="text" class="form-control" ng-model="newComponentName">
+						<button class="btn btn-success btn-sm" ng-click="createComponentdef()">Create</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="card bg-dark text-white">
+					Available Components
+					<div class="card-body bg-white text-dark">
+						<ul>
+							<li ng-repeat="componentDef in componentsDef" ng-click="selectComponentDef(componentDef)">
+								{{componentDef.name}}
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+	<div class="col-md-6" ng-show="selectedComponentDef != null">
+		<div class="card bg-dark text-white">
+			<div class="card-header">
+				Astronom Component Properties
+				<div class="pull-right">
+					<button class="btn btn-success" ng-click="addComponentParameter()">Add</button>
+					<button class="btn btn-success" ng-click="saveComponentDef()">Save</button>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="card-body bg-white text-dark">
+				<ul>
+					<div ng-repeat="parameter in selectedComponentDef.parametersDefs">
+						Parameter
+						<input type="text" ng-model="parameter.name"></input>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

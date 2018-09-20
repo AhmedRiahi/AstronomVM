@@ -57,7 +57,6 @@ public class CSVFileLoaderComponent extends BaseComponent {
             stream.forEachOrdered(line -> {
                 Row row = new Row();
                 String[] cols = line.split(separator);
-                final AtomicInteger counter = new AtomicInteger();
                 Arrays.stream(cols).forEachOrdered(col -> {
                     Column column = new Column();
                     column.setValue(new AstronomObject(col));

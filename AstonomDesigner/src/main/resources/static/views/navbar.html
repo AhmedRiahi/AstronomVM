@@ -1,0 +1,29 @@
+<div ng-controller='NavbarController'>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <a class="navbar-brand" href="#">Astronom Designer</a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item" ng-class="{active: isActive('/project')}">
+                <a class="nav-link" ui-sref="project"><span class="fas fa-project-diagram"></span> Projects</a>
+              </li>
+              <li class="nav-item" ng-class="{active: isActive('/components')}">
+                <a class="nav-link" ui-sref="components"><span class="fas fa-puzzle-piece"></span> Components</a>
+              </li>
+              <li class="nav-item" ng-class="{active: isActive('/entities')}">
+                <a class="nav-link" ui-sref="entities"><span class="fas fa-certificate"></span> Entities</a>
+              </li>
+              <li class="nav-item" ng-class="{active: isActive('/configuration')}">
+                <a class="nav-link" ui-sref="configuration"><span class="fas fa-wrench"></span> Configuration</a>
+              </li>
+            </ul>
+
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="javascript:void(0)">Version POC</a></li>
+            </ul>
+        </div>
+
+      </div>
+  </nav>
+</div>

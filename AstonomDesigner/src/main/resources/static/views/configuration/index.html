@@ -1,0 +1,66 @@
+<div class='row' style="padding:20px">
+	<div class="col-md-3">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white">
+					<div class="card-header">
+						Database connections
+					</div>
+					<div class="panel-body">
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item bg-white text-dark" 
+								ng-repeat="dbConnection in dbConnections" 
+								ng-click="selectDBConnection(dbConnection)">
+								{{dbConnection.name}}
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-3">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white">
+					<div class="card-header">
+						Connection Properties
+						<button class="btn btn-success btn-sm pull-right" ng-click="createDBConnection()">Save</button>
+						<div class="clearfix"></div>
+					</div>
+					<div class="card-body bg-white text-dark">
+						<div class="form-group">
+							<label>Connection name</label>
+							<input type="text" class="form-control" ng-model="currentDBConnection.name" placeholder="Connection name">
+						</div>
+						<div class="form-group">
+							<label>Host Name</label>
+							<input type="text" class="form-control" ng-model="currentDBConnection.hostname" placeholder="Hostname">
+						</div>
+						<div class="form-group">
+							<label>Port Number</label>
+							<input type="text" class="form-control" ng-model="currentDBConnection.port" placeholder="Port">
+						</div>
+						<div class="form-group">
+							<label>Database Name</label>
+							<input type="text" class="form-control" ng-model="currentDBConnection.databaseName" placeholder="Database Name">
+						</div>
+						<div class="form-group">
+							<label>Username</label>
+							<input type="text" class="form-control" ng-model="currentDBConnection.username" placeholder="Username">
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+							<input type="text" class="form-control" ng-model="currentDBConnection.password" placeholder="Password">
+						</div>
+						<div class="form-group">
+							<label>Database Interface</label>
+							<input type="text" class="form-control" ng-model="currentDBConnection.databaseInterface" placeholder="Database Interface">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

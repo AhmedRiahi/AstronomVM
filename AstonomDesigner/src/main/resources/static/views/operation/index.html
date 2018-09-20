@@ -1,0 +1,101 @@
+<div class='row'>
+	<div class="col-md-2">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white">
+					<div class="card-header">
+						<b>{{selectedOperation.name}} Steps</b>
+						<div class="clearfix"></div>
+					</div>
+					<div class="card-body bg-white text-dark" style="padding: 0px;">
+					  	<ul class="list-group list-group-flush">
+					    	<li class="list-group-item" 
+					    		ng-repeat="step in selectedOperation.steps"
+					    		ng-click="selectStepFromList(step)">
+					    		{{step.name}}
+
+					    	</li>
+					  	</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 10px">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white" ng-show="selectedStep">
+					<div class="card-header">
+						<b>Step Parameters</b>
+					</div>
+					<div class="card-body bg-white text-dark">
+						<div class="form-group">
+							<label>Step Name</label>
+							<input type="text" class="form-control form-control-sm" ng-model="selectedStep.name" placeholder="Step Name">
+						</div>
+						<div class="form-group"
+							 ng-repeat="(i,parameterDef) in selectedStep.componentDefinition.parametersDefs">
+							<label>{{parameterDef.name}}</label>
+							<input type="text" class="form-control form-control-sm" ng-model="selectedStep.parametersValues[i].value" placeholder="{{parameterDef.name}}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 10px">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white" ng-show="selectedStep">
+					<div class="card-header">
+						<b>Transition Parameters</b>
+					</div>
+					<div class="card-body bg-white text-dark">
+						{{selectedTransition.fromStep.name}} -> {{selectedTransition.toStep.name}}
+						<input type="checkbox" ng-model="selectedTransition.isErrorTransition"/>Error transition
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+
+	<div class="col-md-8">
+		<div class="card bg-dark text-white">
+			<div class="card-header">
+				<b>{{selectedOperation.name}} Workflow</b>
+				<div class="pull-right">
+					<button class="btn btn-success btn-sm" ng-click="connectSteps()">Connect</button>
+					<button class="btn btn-success btn-sm" ng-click="exportOperation()">Export Operation</button>
+					<button class="btn btn-success btn-sm" ng-click="executeOperation()">Execute</button>
+					<button class="btn btn-success btn-sm" ng-click="saveProject()">Save Project</button>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="card-body bg-white text-dark" style="padding: 0px;">
+				<div class="row">
+					<div class="col-md-12">
+						<div id="canvas" class="bg-white"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<div class="card bg-dark text-white">
+			<div class="card-header">
+				<b>Astronom Components</b>
+			</div>
+			<div class="card-body bg-white text-dark" style="padding: 0px;">
+			  	<ul class="list-group list-group-flush">
+			    	<li class="list-group-item" 
+			    		ng-repeat="componentDef in componentsDef">
+			    		{{componentDef.name}}
+			    		<div class="pull-right">
+							<i class="icon-button fas fa-plus-square text-success" ng-click="addComponent(componentDef)"></i>
+						</div>
+			    	</li>
+			  	</ul>
+			</div>
+		</div>
+	</div>
+	
+</div>

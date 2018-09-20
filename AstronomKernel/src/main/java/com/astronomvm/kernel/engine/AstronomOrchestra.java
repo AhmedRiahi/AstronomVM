@@ -18,12 +18,12 @@ import javax.xml.crypto.Data;
 import javax.xml.transform.Result;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.LogManager;
 import java.util.stream.Collectors;
 
 public class AstronomOrchestra {
 
     private ResultStorage resultStorage = new ResultStorage();
-
 
     public void play(AstronomWorkflow workflow){
         HashMap<Integer,List<StepMeta>> stepsIndex = this.buildWorkflowExecutionOrder(workflow.getAstronomMetaFlow());
@@ -70,12 +70,11 @@ public class AstronomOrchestra {
 
 
     private void prepareResultFlowParameterInputs(AstronomWorkflow workflow,StepMeta stepMeta){
-        List<StepMeta> soruceSteps = workflow.getAstronomMetaFlow().getSourceSteps(stepMeta);
+        List<StepMeta> sourceSteps = workflow.getAstronomMetaFlow().getSourceSteps(stepMeta);
         List<ParameterMeta> inputFlowParameterMetas = stepMeta.getComponentMeta().getParameterMetas().stream().filter(parameterMeta -> parameterMeta.getType().equals(DataType.INPUT_FLOW_NAME)).collect(Collectors.toList());
         inputFlowParameterMetas.stream().forEach(parameterMeta -> {
             String inputFlowName = stepMeta.getInputParameters().getParameterByName(parameterMeta.getName()).getValue().toString();
-            Map<String,ResultSet> resultSetMap = soruceSteps.stream().map(sourceStepMeta -> this.resultStorage.getStepMetaResultFlow(sourceStepMeta).getResultSetMap()).filter(map -> map.containsKey(inputFlowName)).findAny().get();
-
+            Map<String,ResultSet> resultSetMap = sourceSteps.stream().map(sourceStepMeta -> this.resultStorage.getStepMetaResultFlow(sourceStepMeta).getResultSetMap()).filter(map -> map.containsKey(inputFlowName)).findAny().get();
             ResultSet inputFlowResultSet = resultSetMap.get(inputFlowName);
             stepMeta.getInputParameters().addParameter(new InputParameter(inputFlowName,new AstronomObject(inputFlowResultSet)));
         });
