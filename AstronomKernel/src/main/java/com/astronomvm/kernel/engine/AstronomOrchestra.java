@@ -2,9 +2,11 @@ package com.astronomvm.kernel.engine;
 
 import com.astronomvm.component.BaseComponent;
 import com.astronomvm.component.exception.ComponentException;
+import com.astronomvm.core.data.input.InputParameter;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.output.ResultStorage;
+import com.astronomvm.core.data.row.AstronomObject;
 import com.astronomvm.core.data.row.DataType;
 import com.astronomvm.core.meta.AstronomMetaFlow;
 import com.astronomvm.core.meta.ParameterMeta;
@@ -14,10 +16,7 @@ import com.astronomvm.kernel.workflow.AstronomWorkflow;
 
 import javax.xml.crypto.Data;
 import javax.xml.transform.Result;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -30,7 +29,7 @@ public class AstronomOrchestra {
         HashMap<Integer,List<StepMeta>> stepsIndex = this.buildWorkflowExecutionOrder(workflow.getAstronomMetaFlow());
         stepsIndex.keySet().forEach(level -> {
             List<StepMeta> steps = stepsIndex.get(level);
-            steps.forEach(step ->this.executeStep(workflow,step));
+            steps.forEach(step -> this.executeStep(workflow,step));
         });
     }
 
@@ -57,21 +56,29 @@ public class AstronomOrchestra {
     }
 
 
-    private void executeStep(AstronomWorkflow workflow,StepMeta step){
-        BaseComponent component = workflow.getComponentByName(step.getComponentMeta().getName());
+    private void executeStep(AstronomWorkflow workflow,StepMeta stepMeta){
+        BaseComponent component = workflow.getComponentByName(stepMeta.getComponentMeta().getName());
         ComponentExecutor componentExecutor = new ComponentExecutor();
         try {
-            List<ParameterMeta> resultSetParameterMetas = step.getComponentMeta().getParameterMetas().stream().filter(parameterMeta -> parameterMeta.getType().equals(DataType.RESULT_SET)).collect(Collectors.toList());
-            resultSetParameterMetas.stream().forEach(parameterMeta -> {
-                //TODO
-            });
-            ResultFlow resultFlow = componentExecutor.execute(component,step.getInputParameters());
-            this.resultStorage.addStepResult(step,resultFlow);
+            this.prepareResultFlowParameterInputs(workflow,stepMeta);
+            ResultFlow resultFlow = componentExecutor.execute(component,stepMeta.getInputParameters());
+            this.resultStorage.addStepResultFlow(stepMeta,resultFlow);
         } catch (ComponentException e) {
             e.printStackTrace();
         }
+    }
 
 
+    private void prepareResultFlowParameterInputs(AstronomWorkflow workflow,StepMeta stepMeta){
+        List<StepMeta> soruceSteps = workflow.getAstronomMetaFlow().getSourceSteps(stepMeta);
+        List<ParameterMeta> inputFlowParameterMetas = stepMeta.getComponentMeta().getParameterMetas().stream().filter(parameterMeta -> parameterMeta.getType().equals(DataType.INPUT_FLOW_NAME)).collect(Collectors.toList());
+        inputFlowParameterMetas.stream().forEach(parameterMeta -> {
+            String inputFlowName = stepMeta.getInputParameters().getParameterByName(parameterMeta.getName()).getValue().toString();
+            Map<String,ResultSet> resultSetMap = soruceSteps.stream().map(sourceStepMeta -> this.resultStorage.getStepMetaResultFlow(sourceStepMeta).getResultSetMap()).filter(map -> map.containsKey(inputFlowName)).findAny().get();
+
+            ResultSet inputFlowResultSet = resultSetMap.get(inputFlowName);
+            stepMeta.getInputParameters().addParameter(new InputParameter(inputFlowName,new AstronomObject(inputFlowResultSet)));
+        });
     }
 
 }

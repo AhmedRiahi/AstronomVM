@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class AstronomMetaFlow {
@@ -19,6 +20,10 @@ public class AstronomMetaFlow {
 
     public void addTransition(Transition transition){
         this.transitions.add(transition);
+    }
+
+    public List<StepMeta> getSourceSteps(StepMeta stepMeta){
+        return this.transitions.stream().filter(transition -> transition.getTarget().equals(stepMeta)).map(transition -> transition.getSource()).collect(Collectors.toList());
     }
 
     public List<StepMeta> getStepMetaList(){

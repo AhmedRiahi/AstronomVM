@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 public class RowFilterComponent extends BaseComponent {
 
-    private static final String INPUT_FLOW_PARAMETER_NAME = "INPUT_FLOW";
+    private static final String INPUT_FLOW_NAME_PARAMETER_NAME = "INPUT_FLOW_NAME";
     private static final String FILTER_COLUMN_PARAMETER_NAME = "FILTER_COLUMN";
     private static final String FILTER_OPERATOR_PARAMETER_NAME = "FILTER_OPERATOR";
     private static final String FILTER_VALUE_PARAMETER_NAME = "FILTER_VALUE";
@@ -28,11 +28,6 @@ public class RowFilterComponent extends BaseComponent {
     public ComponentMeta getComponentMeta() {
         ComponentMeta componentMeta = new ComponentMeta();
         componentMeta.setName("ROW_FILTER");
-
-        ParameterMeta firstFlowParameterMeta = new ParameterMeta();
-        firstFlowParameterMeta.setName(INPUT_FLOW_PARAMETER_NAME);
-        firstFlowParameterMeta.setType(DataType.RESULT_SET);
-        firstFlowParameterMeta.setUserInput(false);
 
         ParameterMeta filterColumnParameterMeta = new ParameterMeta();
         filterColumnParameterMeta.setName(FILTER_COLUMN_PARAMETER_NAME);
@@ -46,16 +41,21 @@ public class RowFilterComponent extends BaseComponent {
         filterValueParameterMeta.setName(FILTER_VALUE_PARAMETER_NAME);
         filterValueParameterMeta.setType(DataType.STRING);
 
-        componentMeta.addParameterMeta(firstFlowParameterMeta);
+        ParameterMeta inputFlowNameParameterMeta = new ParameterMeta();
+        inputFlowNameParameterMeta.setName(INPUT_FLOW_NAME_PARAMETER_NAME);
+        inputFlowNameParameterMeta.setType(DataType.INPUT_FLOW_NAME);
+
         componentMeta.addParameterMeta(filterColumnParameterMeta);
         componentMeta.addParameterMeta(filterOperatorParameterMeta);
         componentMeta.addParameterMeta(filterValueParameterMeta);
+        componentMeta.addParameterMeta(inputFlowNameParameterMeta);
         return componentMeta;
     }
 
     @Override
     public ResultFlow execute() throws ComponentException {
-        ResultSet inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(INPUT_FLOW_PARAMETER_NAME).getValue().getUnderlying();
+        String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
+        ResultSet inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
         String filterColumnName =  this.inputParameters.getParameterByName(FILTER_COLUMN_PARAMETER_NAME).getValue().toString();
         String filterOperatorString = this.inputParameters.getParameterByName(FILTER_OPERATOR_PARAMETER_NAME).getValue().toString();
         String filterValueString =  this.inputParameters.getParameterByName(FILTER_VALUE_PARAMETER_NAME).getValue().toString();

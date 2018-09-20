@@ -2,10 +2,7 @@ package com.astronomvm.kernel;
 
 import com.astronomvm.core.data.input.InputParameter;
 import com.astronomvm.core.data.row.AstronomObject;
-import com.astronomvm.core.meta.AstronomMetaFlow;
-import com.astronomvm.core.meta.ComponentMeta;
-import com.astronomvm.core.meta.ParameterMeta;
-import com.astronomvm.core.meta.StepMeta;
+import com.astronomvm.core.meta.*;
 import com.astronomvm.kernel.engine.AstronomEngine;
 import com.astronomvm.kernel.spi.ComponentsLoader;
 
@@ -17,9 +14,15 @@ public class Main {
 
         AstronomMetaFlow astronomMetaFlow = new AstronomMetaFlow();
 
-        astronomMetaFlow.addStepMeta(buildCSVLoaderMetaStep());
-        astronomMetaFlow.addStepMeta(buildRowFilterMetaStep());
-        astronomMetaFlow.addStepMeta(buildTextOutputMetaStep());
+        StepMeta csvStepMeta = buildCSVLoaderMetaStep();
+        StepMeta rowFilterStepMeta = buildRowFilterMetaStep();
+        StepMeta textOutputStepMeta = buildTextOutputMetaStep();
+
+        astronomMetaFlow.addStepMeta(csvStepMeta);
+        astronomMetaFlow.addStepMeta(rowFilterStepMeta);
+        astronomMetaFlow.addStepMeta(textOutputStepMeta);
+        astronomMetaFlow.addTransition(new Transition(csvStepMeta,rowFilterStepMeta));
+        astronomMetaFlow.addTransition(new Transition(rowFilterStepMeta,textOutputStepMeta));
         AstronomEngine.getInstance().executeWorkflow(astronomMetaFlow);
     }
 
@@ -40,10 +43,10 @@ public class Main {
         ComponentMeta componentMeta = new ComponentMeta();
         componentMeta.setName("ROW_FILTER");
 
-        stepMeta.getInputParameters().addParameter(new InputParameter("FILTER_COLUMN",new AstronomObject("C:\\astronomvm\\test.txt")));
-        stepMeta.getInputParameters().addParameter(new InputParameter("FILTER_OPERATOR",new AstronomObject(";")));
+        stepMeta.getInputParameters().addParameter(new InputParameter("FILTER_COLUMN",new AstronomObject("Name")));
+        stepMeta.getInputParameters().addParameter(new InputParameter("FILTER_OPERATOR",new AstronomObject("=")));
         stepMeta.getInputParameters().addParameter(new InputParameter("FILTER_VALUE",new AstronomObject("Astro")));
-        stepMeta.getInputParameters().addParameter(new InputParameter("INPUT_FLOW",new AstronomObject("csv_flow")));
+        stepMeta.getInputParameters().addParameter(new InputParameter("INPUT_FLOW_NAME",new AstronomObject("csv_flow")));
         stepMeta.setComponentMeta(componentMeta);
         return stepMeta;
     }

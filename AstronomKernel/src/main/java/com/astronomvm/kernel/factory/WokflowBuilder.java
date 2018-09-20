@@ -22,6 +22,7 @@ public class WokflowBuilder {
         astronomMetaFlow.getStepMetaList().stream().forEach(step -> {
             try {
                 BaseComponent component = ComponentFactory.getInstance().buildComponent(step.getComponentMeta().getName());
+                step.setComponentMeta(component.getComponentMeta());
                 astronomWorkflow.addComponent(step.getComponentMeta().getName(),component);
             } catch (IllegalAccessException | InstantiationException e) {
                 throw new ComponentCreationException();
