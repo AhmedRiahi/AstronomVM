@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/componentDefinition")
-public class ComponentRest {
+@RequestMapping("/astronomComponent")
+public class AstronomComponentRest {
 
     @Autowired
     private ComponentService astronomComponentService;

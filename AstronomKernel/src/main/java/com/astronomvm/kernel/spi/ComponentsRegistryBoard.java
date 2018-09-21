@@ -3,6 +3,7 @@ package com.astronomvm.kernel.spi;
 import com.astronomvm.core.meta.ComponentMeta;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class ComponentsRegistryBoard {
     }
 
     public Set<ComponentMeta> getAllRegisteredComponents(){
-        return this.componentMap.keySet();
+        return new HashSet<>(this.componentMap.keySet());
     }
 
 }
