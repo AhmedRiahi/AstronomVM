@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class AstronomComponentService {
+public class ComponentMetaService {
 
     public void reloadComponents(){
         ComponentsLoader.getInstance().loadComponents();
