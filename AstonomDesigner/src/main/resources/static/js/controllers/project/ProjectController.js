@@ -46,4 +46,20 @@ var ProjectController = function($scope,$http,$state,$location,DataService,Entit
 	$scope.selectProject = function(project){
 		$scope.selectedProject = project;
 	}
+
+	$scope.createProjectOperation = function(){
+	    if($scope.selectedProject.operations == undefined){
+        	$scope.selectedProject.operations = new Array();
+        }
+	    var operation = {};
+        operation.name = "Operation_"+$scope.selectedProject.operations.length;
+        $scope.selectedProject.operations.push(operation);
+        $scope.saveProject();
+	}
+
+	$scope.saveProject = function(){
+    		EntityWS.post(serverURL,'project',$scope.selectedProject).then(function(data){
+    			console.log(data)
+    		})
+    	}
 }
