@@ -24,9 +24,6 @@ public class AstronomComponentRest {
         return this.astronomComponentService.getAll();
     }
 
-    @RequestMapping(path = "/create", method = RequestMethod.POST)
-    public ComponentDefinitionEntity create(@RequestBody ComponentDefinitionEntity astronomComponentDefinitionEntity){
-        return this.astronomComponentService.create(astronomComponentDefinitionEntity);
-    }
+
 
 }

@@ -12,9 +12,10 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 	self.operationPlotter.init($scope);
 
 	$scope.selectedOperation = null
+
 	$scope.project.operations.forEach(function(operation){
 		if(operation.name == $stateParams.operationName){
-			$scope.selectedOperation = operation
+			$scope.selectedOperation = operation;
 			self.operationPlotter.drawOperation($scope.selectedOperation);
 		}
 	});

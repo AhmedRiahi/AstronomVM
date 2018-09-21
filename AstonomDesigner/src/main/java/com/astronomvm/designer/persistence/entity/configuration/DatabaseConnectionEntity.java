@@ -1,7 +1,6 @@
 package com.astronomvm.designer.persistence.entity.configuration;
 
 
-import com.astronomvm.core.data.astonomType.DatabaseInterface;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -33,5 +32,5 @@ public class DatabaseConnectionEntity {
     private String password;
 
     @Column
-    private DatabaseInterface databaseInterface;
+    private String databaseInterface;
 }
