@@ -1,14 +1,13 @@
 package com.astronomvm.designer.persistence.entity.component;
 
-
+import com.astronomvm.core.data.row.AstronomObject;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
-@Entity(name = "COMPONENT_DEFINITION")
-public class ComponentDefinitionEntity {
+@Entity(name = "INPUT_PARAMETER")
+public class InputParameter {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -17,8 +16,6 @@ public class ComponentDefinitionEntity {
     @Column(name = "NAME")
     private String name;
 
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ComponentParameterDefEntity> parametersDefs;
-
+    @Column(name = "VALUE")
+    private String value;
 }

@@ -32,9 +32,9 @@
 							<input type="text" class="form-control form-control-sm" ng-model="selectedStep.name" placeholder="Step Name">
 						</div>
 						<div class="form-group"
-							 ng-repeat="(i,parameterDef) in selectedStep.componentDefinition.parametersDefs">
-							<label>{{parameterDef.name}}</label>
-							<input type="text" class="form-control form-control-sm" ng-model="selectedStep.parametersValues[i].value" placeholder="{{parameterDef.name}}">
+							 ng-repeat="(i,parameterMeta) in selectedStep.componentMeta.parameterMetas">
+							<label>{{parameterMeta.name}}</label>
+							<input type="text" class="form-control form-control-sm" ng-model="selectedStep.parametersValues[i].value" placeholder="{{parameterMeta.name}}">
 						</div>
 					</div>
 				</div>
@@ -87,10 +87,10 @@
 			<div class="card-body bg-white text-dark" style="padding: 0px;">
 			  	<ul class="list-group list-group-flush">
 			    	<li class="list-group-item" 
-			    		ng-repeat="componentDef in componentsDef">
-			    		{{componentDef.name}}
+			    		ng-repeat="componentMeta in componentsMeta">
+			    		{{componentMeta.name}}
 			    		<div class="pull-right">
-							<i class="icon-button fas fa-plus-square text-success" ng-click="addComponent(componentDef)"></i>
+							<i class="icon-button fas fa-plus-square text-success" ng-click="addComponent(componentMeta)"></i>
 						</div>
 			    	</li>
 			  	</ul>

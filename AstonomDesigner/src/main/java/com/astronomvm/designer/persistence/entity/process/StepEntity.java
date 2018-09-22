@@ -2,8 +2,7 @@ package com.astronomvm.designer.persistence.entity.process;
 
 
 
-import com.astronomvm.designer.persistence.entity.component.ComponentDefinitionEntity;
-import com.astronomvm.designer.persistence.entity.component.ComponentParameterDefValueEntity;
+import com.astronomvm.designer.persistence.entity.component.InputParameter;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,11 +19,11 @@ public class StepEntity {
     @Column(name = "NAME")
     private String name;
 
-    @OneToOne(cascade = CascadeType.REFRESH)
-    private ComponentDefinitionEntity componentDefinition;
+    @Column(name = "COMPONENT_NAME")
+    private String componentName;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<ComponentParameterDefValueEntity> parametersValues;
+    private List<InputParameter> inputParameters;
 
     @OneToOne(cascade = CascadeType.ALL)
     private GraphicsPropertiesEntity graphicsProperties;

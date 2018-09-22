@@ -32,4 +32,8 @@ public class ComponentsRegistryBoard {
         return new HashSet<>(this.componentMap.keySet());
     }
 
+    public ComponentMeta getComponentMeta(String componentName){
+        return this.componentMap.keySet().stream().filter(componentMeta -> componentMeta.getName().equals(componentName)).findAny().get();
+    }
+
 }

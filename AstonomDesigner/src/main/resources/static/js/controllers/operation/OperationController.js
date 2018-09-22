@@ -24,9 +24,9 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 		$scope.project.operations = new Array();
 	}
 
-	DataService.get(serverURL,'componentDefinition',true).then(function(componentsDef){
-		$scope.componentsDef = componentsDef;
-		console.log($scope.componentsDef)
+	DataService.get(serverURL,'componentMeta',true).then(function(componentsMeta){
+		$scope.componentsMeta = componentsMeta;
+		console.log($scope.componentsMeta)
 	});
 
 	$scope.saveProject = function(){
@@ -41,18 +41,18 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 		$scope.project.operations.push(operation);
 	}
 
-	$scope.addComponent = function(componentDefinition){
+	$scope.addComponent = function(componentMeta){
 		var step = {}
-		step.componentDefinition = componentDefinition;
+		step.componentMeta = componentMeta;
 		step.graphicsProperties = {
 			x : 300,
 			y: 300
 		}
 
-		step.parametersValues = new Array();
-		for(var i=0; i< componentDefinition.parametersDefs.length; i++){
-			step.parametersValues.push({
-				'componentParameterDef': componentDefinition.parametersDefs[i],
+		step.inputParameters = new Array();
+		for(var i=0; i< componentMeta.parameterMetas.length; i++){
+			step.inputParameters.push({
+				'name': componentMeta.parameterMetas[i],
 				'value':""
 			})
 		}
@@ -61,7 +61,7 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 		if($scope.selectedOperation.steps == undefined){
 			$scope.selectedOperation.steps = new Array();
 		}
-		step.name = step.componentDefinition.name+"_"+$scope.selectedOperation.steps.length;
+		step.name = step.componentMeta.name+"_"+$scope.selectedOperation.steps.length;
 		$scope.selectedOperation.steps.push(step)
 		self.operationPlotter.redraw()
 	}
