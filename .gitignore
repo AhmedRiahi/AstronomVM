@@ -11,3 +11,4 @@ AstronomAPI/target/*
 RowFilterComponent/target/*
 TextFileOutputComponent/target/*
 *.jar
+AstronomSimulator/target/*

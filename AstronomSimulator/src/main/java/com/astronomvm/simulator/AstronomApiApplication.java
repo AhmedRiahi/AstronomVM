@@ -1,4 +1,4 @@
-package com.astronomvm.api;
+package com.astronomvm.simulator;
 
 
 import org.springframework.boot.SpringApplication;

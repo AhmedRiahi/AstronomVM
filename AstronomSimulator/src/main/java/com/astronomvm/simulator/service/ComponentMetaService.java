@@ -1,4 +1,4 @@
-package com.astronomvm.api.service;
+package com.astronomvm.simulator.service;
 
 import com.astronomvm.core.meta.ComponentMeta;
 import com.astronomvm.kernel.spi.ComponentsLoader;

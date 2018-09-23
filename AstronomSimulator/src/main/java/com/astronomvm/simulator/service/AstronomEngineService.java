@@ -1,4 +1,4 @@
-package com.astronomvm.api.service;
+package com.astronomvm.simulator.service;
 
 
 import org.springframework.stereotype.Service;

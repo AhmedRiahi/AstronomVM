@@ -1,13 +1,12 @@
-package com.astronomvm.api.rest;
+package com.astronomvm.simulator.rest;
 
-import com.astronomvm.api.service.ComponentMetaService;
+import com.astronomvm.simulator.service.ComponentMetaService;
 import com.astronomvm.core.meta.ComponentMeta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController

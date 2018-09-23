@@ -1,4 +1,4 @@
-package com.astronomvm.api.rest;
+package com.astronomvm.simulator.rest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
