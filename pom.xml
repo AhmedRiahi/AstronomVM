@@ -21,6 +21,7 @@
         <module>RowFilterComponent</module>
         <module>TextFileOutputComponent</module>
         <module>AstronomSimulator</module>
+        <module>AstronomAgent</module>
     </modules>
 
 
