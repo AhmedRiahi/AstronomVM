@@ -1,6 +1,6 @@
 package com.astronomvm.designer.persistence.entity.component;
 
-import com.astronomvm.core.data.row.AstronomObject;
+
 import lombok.Data;
 
 import javax.persistence.*;

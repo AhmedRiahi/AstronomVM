@@ -1,8 +1,6 @@
 package com.astronomvm.designer.service;
 
 import com.astronomvm.core.meta.ComponentMeta;
-import com.astronomvm.kernel.spi.ComponentsLoader;
-import com.astronomvm.kernel.spi.ComponentsRegistryBoard;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -11,10 +9,10 @@ import java.util.Set;
 public class ComponentMetaService {
 
     public void reloadComponents(){
-        ComponentsLoader.getInstance().loadComponents();
+        //TODO send command ti astronom simulator
     }
 
     public Set<ComponentMeta> getComponentsMeta(){
-        return ComponentsRegistryBoard.getInstance().getAllRegisteredComponents();
+        return null;
     }
 }

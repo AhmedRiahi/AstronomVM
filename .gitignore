@@ -12,3 +12,4 @@ RowFilterComponent/target/*
 TextFileOutputComponent/target/*
 *.jar
 AstronomSimulator/target/*
+AstronomAgent/target/*

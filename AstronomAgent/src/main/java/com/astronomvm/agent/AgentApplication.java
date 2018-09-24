@@ -1,17 +1,17 @@
-package com.astronomvm.designer;
+package com.astronomvm.agent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
-@ComponentScan
 @SpringBootApplication
+@ComponentScan
 @EnableSwagger2
-public class AstronomDesignerApplication {
+public class AgentApplication {
+
 
     public static void main(String[] args){
-        SpringApplication.run(AstronomDesignerApplication.class,args);
+        SpringApplication.run(AgentApplication.class,args);
     }
 }
