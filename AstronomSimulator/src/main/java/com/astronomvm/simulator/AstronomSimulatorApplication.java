@@ -9,10 +9,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan
 @SpringBootApplication
 @EnableSwagger2
-public class AstronomApiApplication {
+public class AstronomSimulatorApplication {
 
 
     public static void main(String[] args){
-        SpringApplication.run(AstronomApiApplication.class,args);
+        SpringApplication.run(AstronomSimulatorApplication.class,args);
     }
 }
