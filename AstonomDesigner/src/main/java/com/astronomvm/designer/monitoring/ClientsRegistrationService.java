@@ -9,11 +9,9 @@ import java.util.List;
 @Service
 public class ClientsRegistrationService {
 
-
     private static final Object lock = new Object();
     private List<Application> simulatorsClients = new ArrayList<>();
     private List<Application> agentsClients = new ArrayList<>();
-
 
 
     public void registerClient(Application application){
@@ -27,7 +25,6 @@ public class ClientsRegistrationService {
                 }
             }
         }
-
     }
 
     public void unregisterClient(Application application){
@@ -41,6 +38,10 @@ public class ClientsRegistrationService {
                 }
             }
         }
+    }
+
+    public Application getSimulatorClientById(String id){
+        return this.simulatorsClients.stream().filter(simulatorsClient -> simulatorsClient.getId().equals(id)).findAny().get();
     }
 
 }
