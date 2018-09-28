@@ -1,6 +1,6 @@
 package com.astronomvm.kernel.engine;
 
-import com.astronomvm.core.meta.AstronomMetaFlow;
+import com.astronomvm.core.meta.MetaFlow;
 import com.astronomvm.kernel.factory.WokflowBuilder;
 import com.astronomvm.kernel.workflow.AstronomWorkflow;
 
@@ -16,7 +16,7 @@ public class AstronomEngine {
     }
 
 
-    public void executeWorkflow(AstronomMetaFlow flow){
+    public void executeWorkflow(MetaFlow flow){
         AstronomOrchestra astronomOrchestra = new AstronomOrchestra();
         AstronomWorkflow astronomWorkflow = WokflowBuilder.getInstance().buildWorkflow(flow);
         astronomOrchestra.play(astronomWorkflow);

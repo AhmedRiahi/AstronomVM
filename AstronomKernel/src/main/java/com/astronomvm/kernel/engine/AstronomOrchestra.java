@@ -8,10 +8,10 @@ import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.output.ResultStorage;
 import com.astronomvm.core.data.row.AstronomObject;
 import com.astronomvm.core.data.astonomType.DataType;
-import com.astronomvm.core.meta.AstronomMetaFlow;
+import com.astronomvm.core.meta.MetaFlow;
 import com.astronomvm.core.meta.ParameterMeta;
 import com.astronomvm.core.meta.StepMeta;
-import com.astronomvm.core.meta.Transition;
+import com.astronomvm.core.meta.TransitionMeta;
 import com.astronomvm.kernel.workflow.AstronomWorkflow;
 
 import java.util.*;
@@ -32,10 +32,10 @@ public class AstronomOrchestra {
         });
     }
 
-    private HashMap<Integer,List<StepMeta>> buildWorkflowExecutionOrder(AstronomMetaFlow metaFlow){
+    private HashMap<Integer,List<StepMeta>> buildWorkflowExecutionOrder(MetaFlow metaFlow){
         HashMap<Integer,List<StepMeta>> stepsIndex = new HashMap<>();
         List<StepMeta> currentSteps = metaFlow.getStepMetaList();
-        List<Transition> currentTransitions = metaFlow.getTransitions();
+        List<TransitionMeta> currentTransitions = metaFlow.getTransitions();
         final AtomicInteger level = new AtomicInteger(0);
         while(!currentSteps.isEmpty()){
             List<StepMeta> processedSteps = new ArrayList<>();

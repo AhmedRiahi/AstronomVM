@@ -1,7 +1,7 @@
 package com.astronomvm.simulator.service;
 
 
-import com.astronomvm.core.meta.AstronomMetaFlow;
+import com.astronomvm.core.meta.MetaFlow;
 import com.astronomvm.kernel.engine.AstronomEngine;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class AstronomEngineService {
 
 
-    public void executeWorkflow(AstronomMetaFlow astronomMetaFlow){
+    public void executeWorkflow(MetaFlow astronomMetaFlow){
         AstronomEngine.getInstance().executeWorkflow(astronomMetaFlow);
     }
 

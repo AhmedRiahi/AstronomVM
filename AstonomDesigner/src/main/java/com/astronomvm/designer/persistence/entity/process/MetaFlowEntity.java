@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Entity(name = "OPERATION")
-public class OperationEntity {
+@Entity(name = "AstronomFLow")
+public class MetaFlowEntity {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -17,8 +17,8 @@ public class OperationEntity {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<StepEntity> steps;
+    private List<StepMetaEntity> steps;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<TransitionEntity> transitions;
+    private List<TransitionMetaEntity> transitions;
 }

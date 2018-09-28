@@ -1,9 +1,13 @@
 package com.astronomvm.core.data.input;
 
+import lombok.Data;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InputParameters {
+@Data
+public class InputParameters implements Serializable{
 
     private List<InputParameter> inputParameters = new ArrayList<>();
 

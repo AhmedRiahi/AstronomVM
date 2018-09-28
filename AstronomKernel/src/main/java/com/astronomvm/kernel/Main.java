@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args){
         ComponentsLoader.getInstance().loadComponents();
 
-        AstronomMetaFlow astronomMetaFlow = new AstronomMetaFlow();
+        MetaFlow astronomMetaFlow = new MetaFlow();
 
         StepMeta csvStepMeta = buildCSVLoaderMetaStep();
         StepMeta rowFilterStepMeta = buildRowFilterMetaStep();
@@ -26,9 +26,9 @@ public class Main {
         astronomMetaFlow.addStepMeta(textOutputStepMeta);
         astronomMetaFlow.addStepMeta(invalidTextOutputStepMeta);
 
-        astronomMetaFlow.addTransition(new Transition(csvStepMeta,rowFilterStepMeta));
-        astronomMetaFlow.addTransition(new Transition(rowFilterStepMeta,textOutputStepMeta));
-        astronomMetaFlow.addTransition(new Transition(rowFilterStepMeta,invalidTextOutputStepMeta));
+        astronomMetaFlow.addTransition(new TransitionMeta(csvStepMeta,rowFilterStepMeta));
+        astronomMetaFlow.addTransition(new TransitionMeta(rowFilterStepMeta,textOutputStepMeta));
+        astronomMetaFlow.addTransition(new TransitionMeta(rowFilterStepMeta,invalidTextOutputStepMeta));
         AstronomEngine.getInstance().executeWorkflow(astronomMetaFlow);
     }
 

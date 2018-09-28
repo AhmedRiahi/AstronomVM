@@ -69,7 +69,7 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 		step.inputParameters = new Array();
 		for(var i=0; i< componentMeta.parameterMetas.length; i++){
 			step.inputParameters.push({
-				'name': componentMeta.parameterMetas[i],
+				'name': componentMeta.parameterMetas[i].name,
 				'value':""
 			})
 		}
@@ -111,7 +111,7 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 	}
 
 	$scope.executeOperation = function(){
-		$http.get(serverURL+'/engine'+'/executeOperation/'+$scope.selectedOperation.id);
+		$http.get(serverURL+'/astronomFlowExecutor'+'/execute/'+$scope.selectedSimulator.id+'/'+$scope.selectedOperation.id);
 	}
 
 	$scope.selectStep = function(step){

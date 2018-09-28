@@ -7,18 +7,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-public class AstronomMetaFlow {
+public class MetaFlow {
 
 
     private List<StepMeta> stepMetaList = new ArrayList<>();
-    private List<Transition> transitions = new ArrayList<>();
+    private List<TransitionMeta> transitions = new ArrayList<>();
 
 
     public void addStepMeta(StepMeta stepMeta){
         this.stepMetaList.add(stepMeta);
     }
 
-    public void addTransition(Transition transition){
+    public void addTransition(TransitionMeta transition){
         this.transitions.add(transition);
     }
 
@@ -32,8 +32,8 @@ public class AstronomMetaFlow {
         return copy;
     }
 
-    public List<Transition> getTransitions(){
-        List<Transition> copy = new ArrayList<>();
+    public List<TransitionMeta> getTransitions(){
+        List<TransitionMeta> copy = new ArrayList<>();
         copy.addAll(transitions);
         return copy;
     }

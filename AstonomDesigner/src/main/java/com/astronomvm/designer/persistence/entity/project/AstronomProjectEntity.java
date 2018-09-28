@@ -1,7 +1,7 @@
 package com.astronomvm.designer.persistence.entity.project;
 
 
-import com.astronomvm.designer.persistence.entity.process.OperationEntity;
+import com.astronomvm.designer.persistence.entity.process.MetaFlowEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,5 +19,5 @@ public class AstronomProjectEntity {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<OperationEntity> operations;
+    private List<MetaFlowEntity> operations;
 }

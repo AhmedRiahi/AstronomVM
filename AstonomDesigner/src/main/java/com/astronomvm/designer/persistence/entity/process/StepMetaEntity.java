@@ -9,8 +9,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Entity(name = "STEP")
-public class StepEntity {
+@Entity(name = "STEP_META")
+public class StepMetaEntity {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

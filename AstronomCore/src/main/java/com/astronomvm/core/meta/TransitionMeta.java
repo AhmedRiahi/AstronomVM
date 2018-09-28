@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Transition {
+public class TransitionMeta {
 
     private StepMeta source;
     private StepMeta target;

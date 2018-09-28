@@ -1,10 +1,9 @@
 package com.astronomvm.kernel.factory;
 
 import com.astronomvm.component.BaseComponent;
-import com.astronomvm.core.meta.AstronomMetaFlow;
+import com.astronomvm.core.meta.MetaFlow;
 import com.astronomvm.kernel.exception.ComponentCreationException;
 import com.astronomvm.kernel.workflow.AstronomWorkflow;
-import lombok.Singular;
 
 public class WokflowBuilder {
 
@@ -17,7 +16,7 @@ public class WokflowBuilder {
         return WokflowBuilder.instance;
     }
 
-    public static AstronomWorkflow buildWorkflow(AstronomMetaFlow astronomMetaFlow){
+    public static AstronomWorkflow buildWorkflow(MetaFlow astronomMetaFlow){
         AstronomWorkflow astronomWorkflow = new AstronomWorkflow(astronomMetaFlow);
         astronomMetaFlow.getStepMetaList().stream().forEach(step -> {
             try {

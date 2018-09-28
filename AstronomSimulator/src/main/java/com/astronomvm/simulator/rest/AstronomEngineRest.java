@@ -1,7 +1,8 @@
 package com.astronomvm.simulator.rest;
 
-import com.astronomvm.core.meta.AstronomMetaFlow;
+import com.astronomvm.core.meta.MetaFlow;
 import com.astronomvm.simulator.service.AstronomEngineService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/astronomEngine")
 public class AstronomEngineRest {
 
-
+    @Autowired
     private AstronomEngineService astronomEngineService;
 
     @PostMapping(path = "/execute")
-    public void executeWorkflow(AstronomMetaFlow astronomMetaFlow){
+    public void executeWorkflow(MetaFlow astronomMetaFlow){
         this.astronomEngineService.executeWorkflow(astronomMetaFlow);
     }
 }
