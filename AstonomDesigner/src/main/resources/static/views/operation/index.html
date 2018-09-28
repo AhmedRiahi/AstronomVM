@@ -66,6 +66,11 @@
 					<button class="btn btn-success btn-sm" ng-click="exportOperation()">Export Operation</button>
 					<button class="btn btn-success btn-sm" ng-click="executeOperation()">Execute</button>
 					<button class="btn btn-success btn-sm" ng-click="saveProject()">Save Project</button>
+					<select class="form-control"
+						ng-options="simulator.name for simulator in simulators" 
+						ng-model="selectedSimulator" 
+						ng-change="simulatorSelectionChanged()"
+						ng-init="selectedSimulator = {}"></select>
 				</div>
 				<div class="clearfix"></div>
 			</div>

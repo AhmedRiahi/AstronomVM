@@ -8,26 +8,43 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 	
 	$scope.selectedStep = null;
 	$scope.selectedTransition = null;
-	self.operationPlotter = new OperationPlotter()
-	self.operationPlotter.init($scope);
+	$scope.selectedSimulator = null;
+	
 
-	$scope.selectedOperation = null
 
-	$scope.project.operations.forEach(function(operation){
-		if(operation.name == $stateParams.operationName){
-			$scope.selectedOperation = operation;
-			self.operationPlotter.drawOperation($scope.selectedOperation);
+	self.init = function(){
+		self.operationPlotter = new OperationPlotter()
+		self.operationPlotter.init($scope);
+
+		$scope.selectedOperation = null
+
+		$scope.project.operations.forEach(function(operation){
+			if(operation.name == $stateParams.operationName){
+				$scope.selectedOperation = operation;
+				self.operationPlotter.drawOperation($scope.selectedOperation);
+			}
+		});
+
+		if($scope.project.operations == undefined){
+			$scope.project.operations = new Array();
 		}
-	});
 
-	if($scope.project.operations == undefined){
-		$scope.project.operations = new Array();
+		DataService.get(serverURL,'simulator',true).then(function(simulators){
+			$scope.simulators = simulators;
+			console.log($scope.componentsMeta);
+		});
+	};
+
+
+	self.init();
+
+	$scope.simulatorSelectionChanged = function(){
+		console.log($scope.selectedSimulator)
+		DataService.get(serverURL,'componentMeta/'+$scope.selectedSimulator.id,true).then(function(componentsMeta){
+			$scope.componentsMeta = componentsMeta;
+			console.log($scope.componentsMeta)
+		});
 	}
-
-	DataService.get(serverURL,'componentMeta',true).then(function(componentsMeta){
-		$scope.componentsMeta = componentsMeta;
-		console.log($scope.componentsMeta)
-	});
 
 	$scope.saveProject = function(){
 		EntityWS.post(serverURL,'project',$scope.project).then(function(data){

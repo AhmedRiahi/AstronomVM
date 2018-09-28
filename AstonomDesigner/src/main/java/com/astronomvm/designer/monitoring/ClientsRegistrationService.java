@@ -1,12 +1,14 @@
 package com.astronomvm.designer.monitoring;
 
 import de.codecentric.boot.admin.model.Application;
+import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Data
 public class ClientsRegistrationService {
 
     private static final Object lock = new Object();
