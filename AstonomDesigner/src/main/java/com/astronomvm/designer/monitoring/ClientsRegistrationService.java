@@ -1,11 +1,13 @@
 package com.astronomvm.designer.monitoring;
 
+import com.astronomvm.designer.exception.ClientApplicationNotFoundException;
 import de.codecentric.boot.admin.model.Application;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Data
@@ -43,7 +45,7 @@ public class ClientsRegistrationService {
     }
 
     public Application getSimulatorClientById(String id){
-        return this.simulatorsClients.stream().filter(simulatorsClient -> simulatorsClient.getId().equals(id)).findAny().get();
+        return this.simulatorsClients.stream().filter(simulatorsClient -> simulatorsClient.getId().equals(id)).findAny().orElseThrow(ClientApplicationNotFoundException::new);
     }
 
 }

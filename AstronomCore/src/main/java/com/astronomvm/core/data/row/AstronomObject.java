@@ -1,8 +1,10 @@
 package com.astronomvm.core.data.row;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class AstronomObject {
 
     private Object underlying;

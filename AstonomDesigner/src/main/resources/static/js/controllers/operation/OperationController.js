@@ -18,15 +18,15 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 
 		$scope.selectedOperation = null
 
-		$scope.project.operations.forEach(function(operation){
+		$scope.project.metaFlows.forEach(function(operation){
 			if(operation.name == $stateParams.operationName){
 				$scope.selectedOperation = operation;
 				self.operationPlotter.drawOperation($scope.selectedOperation);
 			}
 		});
 
-		if($scope.project.operations == undefined){
-			$scope.project.operations = new Array();
+		if($scope.project.metaFlows == undefined){
+			$scope.project.metaFlows = new Array();
 		}
 
 		DataService.get(serverURL,'simulator',true).then(function(simulators){
@@ -55,12 +55,12 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 	$scope.addOperation = function(name){
 		var operation = {};
 		operation.name = name;
-		$scope.project.operations.push(operation);
+		$scope.project.metaFlows.push(operation);
 	}
 
 	$scope.addComponent = function(componentMeta){
 		var step = {}
-		step.componentMeta = componentMeta;
+		step.componentName = componentMeta.name;
 		step.graphicsProperties = {
 			x : 300,
 			y: 300
@@ -78,7 +78,7 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 		if($scope.selectedOperation.steps == undefined){
 			$scope.selectedOperation.steps = new Array();
 		}
-		step.name = step.componentMeta.name+"_"+$scope.selectedOperation.steps.length;
+		step.name = step.componentName+"_"+$scope.selectedOperation.steps.length;
 		$scope.selectedOperation.steps.push(step)
 		self.operationPlotter.redraw()
 	}
@@ -124,6 +124,15 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 
 	$scope.transitionClicked = function(transition){
 		$scope.$apply(function(){$scope.selectedTransition = transition});
+	}
+
+
+	$scope.getComponentMeta = function(componentName){
+		for(var i=0;i<$scope.componentsMeta.length;i++){
+			if($scope.componentsMeta[i].name == componentName){
+				return $scope.componentsMeta[i];
+			}
+		}
 	}
 
 }

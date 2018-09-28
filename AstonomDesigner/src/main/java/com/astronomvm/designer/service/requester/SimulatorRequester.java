@@ -15,8 +15,8 @@ public class SimulatorRequester {
     private RestTemplate restTemplate;
 
 
-    public void requestExecuteFlow(String simulatorUrl,MetaFlow astronomMetaFlow){
-        this.restTemplate.postForEntity(simulatorUrl+"/astronomEngine/execute",astronomMetaFlow,astronomMetaFlow.getClass());
+    public void requestExecuteFlow(String simulatorUrl,MetaFlow metaFlow){
+        this.restTemplate.postForEntity(simulatorUrl+"/astronomEngine/execute",metaFlow,metaFlow.getClass());
     }
 
     public Set<ComponentMeta> getAllComponents(String simulatorUrl){

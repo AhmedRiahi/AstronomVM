@@ -2,7 +2,7 @@ package com.astronomvm.designer.persistence.entity.process;
 
 
 
-import com.astronomvm.designer.persistence.entity.component.InputParameter;
+import com.astronomvm.designer.persistence.entity.component.InputParameterEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,7 +23,7 @@ public class StepMetaEntity {
     private String componentName;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<InputParameter> inputParameters;
+    private List<InputParameterEntity> inputParameters;
 
     @OneToOne(cascade = CascadeType.ALL)
     private GraphicsPropertiesEntity graphicsProperties;

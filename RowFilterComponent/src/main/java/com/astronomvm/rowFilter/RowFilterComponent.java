@@ -53,7 +53,7 @@ public class RowFilterComponent extends BaseComponent {
         validOutputFlowParameterMeta.setType(DataType.STRING);
 
         ParameterMeta invalidOutputFlowParameterMeta = new ParameterMeta();
-        invalidOutputFlowParameterMeta.setName(INPUT_FLOW_NAME_PARAMETER_NAME);
+        invalidOutputFlowParameterMeta.setName(INVALID_OUTPUT_FLOW_NAME_PARAMETER_NAME);
         invalidOutputFlowParameterMeta.setType(DataType.STRING);
 
         componentMeta.addParameterMeta(filterColumnParameterMeta);

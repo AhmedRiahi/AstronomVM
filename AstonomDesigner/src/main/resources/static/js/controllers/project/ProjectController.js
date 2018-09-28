@@ -48,12 +48,12 @@ var ProjectController = function($scope,$http,$state,$location,DataService,Entit
 	}
 
 	$scope.createProjectOperation = function(){
-	    if($scope.selectedProject.operations == undefined){
-        	$scope.selectedProject.operations = new Array();
+	    if($scope.selectedProject.metaFlows == undefined){
+        	$scope.selectedProject.metaFlows = new Array();
         }
 	    var operation = {};
-        operation.name = "Operation_"+$scope.selectedProject.operations.length;
-        $scope.selectedProject.operations.push(operation);
+        operation.name = "Operation_"+$scope.selectedProject.metaFlows.length;
+        $scope.selectedProject.metaFlows.push(operation);
         $scope.saveProject();
 	}
 

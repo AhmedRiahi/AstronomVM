@@ -6,7 +6,8 @@ import lombok.Data;
 @Data
 public class StepMeta {
 
-    private ComponentMeta componentMeta;
+    private String name;
+    private String componentName;
     private InputParameters inputParameters = new InputParameters();
 
 }

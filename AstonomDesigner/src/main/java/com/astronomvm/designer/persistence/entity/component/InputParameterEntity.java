@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Data
 @Entity(name = "INPUT_PARAMETER")
-public class InputParameter {
+public class InputParameterEntity {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

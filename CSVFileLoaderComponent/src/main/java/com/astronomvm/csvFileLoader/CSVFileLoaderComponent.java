@@ -38,9 +38,14 @@ public class CSVFileLoaderComponent extends BaseComponent {
         outputFlowParameterMeta.setName(OUTPUT_FLOW_NAME_PARAMETER_NAME);
         outputFlowParameterMeta.setType(DataType.STRING);
 
+        ParameterMeta rowHeaderParameterMeta = new ParameterMeta();
+        rowHeaderParameterMeta.setName(ROW_HEADER_PARAMETER_NAME);
+        rowHeaderParameterMeta.setType(DataType.STRING);
+
         componentMeta.addParameterMeta(filePathParameterMeta);
         componentMeta.addParameterMeta(separatorParameterMeta);
         componentMeta.addParameterMeta(outputFlowParameterMeta);
+        componentMeta.addParameterMeta(rowHeaderParameterMeta);
         return componentMeta;
     }
 
@@ -49,7 +54,9 @@ public class CSVFileLoaderComponent extends BaseComponent {
         String filePath = this.inputParameters.getParameterByName(FILE_PATH_PARAMETER_NAME).getValue().toString();
         String separator = this.inputParameters.getParameterByName(SEPARATOR_PARAMETER_NAME).getValue().toString();
         String outputFlowName = this.inputParameters.getParameterByName(OUTPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
-        RowHeader rowHeader = (RowHeader) this.inputParameters.getParameterByName(ROW_HEADER_PARAMETER_NAME).getValue().getUnderlying();
+        String rowHeaderString =  this.inputParameters.getParameterByName(ROW_HEADER_PARAMETER_NAME).getValue().getUnderlying().toString();
+        RowHeader rowHeader = new RowHeader();
+        Arrays.stream(rowHeaderString.split(";")).forEach(columnName -> rowHeader.addColumn(columnName,DataType.STRING));
         resultSet.setRowHeader(rowHeader);
         try {
             Stream<String> stream = Files.lines(Paths.get(filePath));

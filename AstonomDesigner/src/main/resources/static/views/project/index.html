@@ -24,7 +24,7 @@
 	<div class="col-md-4" >
 		<div class="card bg-dark text-white">
 			<div class="card-header">
-				{{selectedProject.name}} Operations
+				{{selectedProject.name}} Flows
 				<div class="pull-right">
 					<i class="icon-button big-icon fas fa-plus-square text-success" ng-click="createProjectOperation()"></i>
 				</div>
@@ -32,7 +32,7 @@
 		  	<div class="card-body" style="padding: 0px">
 			  	<ul class="list-group list-group-flush">
 			    	<li class="list-group-item bg-white text-dark" 
-			    	ng-repeat="operation in selectedProject.operations">
+			    	ng-repeat="operation in selectedProject.metaFlows">
 			    		<a ui-sref="operation({projectName:selectedProject.name,operationName:operation.name})" class="card-link">{{operation.name}}</a>
 			    	</li>
 			  	</ul>

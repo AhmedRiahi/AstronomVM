@@ -1,5 +1,6 @@
 package com.astronomvm.core.meta;
 
+import com.astronomvm.core.exception.StepMetaNotFoundException;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -36,5 +37,9 @@ public class MetaFlow {
         List<TransitionMeta> copy = new ArrayList<>();
         copy.addAll(transitions);
         return copy;
+    }
+
+    public StepMeta getStepMetaByName(String name){
+        return this.stepMetaList.stream().filter(stepMeta -> stepMeta.getName().equals(name)).findAny().orElseThrow(StepMetaNotFoundException::new);
     }
 }

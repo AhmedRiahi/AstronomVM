@@ -19,5 +19,5 @@ public class AstronomProjectEntity {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<MetaFlowEntity> operations;
+    private List<MetaFlowEntity> metaFlows;
 }

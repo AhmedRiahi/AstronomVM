@@ -10,14 +10,14 @@ import java.util.Map;
 @Data
 public class ResultStorage {
 
-    private Map<StepMeta,ResultFlow> stepResults = new HashMap<>();
+    private Map<String,ResultFlow> stepResults = new HashMap<>();
 
-    public void addStepResultFlow(StepMeta stepMeta,ResultFlow resultFlow){
-        this.stepResults.put(stepMeta,resultFlow);
+    public void addStepResultFlow(String stepMetaName,ResultFlow resultFlow){
+        this.stepResults.put(stepMetaName,resultFlow);
     }
 
-    public ResultFlow getStepMetaResultFlow(StepMeta stepMeta){
-        return this.stepResults.get(stepMeta);
+    public ResultFlow getStepMetaResultFlow(String stepMetaName){
+        return this.stepResults.get(stepMetaName);
     }
 
 }
