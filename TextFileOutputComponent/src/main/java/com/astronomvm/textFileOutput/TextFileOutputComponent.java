@@ -81,7 +81,7 @@ public class TextFileOutputComponent extends BaseComponent {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(),e);
         }
 
 
