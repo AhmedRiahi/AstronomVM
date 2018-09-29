@@ -58,19 +58,21 @@ public class CSVFileLoaderComponent extends BaseComponent {
         RowHeader rowHeader = new RowHeader();
         Arrays.stream(rowHeaderString.split(";")).forEach(columnName -> rowHeader.addColumn(columnName,DataType.STRING));
         resultSet.setRowHeader(rowHeader);
+
         try {
-            Stream<String> stream = Files.lines(Paths.get(filePath));
-            stream.forEachOrdered(line -> {
-                Row row = new Row();
-                String[] cols = line.split(separator);
-                Arrays.stream(cols).forEachOrdered(col -> {
-                    Column column = new Column();
-                    column.setValue(new AstronomObject(col));
-                    row.addColumn(column);
+            try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
+                stream.forEachOrdered(line -> {
+                    Row row = new Row();
+                    String[] cols = line.split(separator);
+                    Arrays.stream(cols).forEachOrdered(col -> {
+                        Column column = new Column();
+                        column.setValue(new AstronomObject(col));
+                        row.addColumn(column);
+                    });
+                    resultSet.addRow(row);
                 });
-                resultSet.addRow(row);
-            });
-        } catch (IOException e) {
+            }
+        }catch(IOException e){
             throw new ComponentException(e.getMessage());
         }
 

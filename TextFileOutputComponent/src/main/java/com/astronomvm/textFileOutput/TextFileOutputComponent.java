@@ -7,6 +7,7 @@ import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.type.DataType;
 import com.astronomvm.core.meta.ComponentMeta;
 import com.astronomvm.core.meta.ParameterMeta;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+@Slf4j
 public class TextFileOutputComponent extends BaseComponent {
 
 
@@ -56,7 +58,7 @@ public class TextFileOutputComponent extends BaseComponent {
 
         try {
             Files.deleteIfExists(file.toPath());
-            
+
             if(file.createNewFile()){
                 Path path = Paths.get(filePath);
 
@@ -67,13 +69,13 @@ public class TextFileOutputComponent extends BaseComponent {
                             try {
                                 writer.write(column.getValue().getUnderlying()+separator);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                log.error(e.getMessage(),e);
                             }
                         });
                         try {
                             writer.newLine();
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            log.error(e.getMessage(),e);
                         }
                     });
                 }
