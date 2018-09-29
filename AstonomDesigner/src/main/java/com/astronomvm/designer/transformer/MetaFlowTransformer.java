@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 
 public class MetaFlowTransformer {
 
+    private MetaFlowTransformer(){}
+
 
     public static MetaFlow fromEntity(MetaFlowEntity metaFlowEntity){
         MetaFlow metaFlow = new MetaFlow();

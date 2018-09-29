@@ -6,6 +6,7 @@ import com.astronomvm.designer.persistence.entity.component.InputParameterEntity
 
 public class InputParameterTransformer {
 
+    private InputParameterTransformer(){}
 
     public static InputParameter fromEntity(InputParameterEntity inputParameterEntity){
         InputParameter inputParameter = new InputParameter();
