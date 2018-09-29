@@ -55,9 +55,8 @@ public class TextFileOutputComponent extends BaseComponent {
         File file = new File(filePath);
 
         try {
-            if(file.exists()){
-                file.delete();
-            }
+            Files.deleteIfExists(file.toPath());
+            
             if(file.createNewFile()){
                 Path path = Paths.get(filePath);
 
