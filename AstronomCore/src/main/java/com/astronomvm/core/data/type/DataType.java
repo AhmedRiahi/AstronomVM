@@ -1,4 +1,4 @@
-package com.astronomvm.core.data.astonomType;
+package com.astronomvm.core.data.type;
 
 public enum DataType {
     STRING,

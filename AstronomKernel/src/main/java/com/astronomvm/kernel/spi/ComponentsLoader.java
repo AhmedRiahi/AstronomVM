@@ -1,10 +1,12 @@
 package com.astronomvm.kernel.spi;
 
 import com.astronomvm.component.BaseComponent;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
+@Slf4j
 public class ComponentsLoader {
 
     private static final ComponentsLoader instance = new ComponentsLoader();
@@ -20,7 +22,7 @@ public class ComponentsLoader {
         Iterator<BaseComponent> iterator = loaders.iterator();
         while(iterator.hasNext()){
             BaseComponent component = iterator.next();
-            System.out.println("Registering new component "+component.getComponentMeta().getName());
+            log.info("Registering new component "+component.getComponentMeta().getName());
             ComponentsRegistryBoard.getInstance().registerComponent(component.getComponentMeta(),component.getClass());
         }
     }

@@ -11,7 +11,7 @@ public class ClientInfoContributor implements InfoContributor {
 
     @Override
     public void contribute(Info.Builder builder) {
-        //builder.withDetail("example",Collections.singletonMap("key", "value"));
+        //Nothing to do
     }
 
 }
