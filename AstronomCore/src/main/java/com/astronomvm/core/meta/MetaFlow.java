@@ -24,7 +24,7 @@ public class MetaFlow {
     }
 
     public List<StepMeta> getSourceSteps(StepMeta stepMeta){
-        return this.transitions.stream().filter(transition -> transition.getTarget().equals(stepMeta)).map(transition -> transition.getSource()).collect(Collectors.toList());
+        return this.transitions.stream().filter(transition -> transition.getTarget().equals(stepMeta)).map(TransitionMeta::getSource).collect(Collectors.toList());
     }
 
     public List<StepMeta> getStepMetaList(){

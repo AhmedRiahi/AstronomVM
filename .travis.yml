@@ -1,0 +1,9 @@
+language: java
+
+addons:
+  sonarcloud:
+    organization: "ahmedriahi-github"
+    token:
+      secure: 6ad459a4157f9e9ca2dccaa07671774e10c6fc71
+script:
+  - sonar-scanner

@@ -4,10 +4,14 @@ import com.astronomvm.core.meta.MetaFlow;
 import com.astronomvm.kernel.factory.WokflowBuilder;
 import com.astronomvm.kernel.workflow.AstronomWorkflow;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AstronomEngine {
 
 
-    private final static AstronomEngine instance = new AstronomEngine();
+    private static final AstronomEngine instance = new AstronomEngine();
+    private List<Orchestrator> orchestrators = new ArrayList<>();
 
     private AstronomEngine(){}
 
@@ -17,8 +21,9 @@ public class AstronomEngine {
 
 
     public void executeWorkflow(MetaFlow flow){
-        AstronomOrchestra astronomOrchestra = new AstronomOrchestra();
+        Orchestrator orchestrator = new Orchestrator();
+        this.orchestrators.add(orchestrator);
         AstronomWorkflow astronomWorkflow = WokflowBuilder.getInstance().buildWorkflow(flow);
-        astronomOrchestra.play(astronomWorkflow);
+        orchestrator.play(astronomWorkflow);
     }
 }

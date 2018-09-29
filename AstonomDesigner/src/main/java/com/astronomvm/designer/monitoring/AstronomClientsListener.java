@@ -13,10 +13,11 @@ public class AstronomClientsListener {
 
     @EventListener
     public void onClientApplicationRegistered(final ClientApplicationEvent event) {
-        if(event.getType().toUpperCase().equals("STATUS_CHANGE")){
+        if(event.getType().equalsIgnoreCase("STATUS_CHANGE")){
             switch(event.getApplication().getStatusInfo().getStatus()){
                 case "UP": clientsRegistrationService.registerClient(event.getApplication());break;
                 case "OFFLINE": clientsRegistrationService.unregisterClient(event.getApplication());break;
+                default:break;
             }
         }
     }

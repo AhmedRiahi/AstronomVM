@@ -1,10 +1,8 @@
 package com.astronomvm.core.data.output;
 
-import com.astronomvm.core.meta.StepMeta;
 import lombok.Data;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Data

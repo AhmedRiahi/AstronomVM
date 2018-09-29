@@ -13,3 +13,4 @@ TextFileOutputComponent/target/*
 *.jar
 AstronomSimulator/target/*
 AstronomAgent/target/*
+target/*

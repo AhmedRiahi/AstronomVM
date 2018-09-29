@@ -13,7 +13,7 @@ public class ComponentMetaService {
 
     @PostConstruct
     public void init(){
-        this.reloadComponents();;
+        this.reloadComponents();
     }
 
     public void reloadComponents(){

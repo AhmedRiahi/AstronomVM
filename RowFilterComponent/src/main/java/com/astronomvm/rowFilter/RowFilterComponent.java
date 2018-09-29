@@ -5,7 +5,7 @@ import com.astronomvm.component.exception.ComponentException;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.row.AstronomObject;
-import com.astronomvm.core.data.astonomType.DataType;
+import com.astronomvm.core.data.type.DataType;
 import com.astronomvm.core.data.row.Row;
 import com.astronomvm.core.meta.ComponentMeta;
 import com.astronomvm.core.meta.ParameterMeta;
@@ -79,7 +79,7 @@ public class RowFilterComponent extends BaseComponent {
         Integer filterColumnIndex = inputFlowResultSet.getRowHeader().getColumnNameIndex(filterColumnName);
         AstronomObject filterValue = new AstronomObject(filterValueString);
 
-        Map<Boolean,List<Row>> filterGroups =  inputFlowResultSet.getRows().stream().collect(Collectors.groupingBy((row) -> comparisonOperation.apply(row.getColumnAt(filterColumnIndex).getValue(), filterValue)));
+        Map<Boolean,List<Row>> filterGroups =  inputFlowResultSet.getRows().stream().collect(Collectors.groupingBy(row -> comparisonOperation.apply(row.getColumnAt(filterColumnIndex).getValue(), filterValue)));
 
 
         ResultSet validFilterResultSet = new ResultSet();

@@ -7,15 +7,19 @@ import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.output.ResultStorage;
 import com.astronomvm.core.data.row.AstronomObject;
-import com.astronomvm.core.data.astonomType.DataType;
+import com.astronomvm.core.data.type.DataType;
 import com.astronomvm.core.meta.*;
 import com.astronomvm.kernel.workflow.AstronomWorkflow;
+import lombok.extern.slf4j.Slf4j;
+
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-public class AstronomOrchestra {
+
+@Slf4j
+public class Orchestrator {
 
     private ResultStorage resultStorage = new ResultStorage();
     private List<IOrchestraListener> orchestraListeners = new ArrayList<>();
@@ -60,7 +64,7 @@ public class AstronomOrchestra {
             ResultFlow resultFlow = componentExecutor.execute(component,stepMeta.getInputParameters());
             this.resultStorage.addStepResultFlow(stepMeta.getName(),resultFlow);
         } catch (ComponentException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(),e);
         }
     }
 

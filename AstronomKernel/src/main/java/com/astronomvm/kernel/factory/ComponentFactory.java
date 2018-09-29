@@ -12,8 +12,9 @@ public class ComponentFactory {
         return ComponentFactory.instance;
     }
 
+    private ComponentFactory(){}
 
-    public static BaseComponent buildComponent(String name) throws IllegalAccessException, InstantiationException {
+    public BaseComponent buildComponent(String name) throws IllegalAccessException, InstantiationException {
         Class componentClass = ComponentsRegistryBoard.getInstance().getComponentClass(name);
         return (BaseComponent)componentClass.newInstance();
     }

@@ -2,7 +2,7 @@ package com.astronomvm.csvFileLoader;
 
 import com.astronomvm.component.BaseComponent;
 import com.astronomvm.component.exception.ComponentException;
-import com.astronomvm.core.data.astonomType.DataType;
+import com.astronomvm.core.data.type.DataType;
 import com.astronomvm.core.data.row.*;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
@@ -58,19 +58,21 @@ public class CSVFileLoaderComponent extends BaseComponent {
         RowHeader rowHeader = new RowHeader();
         Arrays.stream(rowHeaderString.split(";")).forEach(columnName -> rowHeader.addColumn(columnName,DataType.STRING));
         resultSet.setRowHeader(rowHeader);
+
         try {
-            Stream<String> stream = Files.lines(Paths.get(filePath));
-            stream.forEachOrdered(line -> {
-                Row row = new Row();
-                String[] cols = line.split(separator);
-                Arrays.stream(cols).forEachOrdered(col -> {
-                    Column column = new Column();
-                    column.setValue(new AstronomObject(col));
-                    row.addColumn(column);
+            try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
+                stream.forEachOrdered(line -> {
+                    Row row = new Row();
+                    String[] cols = line.split(separator);
+                    Arrays.stream(cols).forEachOrdered(col -> {
+                        Column column = new Column();
+                        column.setValue(new AstronomObject(col));
+                        row.addColumn(column);
+                    });
+                    resultSet.addRow(row);
                 });
-                resultSet.addRow(row);
-            });
-        } catch (IOException e) {
+            }
+        }catch(IOException e){
             throw new ComponentException(e.getMessage());
         }
 

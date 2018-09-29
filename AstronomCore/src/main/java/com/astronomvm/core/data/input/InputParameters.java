@@ -14,14 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 public class InputParameters implements Serializable{
 
-    private List<InputParameter> inputParameters = new ArrayList<>();
+    private List<InputParameter> parameters = new ArrayList<>();
 
     public void addParameter(InputParameter inputParameter){
-        this.inputParameters.add(inputParameter);
+        this.parameters.add(inputParameter);
     }
 
 
     public InputParameter getParameterByName(String name){
-        return this.inputParameters.stream().filter(param -> param.getName().equals(name)).findAny().orElseThrow(ParameterNotFoundException::new);
+        return this.parameters.stream().filter(param -> param.getName().equals(name)).findAny().orElseThrow(ParameterNotFoundException::new);
     }
 }

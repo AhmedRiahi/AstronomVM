@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class StepMetaTransformer {
 
+    private StepMetaTransformer(){}
+
     public static StepMeta fromEntity(StepMetaEntity stepMetaEntity){
         StepMeta stepMeta = new StepMeta();
         stepMeta.setName(stepMetaEntity.getName());
