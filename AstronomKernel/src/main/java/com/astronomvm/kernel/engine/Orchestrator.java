@@ -25,12 +25,13 @@ public class Orchestrator {
     private List<IOrchestraListener> orchestraListeners = new ArrayList<>();
 
     public void play(AstronomWorkflow workflow){
-        orchestraListeners.parallelStream().forEach(IOrchestraListener::onOrchestraStartEvent);
+        this.orchestraListeners.parallelStream().forEach(IOrchestraListener::onOrchestraStartEvent);
         HashMap<Integer,List<StepMeta>> stepsIndex = this.buildWorkflowExecutionOrder(workflow.getAstronomMetaFlow());
         stepsIndex.keySet().forEach(level -> {
             List<StepMeta> steps = stepsIndex.get(level);
             steps.forEach(step -> this.executeStep(workflow,step));
         });
+        this.orchestraListeners.parallelStream().forEach(IOrchestraListener::onOrchestraFinishEvent);
     }
 
     private HashMap<Integer,List<StepMeta>> buildWorkflowExecutionOrder(MetaFlow metaFlow){
