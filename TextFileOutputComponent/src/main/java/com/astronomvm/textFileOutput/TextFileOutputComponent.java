@@ -1,7 +1,6 @@
 package com.astronomvm.textFileOutput;
 
 import com.astronomvm.component.BaseComponent;
-import com.astronomvm.component.exception.ComponentException;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.type.DataType;
@@ -48,7 +47,7 @@ public class TextFileOutputComponent extends BaseComponent {
     }
 
     @Override
-    public ResultFlow execute() throws ComponentException {
+    public ResultFlow execute() {
         String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
         ResultSet inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
         String filePath = this.inputParameters.getParameterByName(FILE_PATH_PARAMETER_NAME).getValue().toString();
