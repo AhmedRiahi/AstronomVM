@@ -1,4 +1,4 @@
-var OperationController = function($scope,$http,$state,$location,DataService,EntityWS,$stateParams){
+var OperationController = function($scope,$http,$state,$location,DataService,EntityWS,$stateParams,WebSocketService){
 	console.log($stateParams)
 
 
@@ -13,7 +13,7 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 
 
 	self.init = function(){
-		self.operationPlotter = new OperationPlotter()
+		self.operationPlotter = new OperationPlotter();
 		self.operationPlotter.init($scope);
 
 		$scope.selectedOperation = null
@@ -112,6 +112,10 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 
 	$scope.executeOperation = function(){
 		$http.get(serverURL+'/astronomFlowExecutor'+'/execute/'+$scope.selectedSimulator.id+'/'+$scope.selectedOperation.id);
+		WebSocketService.connect($scope.selectedSimulator.serviceUrl,$scope.selectedOperation.name,function(data){
+			console.log('Received message from Websocket')
+			console.log(data)
+		})
 	}
 
 	$scope.selectStep = function(step){

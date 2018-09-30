@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class AstronomFlowExecutorService {
+public class MetaFlowExecutorService {
 
     @Autowired
     private ClientsRegistrationService clientsRegistrationService;

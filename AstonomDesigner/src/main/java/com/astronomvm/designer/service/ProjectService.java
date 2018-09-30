@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AstronomProjectService {
+public class ProjectService {
 
     @Autowired
     private IAstronomProjectRepository astronomProjectRepository;

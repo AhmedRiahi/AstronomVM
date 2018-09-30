@@ -32,8 +32,9 @@ AstronomDesigner.config(function($stateProvider,$urlRouterProvider){
 
 // ************** Controllers Management **************
 
-AstronomDesigner.factory('EntityWS',EntityWS)
-AstronomDesigner.factory('DataService',DataService)
+AstronomDesigner.factory('EntityWS',EntityWS);
+AstronomDesigner.factory('DataService',DataService);
+AstronomDesigner.factory('WebSocketService',WebSocketService)
 
 AstronomDesigner.controller('NavbarController',NavbarController);
 AstronomDesigner.controller('ProjectController',ProjectController);

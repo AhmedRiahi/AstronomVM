@@ -18,13 +18,8 @@ public class EngineService {
 
     public void executeWorkflow(MetaFlow metaFlow){
         OrchestraEventsPublisher orchestraEventsPublisher = applicationContext.getBean(OrchestraEventsPublisher.class);
-        orchestraEventsPublisher.setFlowToken(this.generateWebSocketFlowToken());
+        orchestraEventsPublisher.setFlowToken(metaFlow.getName());
         AstronomEngine.getInstance().executeWorkflow(metaFlow,orchestraEventsPublisher);
     }
-
-    private String generateWebSocketFlowToken(){
-        return ((System.currentTimeMillis())*(Math.random()+1)+1000)+"";
-    }
-
 
 }

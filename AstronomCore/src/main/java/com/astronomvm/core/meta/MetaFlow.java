@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Data
 public class MetaFlow {
 
-
+    private String name;
     private List<StepMeta> stepMetaList = new ArrayList<>();
     private List<TransitionMeta> transitions = new ArrayList<>();
 
