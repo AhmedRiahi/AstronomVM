@@ -2,7 +2,7 @@ package com.astronomvm.kernel.engine;
 
 import com.astronomvm.core.meta.MetaFlow;
 import com.astronomvm.core.service.IComponentLogManager;
-import com.astronomvm.kernel.engine.component.ComponentLogManager;
+import com.astronomvm.kernel.engine.component.DefaultComponentLogManager;
 import com.astronomvm.kernel.engine.orchestra.IOrchestraListener;
 import com.astronomvm.kernel.engine.orchestra.Orchestrator;
 import com.astronomvm.kernel.factory.WokflowBuilder;
@@ -26,7 +26,7 @@ public class AstronomEngine {
 
 
     public void executeWorkflow(MetaFlow flow,IOrchestraListener... orchestraListeners){
-        this.executeWorkflow(flow,new ComponentLogManager(),orchestraListeners);
+        this.executeWorkflow(flow,new DefaultComponentLogManager(),orchestraListeners);
     }
 
     public void executeWorkflow(MetaFlow flow,IComponentLogManager componentLogManager,IOrchestraListener... orchestraListeners){

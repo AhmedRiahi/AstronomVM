@@ -65,7 +65,7 @@ public class Orchestrator {
     private void executeStep(AstronomWorkflow workflow,StepMeta stepMeta){
         BaseComponent component = workflow.getComponentByName(stepMeta.getComponentName());
         ComponentExecutor componentExecutor = new ComponentExecutor();
-        component.setComponentLogManager(this.componentLogManager);
+        componentExecutor.setComponentLogManager(this.componentLogManager);
         try {
             this.prepareResultFlowParameterInputs(workflow,stepMeta);
             ResultFlow resultFlow = componentExecutor.execute(component,stepMeta.getInputParameters());

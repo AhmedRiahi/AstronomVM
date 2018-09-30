@@ -21,8 +21,9 @@ public class EngineService {
         OrchestraEventsPublisher orchestraEventsPublisher = this.applicationContext.getBean(OrchestraEventsPublisher.class);
         orchestraEventsPublisher.setFlowToken(metaFlow.getName());
         ComponentLogManager componentLogManager = this.applicationContext.getBean(ComponentLogManager.class);
+        componentLogManager.setOrchestraEventsPublisher(orchestraEventsPublisher);
 
-        AstronomEngine.getInstance().executeWorkflow(metaFlow,orchestraEventsPublisher);
+        AstronomEngine.getInstance().executeWorkflow(metaFlow,componentLogManager,orchestraEventsPublisher);
     }
 
 }

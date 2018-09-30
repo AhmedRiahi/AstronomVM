@@ -40,6 +40,6 @@ public class OrchestraEventsPublisher implements IOrchestraListener {
     }
 
     public void publishLog(String message){
-
+        simpMessagingTemplate.convertAndSend("/topic/orchestra/"+this.flowToken,message);
     }
 }
