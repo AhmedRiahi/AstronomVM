@@ -11,11 +11,11 @@ import java.util.Map;
 public class AstronomWorkflow {
 
 
-    private MetaFlow astronomMetaFlow;
+    private MetaFlow metaFlow;
     private Map<String,BaseComponent> baseComponentMap = new HashMap<>();
 
-    public AstronomWorkflow(MetaFlow astronomMetaFlow){
-        this.astronomMetaFlow = astronomMetaFlow;
+    public AstronomWorkflow(MetaFlow metaFlow){
+        this.metaFlow = metaFlow;
     }
 
     public void addComponent(String name,BaseComponent baseComponent){

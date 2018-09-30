@@ -1,6 +1,6 @@
 package com.astronomvm.simulator.monitoring;
 
-import com.astronomvm.kernel.engine.IOrchestraListener;
+import com.astronomvm.kernel.engine.orchestra.IOrchestraListener;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +19,9 @@ public class OrchestraEventsPublisher implements IOrchestraListener {
 
     @Override
     public void onOrchestraStartEvent() {
-        log.info("Sending message to clients using websockets, by chanel /topic/orchestra/"+this.flowToken);
-        simpMessagingTemplate.convertAndSend("/topic/orchestra/"+this.flowToken,"Orchestra Started");
-
+        MonitoringEventPayload monitoringEventPayload = new MonitoringEventPayload();
+        monitoringEventPayload.setEvent(MonitoringEvent.ORCHESTRA_STARTED);
+        simpMessagingTemplate.convertAndSend("/topic/orchestra/"+this.flowToken,monitoringEventPayload);
     }
 
     @Override
@@ -36,6 +36,10 @@ public class OrchestraEventsPublisher implements IOrchestraListener {
 
     @Override
     public void onStepFinishEvent() {
+
+    }
+
+    public void publishLog(String message){
 
     }
 }

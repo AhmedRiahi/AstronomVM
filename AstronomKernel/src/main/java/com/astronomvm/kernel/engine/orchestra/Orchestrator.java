@@ -1,4 +1,4 @@
-package com.astronomvm.kernel.engine;
+package com.astronomvm.kernel.engine.orchestra;
 
 import com.astronomvm.component.BaseComponent;
 import com.astronomvm.component.exception.ComponentException;
@@ -9,7 +9,10 @@ import com.astronomvm.core.data.output.ResultStorage;
 import com.astronomvm.core.data.row.AstronomObject;
 import com.astronomvm.core.data.type.DataType;
 import com.astronomvm.core.meta.*;
+import com.astronomvm.core.service.IComponentLogManager;
+import com.astronomvm.kernel.engine.component.ComponentExecutor;
 import com.astronomvm.kernel.workflow.AstronomWorkflow;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -19,14 +22,16 @@ import java.util.stream.Collectors;
 
 
 @Slf4j
+@Data
 public class Orchestrator {
 
     private ResultStorage resultStorage = new ResultStorage();
     private List<IOrchestraListener> orchestraListeners = new ArrayList<>();
+    private IComponentLogManager componentLogManager;
 
     public void play(AstronomWorkflow workflow){
         this.orchestraListeners.parallelStream().forEach(IOrchestraListener::onOrchestraStartEvent);
-        HashMap<Integer,List<StepMeta>> stepsIndex = this.buildWorkflowExecutionOrder(workflow.getAstronomMetaFlow());
+        HashMap<Integer,List<StepMeta>> stepsIndex = this.buildWorkflowExecutionOrder(workflow.getMetaFlow());
         stepsIndex.keySet().forEach(level -> {
             List<StepMeta> steps = stepsIndex.get(level);
             steps.forEach(step -> this.executeStep(workflow,step));
@@ -60,6 +65,7 @@ public class Orchestrator {
     private void executeStep(AstronomWorkflow workflow,StepMeta stepMeta){
         BaseComponent component = workflow.getComponentByName(stepMeta.getComponentName());
         ComponentExecutor componentExecutor = new ComponentExecutor();
+        component.setComponentLogManager(this.componentLogManager);
         try {
             this.prepareResultFlowParameterInputs(workflow,stepMeta);
             ResultFlow resultFlow = componentExecutor.execute(component,stepMeta.getInputParameters());
@@ -71,7 +77,7 @@ public class Orchestrator {
 
 
     private void prepareResultFlowParameterInputs(AstronomWorkflow workflow,StepMeta stepMeta){
-        List<StepMeta> sourceSteps = workflow.getAstronomMetaFlow().getSourceSteps(stepMeta);
+        List<StepMeta> sourceSteps = workflow.getMetaFlow().getSourceSteps(stepMeta);
         ComponentMeta componentMeta = workflow.getComponentByName(stepMeta.getComponentName()).getComponentMeta();
         List<ParameterMeta> inputFlowParameterMetas = componentMeta.getParameterMetas().stream().filter(parameterMeta -> parameterMeta.getType().equals(DataType.INPUT_FLOW_NAME)).collect(Collectors.toList());
         inputFlowParameterMetas.stream().forEach(parameterMeta -> {
@@ -84,6 +90,10 @@ public class Orchestrator {
 
     public void subscribeOrchestraListener(IOrchestraListener orchestraListener){
         this.orchestraListeners.add(orchestraListener);
+    }
+
+    public void registerComponentLogManager(IComponentLogManager componentLogManager){
+        this.componentLogManager = componentLogManager;
     }
 
 }
