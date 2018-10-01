@@ -50,6 +50,7 @@ public class CSVFileLoaderComponent extends BaseComponent {
     }
 
     public ResultFlow execute() throws ComponentException{
+        this.log("Reading step inputs");
         ResultSet resultSet = new ResultSet();
         String filePath = this.inputParameters.getParameterByName(FILE_PATH_PARAMETER_NAME).getValue().toString();
         String separator = this.inputParameters.getParameterByName(SEPARATOR_PARAMETER_NAME).getValue().toString();

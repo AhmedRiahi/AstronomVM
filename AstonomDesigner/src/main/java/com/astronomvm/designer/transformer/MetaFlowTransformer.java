@@ -14,6 +14,7 @@ public class MetaFlowTransformer {
 
     public static MetaFlow fromEntity(MetaFlowEntity metaFlowEntity){
         MetaFlow metaFlow = new MetaFlow();
+        metaFlow.setName(metaFlowEntity.getName());
         metaFlow.setStepMetaList(metaFlowEntity.getSteps().stream().map(StepMetaTransformer::fromEntity).collect(Collectors.toList()));
         metaFlowEntity.getTransitions().stream().forEach(transitionMetaEntity -> {
             StepMeta fromStep = metaFlow.getStepMetaByName(transitionMetaEntity.getFromStep().getName());
