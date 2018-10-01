@@ -23,6 +23,10 @@ public class TextFileOutputComponent extends BaseComponent {
     private static final String FILE_PATH_PARAMETER_NAME = "FILE_PATH";
     private static final String SEPARATOR_PARAMETER_NAME = "SEPARATOR";
 
+    private ResultSet inputFlowResultSet;
+    private String filePath;
+    private String separator;
+
     @Override
     public ComponentMeta getComponentMeta() {
         ComponentMeta componentMeta = new ComponentMeta();
@@ -47,26 +51,29 @@ public class TextFileOutputComponent extends BaseComponent {
     }
 
     @Override
-    public ResultFlow execute() {
+    public void readInputs() {
         String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
-        ResultSet inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
-        String filePath = this.inputParameters.getParameterByName(FILE_PATH_PARAMETER_NAME).getValue().toString();
-        String separator = this.inputParameters.getParameterByName(SEPARATOR_PARAMETER_NAME).getValue().toString();
+        this.inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
+        this.filePath = this.inputParameters.getParameterByName(FILE_PATH_PARAMETER_NAME).getValue().toString();
+        this.separator = this.inputParameters.getParameterByName(SEPARATOR_PARAMETER_NAME).getValue().toString();
+    }
 
+    @Override
+    public ResultFlow execute() {
         File file = new File(filePath);
 
         try {
             Files.deleteIfExists(file.toPath());
 
             if(file.createNewFile()){
-                Path path = Paths.get(filePath);
+                Path path = Paths.get(this.filePath);
 
                 try (BufferedWriter writer = Files.newBufferedWriter(path))
                 {
-                    inputFlowResultSet.getRows().stream().forEach(row -> {
+                    this.inputFlowResultSet.getRows().stream().forEach(row -> {
                         row.getColumns().stream().forEach(column -> {
                             try {
-                                writer.write(column.getValue().getUnderlying()+separator);
+                                writer.write(column.getValue().getUnderlying()+this.separator);
                             } catch (IOException e) {
                                 log.error(e.getMessage(),e);
                             }

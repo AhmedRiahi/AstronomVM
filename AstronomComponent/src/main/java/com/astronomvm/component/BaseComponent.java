@@ -16,6 +16,7 @@ public abstract class BaseComponent {
     private IComponentLogManager componentLogManager;
 
     public abstract ComponentMeta getComponentMeta();
+    public abstract void readInputs();
     public abstract ResultFlow execute() throws ComponentException;
 
     public void log(String message){

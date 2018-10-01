@@ -13,15 +13,23 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class CSVFileLoaderComponent extends BaseComponent {
 
     private static final String FILE_PATH_PARAMETER_NAME = "FILE_PATH";
     private static final String SEPARATOR_PARAMETER_NAME = "SEPARATOR";
-    private static final String OUTPUT_FLOW_NAME_PARAMETER_NAME = "OUTPUT_FLOW";
-    private static final String ROW_HEADER_PARAMETER_NAME = "ROW_HEADER";
+    private static final String OUTPUT_FLOW_NAME_PARAMETER_NAME = "OUTPUT_FLOW_NAME";
+    private static final String ROW_HEADER_COLUMNS_LENGTH_PARAMETER_NAME = "ROW_HEADER_COLUMNS_LENGTH";
 
+    private String filePath;
+    private String separator;
+    private RowHeader rowHeader;
+    private String outputFlowName;
+
+    @Override
     public ComponentMeta getComponentMeta() {
         ComponentMeta componentMeta = new ComponentMeta();
         componentMeta.setName("CSV_FILE_LOADER");
@@ -39,8 +47,8 @@ public class CSVFileLoaderComponent extends BaseComponent {
         outputFlowParameterMeta.setType(DataType.STRING);
 
         ParameterMeta rowHeaderParameterMeta = new ParameterMeta();
-        rowHeaderParameterMeta.setName(ROW_HEADER_PARAMETER_NAME);
-        rowHeaderParameterMeta.setType(DataType.STRING);
+        rowHeaderParameterMeta.setName(ROW_HEADER_COLUMNS_LENGTH_PARAMETER_NAME);
+        rowHeaderParameterMeta.setType(DataType.NUMBER);
 
         componentMeta.addParameterMeta(filePathParameterMeta);
         componentMeta.addParameterMeta(separatorParameterMeta);
@@ -49,22 +57,27 @@ public class CSVFileLoaderComponent extends BaseComponent {
         return componentMeta;
     }
 
+
+    @Override
+    public void readInputs() {
+        this.filePath = this.inputParameters.getParameterByName(FILE_PATH_PARAMETER_NAME).getValue().toString();
+        this.separator = this.inputParameters.getParameterByName(SEPARATOR_PARAMETER_NAME).getValue().toString();
+        this.outputFlowName = this.inputParameters.getParameterByName(OUTPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
+        Integer rowHeaderColumnsLength =  Integer.valueOf(this.inputParameters.getParameterByName(ROW_HEADER_COLUMNS_LENGTH_PARAMETER_NAME).getValue().getUnderlying().toString());
+        this.rowHeader = new RowHeader();
+        IntStream.range(1,rowHeaderColumnsLength+1).forEach(i-> this.rowHeader.addColumn("Col"+i,DataType.STRING));
+    }
+
+    @Override
     public ResultFlow execute() throws ComponentException{
-        this.log("Reading step inputs");
         ResultSet resultSet = new ResultSet();
-        String filePath = this.inputParameters.getParameterByName(FILE_PATH_PARAMETER_NAME).getValue().toString();
-        String separator = this.inputParameters.getParameterByName(SEPARATOR_PARAMETER_NAME).getValue().toString();
-        String outputFlowName = this.inputParameters.getParameterByName(OUTPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
-        String rowHeaderString =  this.inputParameters.getParameterByName(ROW_HEADER_PARAMETER_NAME).getValue().getUnderlying().toString();
-        RowHeader rowHeader = new RowHeader();
-        Arrays.stream(rowHeaderString.split(";")).forEach(columnName -> rowHeader.addColumn(columnName,DataType.STRING));
-        resultSet.setRowHeader(rowHeader);
+        resultSet.setRowHeader(this.rowHeader);
 
         try {
-            try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
+            try (Stream<String> stream = Files.lines(Paths.get(this.filePath))) {
                 stream.forEachOrdered(line -> {
                     Row row = new Row();
-                    String[] cols = line.split(separator);
+                    String[] cols = line.split(this.separator);
                     Arrays.stream(cols).forEachOrdered(col -> {
                         Column column = new Column();
                         column.setValue(new AstronomObject(col));
@@ -78,9 +91,8 @@ public class CSVFileLoaderComponent extends BaseComponent {
         }
 
         ResultFlow resultFlow = new ResultFlow();
-        resultFlow.addResultSet(outputFlowName,resultSet);
+        resultFlow.addResultSet(this.outputFlowName,resultSet);
         return resultFlow;
     }
-
 
 }

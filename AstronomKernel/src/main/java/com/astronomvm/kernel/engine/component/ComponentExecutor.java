@@ -11,11 +11,14 @@ import lombok.Data;
 @Data
 public class ComponentExecutor {
 
-    private IComponentLogManager componentLogManager;
+    private IComponentLogManager logger;
 
     public ResultFlow execute(BaseComponent component, InputParameters inputParameters) throws ComponentException {
         component.setInputParameters(inputParameters);
-        component.setComponentLogManager(this.componentLogManager);
+        component.setComponentLogManager(this.logger);
+        logger.log("Start Reading step inputs");
+        component.readInputs();
+        logger.log("Finished Reading step inputs");
         return component.execute();
     }
 }

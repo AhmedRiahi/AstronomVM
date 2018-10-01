@@ -26,6 +26,13 @@ public class RowFilterComponent extends BaseComponent {
     private static final String FILTER_OPERATOR_PARAMETER_NAME = "FILTER_OPERATOR";
     private static final String FILTER_VALUE_PARAMETER_NAME = "FILTER_VALUE";
 
+    private ResultSet inputFlowResultSet;
+    private String filterColumnName;
+    String filterOperatorString;
+    String filterValueString;
+    String validOutputFlowParameterName;
+    String invalidOutputFlowParameterName;
+
 
     @Override
     public ComponentMeta getComponentMeta() {
@@ -66,20 +73,25 @@ public class RowFilterComponent extends BaseComponent {
     }
 
     @Override
-    public ResultFlow execute() throws ComponentException {
+    public void readInputs() {
         String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
-        ResultSet inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
-        String filterColumnName =  this.inputParameters.getParameterByName(FILTER_COLUMN_PARAMETER_NAME).getValue().toString();
-        String filterOperatorString = this.inputParameters.getParameterByName(FILTER_OPERATOR_PARAMETER_NAME).getValue().toString();
-        String filterValueString =  this.inputParameters.getParameterByName(FILTER_VALUE_PARAMETER_NAME).getValue().toString();
-        String validOutputFlowParameterName =  this.inputParameters.getParameterByName(VALID_OUTPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
-        String invalidOutputFlowParameterName =  this.inputParameters.getParameterByName(INVALID_OUTPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
+        this.inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
+        this.filterColumnName =  this.inputParameters.getParameterByName(FILTER_COLUMN_PARAMETER_NAME).getValue().toString();
+        this.filterOperatorString = this.inputParameters.getParameterByName(FILTER_OPERATOR_PARAMETER_NAME).getValue().toString();
+        this.filterValueString =  this.inputParameters.getParameterByName(FILTER_VALUE_PARAMETER_NAME).getValue().toString();
+        this.validOutputFlowParameterName =  this.inputParameters.getParameterByName(VALID_OUTPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
+        this.invalidOutputFlowParameterName =  this.inputParameters.getParameterByName(INVALID_OUTPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
+    }
 
-        BiFunction<AstronomObject,AstronomObject,Boolean> comparisonOperation = buildComparisonOperation(filterOperatorString);
-        Integer filterColumnIndex = inputFlowResultSet.getRowHeader().getColumnNameIndex(filterColumnName);
-        AstronomObject filterValue = new AstronomObject(filterValueString);
+    @Override
+    public ResultFlow execute() throws ComponentException {
 
-        Map<Boolean,List<Row>> filterGroups =  inputFlowResultSet.getRows().stream().collect(Collectors.groupingBy(row -> comparisonOperation.apply(row.getColumnAt(filterColumnIndex).getValue(), filterValue)));
+
+        BiFunction<AstronomObject,AstronomObject,Boolean> comparisonOperation = buildComparisonOperation(this.filterOperatorString);
+        Integer filterColumnIndex = this.inputFlowResultSet.getRowHeader().getColumnNameIndex(this.filterColumnName);
+        AstronomObject filterValue = new AstronomObject(this.filterValueString);
+
+        Map<Boolean,List<Row>> filterGroups =  this.inputFlowResultSet.getRows().stream().collect(Collectors.groupingBy(row -> comparisonOperation.apply(row.getColumnAt(filterColumnIndex).getValue(), filterValue)));
 
 
         ResultSet validFilterResultSet = new ResultSet();
@@ -89,8 +101,8 @@ public class RowFilterComponent extends BaseComponent {
         invalidFilterResultSet.setRows(filterGroups.get(false) == null ? new ArrayList<>() : filterGroups.get(false));
 
         ResultFlow resultFlow = new ResultFlow();
-        resultFlow.addResultSet(validOutputFlowParameterName,validFilterResultSet);
-        resultFlow.addResultSet(invalidOutputFlowParameterName,invalidFilterResultSet);
+        resultFlow.addResultSet(this.validOutputFlowParameterName,validFilterResultSet);
+        resultFlow.addResultSet(this.invalidOutputFlowParameterName,invalidFilterResultSet);
 
         return resultFlow;
     }
