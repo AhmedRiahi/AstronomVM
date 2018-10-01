@@ -4,6 +4,7 @@ public interface IOrchestraListener {
 
     void onOrchestraStartEvent();
     void onOrchestraFinishEvent();
-    void onStepStartEvent();
-    void onStepFinishEvent();
+    void onStepStartEvent(String stepName);
+    void onStepFinishEvent(String stepName);
+    void publishLog(String message);
 }

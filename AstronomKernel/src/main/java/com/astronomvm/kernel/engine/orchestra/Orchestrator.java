@@ -68,8 +68,10 @@ public class Orchestrator {
         componentExecutor.setComponentLogManager(this.componentLogManager);
         try {
             this.prepareResultFlowParameterInputs(workflow,stepMeta);
+            this.orchestraListeners.parallelStream().forEach(orchestraListener -> orchestraListener.onStepStartEvent(stepMeta.getName()));
             ResultFlow resultFlow = componentExecutor.execute(component,stepMeta.getInputParameters());
             this.resultStorage.addStepResultFlow(stepMeta.getName(),resultFlow);
+            this.orchestraListeners.parallelStream().forEach(orchestraListener -> orchestraListener.onStepFinishEvent(stepMeta.getName()));
         } catch (ComponentException e) {
             log.error(e.getMessage(),e);
         }

@@ -9,6 +9,7 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 	$scope.selectedStep = null;
 	$scope.selectedTransition = null;
 	$scope.selectedSimulator = null;
+	$scope.logs = "";
 	
 
 
@@ -115,6 +116,7 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 		WebSocketService.connect($scope.selectedSimulator.serviceUrl,$scope.selectedOperation.name,function(data){
 			console.log('Received message from Websocket')
 			console.log(data)
+			$scope.logs += "\n"+data.body;
 		})
 	}
 

@@ -15,31 +15,45 @@ public class OrchestraEventsPublisher implements IOrchestraListener {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
+    private static final String TOPIC_PREFIX = "/topic/orchestra/";
+
     private String flowToken;
 
     @Override
     public void onOrchestraStartEvent() {
         MonitoringEventPayload monitoringEventPayload = new MonitoringEventPayload();
         monitoringEventPayload.setEvent(MonitoringEvent.ORCHESTRA_STARTED);
-        simpMessagingTemplate.convertAndSend("/topic/orchestra/"+this.flowToken,monitoringEventPayload);
+        simpMessagingTemplate.convertAndSend(TOPIC_PREFIX+this.flowToken,monitoringEventPayload);
     }
 
     @Override
     public void onOrchestraFinishEvent() {
-
+        MonitoringEventPayload monitoringEventPayload = new MonitoringEventPayload();
+        monitoringEventPayload.setEvent(MonitoringEvent.ORCHESRTA_FINISHED);
+        simpMessagingTemplate.convertAndSend(TOPIC_PREFIX+this.flowToken,monitoringEventPayload);
     }
 
     @Override
-    public void onStepStartEvent() {
-
+    public void onStepStartEvent(String stepName) {
+        MonitoringEventPayload monitoringEventPayload = new MonitoringEventPayload();
+        monitoringEventPayload.setEvent(MonitoringEvent.STEP_STARTED);
+        monitoringEventPayload.setInfo(stepName);
+        simpMessagingTemplate.convertAndSend(TOPIC_PREFIX+this.flowToken,monitoringEventPayload);
     }
 
     @Override
-    public void onStepFinishEvent() {
-
+    public void onStepFinishEvent(String stepName) {
+        MonitoringEventPayload monitoringEventPayload = new MonitoringEventPayload();
+        monitoringEventPayload.setEvent(MonitoringEvent.STEP_FINISHED);
+        monitoringEventPayload.setInfo(stepName);
+        simpMessagingTemplate.convertAndSend(TOPIC_PREFIX+this.flowToken,monitoringEventPayload);
     }
 
+    @Override
     public void publishLog(String message){
-        simpMessagingTemplate.convertAndSend("/topic/orchestra/"+this.flowToken,message);
+        MonitoringEventPayload monitoringEventPayload = new MonitoringEventPayload();
+        monitoringEventPayload.setEvent(MonitoringEvent.COMPOENNT_LOG);
+        monitoringEventPayload.setInfo(message);
+        simpMessagingTemplate.convertAndSend(TOPIC_PREFIX+this.flowToken,monitoringEventPayload);
     }
 }

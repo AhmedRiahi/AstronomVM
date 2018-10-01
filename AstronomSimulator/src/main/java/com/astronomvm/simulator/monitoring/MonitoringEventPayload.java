@@ -6,4 +6,5 @@ import lombok.Data;
 public class MonitoringEventPayload {
 
     private MonitoringEvent event;
+    private Object info;
 }

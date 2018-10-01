@@ -5,4 +5,5 @@ public enum MonitoringEvent {
     ORCHESRTA_FINISHED,
     STEP_STARTED,
     STEP_FINISHED,
+    COMPOENNT_LOG
 }

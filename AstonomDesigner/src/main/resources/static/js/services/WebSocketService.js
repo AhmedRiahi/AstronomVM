@@ -3,7 +3,6 @@ var WebSocketService = function(){
 	var self = this;
 
 	self.connect = function(url,subscriptionChanel,callback) {
-		url = url.replace("Camirra-PC","localhost")
 	    var socket = new SockJS(url+'monitoring');
 	    stompClient = Stomp.over(socket);
 	    stompClient.connect({}, function (frame) {
