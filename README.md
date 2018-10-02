@@ -2,7 +2,7 @@
 
 AstronomVM is a platform that aims to provide the possibility to create, execute and deploy functional workflows.The main idea is to create workflows basing on pre-built components.
 
-<h2>Project Structure</2>
+<h2>Project Structure</h2>
 To be done
 
 <h2>Documentation</h2>
