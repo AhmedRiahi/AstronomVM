@@ -22,7 +22,7 @@
         <module>TextFileOutputComponent</module>
         <module>AstronomSimulator</module>
         <module>AstronomAgent</module>
-        <module>FunctionaEntityMapperComponent</module>
+        <module>FunctionalModelMapperComponent</module>
     </modules>
 
     <dependencies>

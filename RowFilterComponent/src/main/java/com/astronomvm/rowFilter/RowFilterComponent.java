@@ -28,10 +28,10 @@ public class RowFilterComponent extends BaseComponent {
 
     private ResultSet inputFlowResultSet;
     private String filterColumnName;
-    String filterOperatorString;
-    String filterValueString;
-    String validOutputFlowParameterName;
-    String invalidOutputFlowParameterName;
+    private String filterOperatorString;
+    private String filterValueString;
+    private String validOutputFlowParameterName;
+    private String invalidOutputFlowParameterName;
 
 
     @Override

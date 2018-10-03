@@ -1,8 +1,8 @@
-package com.astronomvm.core.data.functional;
+package com.astronomvm.core.meta.functional;
 
 import com.astronomvm.core.data.type.DataType;
 
-public class FunctionalAttribute {
+public class FunctionalAttributeMeta {
     private String name;
     private DataType type;
 }
