@@ -52,6 +52,7 @@ public class FunctionalModelMapperComponent extends BaseComponent {
         String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
         this.inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
         this.functionalModelMeta = (FunctionalModelMeta) this.inputParameters.getParameterByName(FUNCTIONAL_MODEL_META_PARAMETER_NAME).getValue().getUnderlying();
+        this.mappingMap = (Map<String, String>) this.inputParameters.getParameterByName(MAPPING_MAP_PARAMETER_NAME).getValue().getUnderlying();
     }
 
     @Override
