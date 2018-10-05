@@ -2,7 +2,7 @@ package com.astronomvm.kernel.engine.orchestra;
 
 import com.astronomvm.component.BaseComponent;
 import com.astronomvm.component.exception.ComponentException;
-import com.astronomvm.core.data.input.InputParameter;
+import com.astronomvm.core.data.input.InputParameterMeta;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.output.ResultStorage;
@@ -86,7 +86,7 @@ public class Orchestrator {
             String inputFlowName = stepMeta.getInputParameters().getParameterByName(parameterMeta.getName()).getValue().toString();
             Map<String,ResultSet> resultSetMap = sourceSteps.stream().map(sourceStepMeta -> this.resultStorage.getStepMetaResultFlow(sourceStepMeta.getName()).getResultSetMap()).filter(map -> map.containsKey(inputFlowName)).findAny().get();
             ResultSet inputFlowResultSet = resultSetMap.get(inputFlowName);
-            stepMeta.getInputParameters().addParameter(new InputParameter(inputFlowName,new AstronomObject(inputFlowResultSet)));
+            stepMeta.getInputParameters().addParameter(new InputParameterMeta(inputFlowName,new AstronomObject(inputFlowResultSet)));
         });
     }
 

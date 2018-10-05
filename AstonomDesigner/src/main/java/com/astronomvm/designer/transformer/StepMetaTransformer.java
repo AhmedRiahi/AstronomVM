@@ -1,6 +1,5 @@
 package com.astronomvm.designer.transformer;
 
-import com.astronomvm.core.data.input.InputParameters;
 import com.astronomvm.core.meta.StepMeta;
 import com.astronomvm.designer.persistence.entity.process.StepMetaEntity;
 

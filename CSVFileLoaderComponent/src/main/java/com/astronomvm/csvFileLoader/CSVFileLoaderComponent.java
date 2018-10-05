@@ -8,11 +8,13 @@ import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.meta.ComponentMeta;
 import com.astronomvm.core.meta.ParameterMeta;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -59,11 +61,12 @@ public class CSVFileLoaderComponent extends BaseComponent {
 
 
     @Override
-    public void readInputs() {
-        this.filePath = this.inputParameters.getParameterByName(FILE_PATH_PARAMETER_NAME).getValue().toString();
-        this.separator = this.inputParameters.getParameterByName(SEPARATOR_PARAMETER_NAME).getValue().toString();
-        this.outputFlowName = this.inputParameters.getParameterByName(OUTPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
-        Integer rowHeaderColumnsLength =  Integer.valueOf(this.inputParameters.getParameterByName(ROW_HEADER_COLUMNS_LENGTH_PARAMETER_NAME).getValue().getUnderlying().toString());
+    public void parseInputParameters(Map<String, JSONObject> parametersValues) {
+
+        this.filePath = parametersValues.get(FILE_PATH_PARAMETER_NAME).getString("value");
+        this.separator = parametersValues.get(SEPARATOR_PARAMETER_NAME).getString("value");
+        this.outputFlowName = parametersValues.get(OUTPUT_FLOW_NAME_PARAMETER_NAME).getString("value");
+        Integer rowHeaderColumnsLength =  parametersValues.get(ROW_HEADER_COLUMNS_LENGTH_PARAMETER_NAME).getInt("value");
         this.rowHeader = new RowHeader();
         IntStream.range(1,rowHeaderColumnsLength+1).forEach(i-> this.rowHeader.addColumn("Col"+i,DataType.STRING));
     }
