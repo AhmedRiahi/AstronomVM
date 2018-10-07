@@ -1,9 +1,7 @@
 package com.astronomvm.designer.transformer;
 
 import com.astronomvm.core.meta.StepMeta;
-import com.astronomvm.designer.persistence.entity.process.StepMetaEntity;
-
-import java.util.stream.Collectors;
+import com.astronomvm.designer.persistence.entity.workflow.StepMetaEntity;
 
 public class StepMetaTransformer {
 

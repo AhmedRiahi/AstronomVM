@@ -1,4 +1,4 @@
-package com.astronomvm.designer.persistence.entity.process;
+package com.astronomvm.designer.persistence.entity.workflow;
 
 
 import lombok.Data;

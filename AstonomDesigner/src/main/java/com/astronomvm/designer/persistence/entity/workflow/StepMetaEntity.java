@@ -1,12 +1,10 @@
-package com.astronomvm.designer.persistence.entity.process;
+package com.astronomvm.designer.persistence.entity.workflow;
 
 
 
-import com.astronomvm.designer.persistence.entity.component.InputParameterEntity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity(name = "STEP_META")
