@@ -1,6 +1,5 @@
 package com.astronomvm.core.data.output;
 
-import com.astronomvm.core.exception.StepMetaNotFoundException;
 import com.astronomvm.core.exception.StepMetaResultSetNotFoundException;
 import lombok.Data;
 

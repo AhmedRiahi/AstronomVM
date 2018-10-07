@@ -9,7 +9,7 @@ public class FunctionalAttributeTransformer {
     private FunctionalAttributeTransformer(){}
 
 
-    public synchronized static FunctionalAttributeMeta fromEntity(FunctionalAttributeEntity entity){
+    public static synchronized FunctionalAttributeMeta fromEntity(FunctionalAttributeEntity entity){
         FunctionalAttributeMeta functionalAttributeMeta = new FunctionalAttributeMeta();
         functionalAttributeMeta.setName(entity.getName());
         functionalAttributeMeta.setType(DataType.findByName(entity.getType()));
@@ -17,7 +17,7 @@ public class FunctionalAttributeTransformer {
     }
 
 
-    public synchronized static FunctionalAttributeEntity fromPayload(FunctionalAttributeMeta payload){
+    public static synchronized FunctionalAttributeEntity fromPayload(FunctionalAttributeMeta payload){
         FunctionalAttributeEntity functionalAttributeEntity = new FunctionalAttributeEntity();
         functionalAttributeEntity.setName(payload.getName());
         functionalAttributeEntity.setType(payload.getType().name());

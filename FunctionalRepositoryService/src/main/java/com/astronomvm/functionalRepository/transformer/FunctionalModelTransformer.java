@@ -9,7 +9,7 @@ public class FunctionalModelTransformer {
 
     private FunctionalModelTransformer(){}
 
-    public synchronized static FunctionalModelMeta fromEntity(FunctionalModelEntity entity){
+    public static synchronized FunctionalModelMeta fromEntity(FunctionalModelEntity entity){
         FunctionalModelMeta functionalModelMeta = new FunctionalModelMeta();
         functionalModelMeta.setName(entity.getName());
         functionalModelMeta.setAttributes(entity.getFunctionalAttributes().stream().map(FunctionalAttributeTransformer::fromEntity).collect(Collectors.toList()));
@@ -17,7 +17,7 @@ public class FunctionalModelTransformer {
     }
 
 
-    public synchronized static FunctionalModelEntity fromPayload(FunctionalModelMeta payload){
+    public static synchronized FunctionalModelEntity fromPayload(FunctionalModelMeta payload){
         FunctionalModelEntity functionalModelEntity = new FunctionalModelEntity();
         functionalModelEntity.setName(payload.getName());
         functionalModelEntity.setFunctionalAttributes(payload.getAttributes().stream().map(FunctionalAttributeTransformer::fromPayload).collect(Collectors.toList()));

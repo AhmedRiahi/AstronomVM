@@ -7,14 +7,14 @@ public class EnvironmentVariablesTransformer {
 
     private EnvironmentVariablesTransformer(){}
 
-    public synchronized static EnvironmentVariables fromEntity(EnvironmentVariablesEntity entity){
+    public static synchronized EnvironmentVariables fromEntity(EnvironmentVariablesEntity entity){
         EnvironmentVariables environmentVariables = new EnvironmentVariables();
         environmentVariables.setFunctionalRepositoryServiceUrl(entity.getFunctionalRepositoryServiceUrl());
         return environmentVariables;
     }
 
 
-    public synchronized static EnvironmentVariablesEntity fromPayload(EnvironmentVariables payload){
+    public static synchronized EnvironmentVariablesEntity fromPayload(EnvironmentVariables payload){
         EnvironmentVariablesEntity environmentVariablesEntity = new EnvironmentVariablesEntity();
         environmentVariablesEntity.setFunctionalRepositoryServiceUrl(payload.getFunctionalRepositoryServiceUrl());
         return environmentVariablesEntity;
