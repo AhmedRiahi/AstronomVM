@@ -18,4 +18,8 @@ public class ResultStorage {
         return this.stepResults.get(stepMetaName);
     }
 
+    public ResultSet getStepMetaResultSet(String stepMetaName,String resultSetName){
+        return this.getStepMetaResultFlow(stepMetaName).getResultSet(resultSetName);
+    }
+
 }

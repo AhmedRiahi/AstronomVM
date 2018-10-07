@@ -10,7 +10,7 @@ public class StepMeta {
 
     private String name;
     private String componentName;
-    private JSONObject parametersJsonObject;
+    private String parametersValues;
 
 
 }

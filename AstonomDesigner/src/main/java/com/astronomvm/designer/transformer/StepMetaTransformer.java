@@ -13,7 +13,7 @@ public class StepMetaTransformer {
         StepMeta stepMeta = new StepMeta();
         stepMeta.setName(stepMetaEntity.getName());
         stepMeta.setComponentName(stepMetaEntity.getComponentName());
-        stepMeta.setInputParameters(new InputParameters(stepMetaEntity.getInputParameters().stream().map(InputParameterTransformer::fromEntity).collect(Collectors.toList())));
+        stepMeta.setParametersValues(stepMetaEntity.getParametersValues());
         return stepMeta;
     }
 }

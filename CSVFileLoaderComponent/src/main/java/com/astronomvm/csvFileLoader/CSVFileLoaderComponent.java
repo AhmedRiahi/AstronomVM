@@ -1,6 +1,6 @@
 package com.astronomvm.csvFileLoader;
 
-import com.astronomvm.component.BaseComponent;
+import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.component.exception.ComponentException;
 import com.astronomvm.core.data.type.DataType;
 import com.astronomvm.core.data.row.*;
@@ -15,11 +15,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class CSVFileLoaderComponent extends BaseComponent {
+public class CSVFileLoaderComponent extends AstronomBaseComponent {
 
     private static final String FILE_PATH_PARAMETER_NAME = "FILE_PATH";
     private static final String SEPARATOR_PARAMETER_NAME = "SEPARATOR";
@@ -62,7 +61,6 @@ public class CSVFileLoaderComponent extends BaseComponent {
 
     @Override
     public void parseInputParameters(Map<String, JSONObject> parametersValues) {
-
         this.filePath = parametersValues.get(FILE_PATH_PARAMETER_NAME).getString("value");
         this.separator = parametersValues.get(SEPARATOR_PARAMETER_NAME).getString("value");
         this.outputFlowName = parametersValues.get(OUTPUT_FLOW_NAME_PARAMETER_NAME).getString("value");

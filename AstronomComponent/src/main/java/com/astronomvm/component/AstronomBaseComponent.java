@@ -13,15 +13,16 @@ import java.util.Map;
 
 @Data
 @Slf4j
-public abstract class BaseComponent {
+public abstract class AstronomBaseComponent {
 
-    private IComponentLogManager componentLogManager;
+    private IComponentLogManager logger;
+    private ResultFlow inputResultFlow;
 
     public abstract ComponentMeta getComponentMeta();
     public abstract void parseInputParameters(Map<String, JSONObject> parametersValues);
     public abstract ResultFlow execute() throws ComponentException;
 
     public void log(String message){
-        this.componentLogManager.log(message);
+        this.logger.log(message);
     }
 }

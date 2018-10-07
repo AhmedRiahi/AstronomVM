@@ -1,12 +1,13 @@
 package com.astronomvm.textFileOutput;
 
-import com.astronomvm.component.BaseComponent;
+import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.type.DataType;
 import com.astronomvm.core.meta.ComponentMeta;
 import com.astronomvm.core.meta.ParameterMeta;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,9 +15,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 
 @Slf4j
-public class TextFileOutputComponent extends BaseComponent {
+public class TextFileOutputComponent extends AstronomBaseComponent {
 
 
     private static final String INPUT_FLOW_NAME_PARAMETER_NAME = "INPUT_FLOW_NAME";
@@ -51,11 +53,11 @@ public class TextFileOutputComponent extends BaseComponent {
     }
 
     @Override
-    public void readInputs() {
-        String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
+    public void parseInputParameters(Map<String, JSONObject> parametersValues) {
+        /*String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
         this.inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
         this.filePath = this.inputParameters.getParameterByName(FILE_PATH_PARAMETER_NAME).getValue().toString();
-        this.separator = this.inputParameters.getParameterByName(SEPARATOR_PARAMETER_NAME).getValue().toString();
+        this.separator = this.inputParameters.getParameterByName(SEPARATOR_PARAMETER_NAME).getValue().toString();*/
     }
 
     @Override
