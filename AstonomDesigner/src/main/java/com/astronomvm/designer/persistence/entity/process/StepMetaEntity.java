@@ -22,8 +22,8 @@ public class StepMetaEntity {
     @Column(name = "COMPONENT_NAME")
     private String componentName;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<InputParameterEntity> inputParameters;
+    @Column
+    private String parametersValues;
 
     @OneToOne(cascade = CascadeType.ALL)
     private GraphicsPropertiesEntity graphicsProperties;

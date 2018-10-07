@@ -1,6 +1,6 @@
 package com.astronomvm.kernel.workflow;
 
-import com.astronomvm.component.BaseComponent;
+import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.core.meta.MetaFlow;
 import lombok.Data;
 
@@ -12,17 +12,17 @@ public class AstronomWorkflow {
 
 
     private MetaFlow metaFlow;
-    private Map<String,BaseComponent> baseComponentMap = new HashMap<>();
+    private Map<String,AstronomBaseComponent> baseComponentMap = new HashMap<>();
 
     public AstronomWorkflow(MetaFlow metaFlow){
         this.metaFlow = metaFlow;
     }
 
-    public void addComponent(String name,BaseComponent baseComponent){
+    public void addComponent(String name,AstronomBaseComponent baseComponent){
         this.baseComponentMap.put(name,baseComponent);
     }
 
-    public BaseComponent getComponentByName(String name){
+    public AstronomBaseComponent getComponentByName(String name){
         return this.baseComponentMap.get(name);
     }
 }

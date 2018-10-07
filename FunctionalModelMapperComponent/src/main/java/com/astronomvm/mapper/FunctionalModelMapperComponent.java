@@ -1,17 +1,17 @@
 package com.astronomvm.mapper;
 
-import com.astronomvm.component.BaseComponent;
-import com.astronomvm.component.exception.ComponentException;
+import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.type.DataType;
 import com.astronomvm.core.meta.ComponentMeta;
 import com.astronomvm.core.meta.ParameterMeta;
 import com.astronomvm.core.meta.functional.FunctionalModelMeta;
+import org.json.JSONObject;
 
 import java.util.Map;
 
-public class FunctionalModelMapperComponent extends BaseComponent {
+public class FunctionalModelMapperComponent extends AstronomBaseComponent {
 
 
     private static final String INPUT_FLOW_NAME_PARAMETER_NAME = "INPUT_FLOW_NAME";
@@ -48,11 +48,11 @@ public class FunctionalModelMapperComponent extends BaseComponent {
     }
 
     @Override
-    public void readInputs() {
-        String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
+    public void parseInputParameters(Map<String, JSONObject> parametersValues) {
+        /*String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
         this.inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
         this.functionalModelMeta = (FunctionalModelMeta) this.inputParameters.getParameterByName(FUNCTIONAL_MODEL_META_PARAMETER_NAME).getValue().getUnderlying();
-        this.mappingMap = (Map<String, String>) this.inputParameters.getParameterByName(MAPPING_MAP_PARAMETER_NAME).getValue().getUnderlying();
+        this.mappingMap = (Map<String, String>) this.inputParameters.getParameterByName(MAPPING_MAP_PARAMETER_NAME).getValue().getUnderlying();*/
     }
 
     @Override

@@ -11,4 +11,6 @@ public class TransitionMeta {
 
     private StepMeta source;
     private StepMeta target;
+    private String sourceFlowName;
+    private String targetFlowName;
 }

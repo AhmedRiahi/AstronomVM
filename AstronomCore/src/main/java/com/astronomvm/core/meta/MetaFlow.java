@@ -23,9 +23,10 @@ public class MetaFlow {
         this.transitions.add(transition);
     }
 
-    public List<StepMeta> getSourceSteps(StepMeta stepMeta){
-        return this.transitions.stream().filter(transition -> transition.getTarget().equals(stepMeta)).map(TransitionMeta::getSource).collect(Collectors.toList());
+    public List<TransitionMeta> getInputTransitions(StepMeta stepMeta){
+        return this.transitions.stream().filter(transitionMeta -> transitionMeta.getTarget().getName().equals(stepMeta.getName())).collect(Collectors.toList());
     }
+
 
     public List<StepMeta> getStepMetaList(){
         List<StepMeta> copy = new ArrayList<>();
@@ -40,6 +41,6 @@ public class MetaFlow {
     }
 
     public StepMeta getStepMetaByName(String name){
-        return this.stepMetaList.stream().filter(stepMeta -> stepMeta.getName().equals(name)).findAny().orElseThrow(StepMetaNotFoundException::new);
+        return this.stepMetaList.stream().filter(stepMeta -> stepMeta.getName().equals(name)).findAny().orElseThrow(() -> new StepMetaNotFoundException(name));
     }
 }

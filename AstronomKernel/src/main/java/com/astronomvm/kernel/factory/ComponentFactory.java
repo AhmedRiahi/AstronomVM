@@ -1,6 +1,6 @@
 package com.astronomvm.kernel.factory;
 
-import com.astronomvm.component.BaseComponent;
+import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.kernel.spi.ComponentsRegistryBoard;
 
 public class ComponentFactory {
@@ -14,9 +14,9 @@ public class ComponentFactory {
 
     private ComponentFactory(){}
 
-    public BaseComponent buildComponent(String name) throws IllegalAccessException, InstantiationException {
+    public AstronomBaseComponent buildComponent(String name) throws IllegalAccessException, InstantiationException {
         Class componentClass = ComponentsRegistryBoard.getInstance().getComponentClass(name);
-        return (BaseComponent)componentClass.newInstance();
+        return (AstronomBaseComponent)componentClass.newInstance();
     }
 
 }

@@ -23,6 +23,7 @@
         <module>AstronomSimulator</module>
         <module>AstronomAgent</module>
         <module>FunctionalModelMapperComponent</module>
+        <module>Examples</module>
     </modules>
 
     <dependencies>

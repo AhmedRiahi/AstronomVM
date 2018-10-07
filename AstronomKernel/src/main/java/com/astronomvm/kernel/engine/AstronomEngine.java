@@ -30,11 +30,11 @@ public class AstronomEngine {
     }
 
     public void executeWorkflow(MetaFlow flow,IComponentLogManager componentLogManager,IOrchestraListener... orchestraListeners){
-        Orchestrator orchestrator = new Orchestrator();
-        this.orchestrators.add(orchestrator);
+        AstronomWorkflow astronomWorkflow = WokflowBuilder.getInstance().buildWorkflow(flow);
+        Orchestrator orchestrator = new Orchestrator(astronomWorkflow);
         Arrays.stream(orchestraListeners).forEach(orchestrator::subscribeOrchestraListener);
         orchestrator.setComponentLogManager(componentLogManager);
-        AstronomWorkflow astronomWorkflow = WokflowBuilder.getInstance().buildWorkflow(flow);
-        orchestrator.play(astronomWorkflow);
+        this.orchestrators.add(orchestrator);
+        orchestrator.play();
     }
 }

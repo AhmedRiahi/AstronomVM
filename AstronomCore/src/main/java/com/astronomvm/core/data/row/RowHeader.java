@@ -15,7 +15,7 @@ public class RowHeader {
     private List<DataType> columnsTypes = new ArrayList<>();
 
     public Integer getColumnNameIndex(String columnName){
-        return IntStream.range(0,this.columnsNames.size()).filter( i-> this.columnsNames.get(i).equals(columnName)).mapToObj(Integer::new).findAny().orElseThrow(ColumnNotFoundException::new);
+        return IntStream.range(0,this.columnsNames.size()).filter( i-> this.columnsNames.get(i).equals(columnName)).mapToObj(Integer::new).findAny().orElseThrow(() -> new ColumnNotFoundException(columnName));
     }
 
     public void addColumn(String columnName,DataType type){
