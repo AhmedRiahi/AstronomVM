@@ -20,6 +20,15 @@ public class RowHeader {
 
     public void addColumn(String columnName,DataType type){
         this.columnsNames.add(columnName);
-        columnsTypes.add(type);
+        this.columnsTypes.add(type);
+    }
+
+    public void addColumnAt(String columnName,DataType type,int index){
+        this.columnsNames.add(index,columnName);
+        this.columnsTypes.add(index,type);
+    }
+
+    public int length(){
+        return this.columnsNames.size();
     }
 }

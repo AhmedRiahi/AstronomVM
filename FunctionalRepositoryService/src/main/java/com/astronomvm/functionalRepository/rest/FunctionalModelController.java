@@ -22,7 +22,7 @@ public class FunctionalModelController {
     }
 
     @PostMapping("/create/{repositoryName}")
-    public void create(String repositoryName,FunctionalModelMeta functionalModelMeta){
+    public void create(@PathVariable String repositoryName,@RequestBody FunctionalModelMeta functionalModelMeta){
         log.info("Received model creation query");
         this.functionalModelService.create(repositoryName,functionalModelMeta);
     }

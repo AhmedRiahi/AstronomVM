@@ -31,8 +31,8 @@ public class Main {
         astronomMetaFlow.addStepMeta(textOutputStepMeta);
         astronomMetaFlow.addStepMeta(invalidTextOutputStepMeta);
 
-        astronomMetaFlow.addTransition(new TransitionMeta(csvStepMeta,functionalModelMapperStepMeta,"csv_flow","csv_flow"));
-        astronomMetaFlow.addTransition(new TransitionMeta(csvStepMeta,rowFilterStepMeta,"csv_flow","csv_flow"));
+        astronomMetaFlow.addTransition(new TransitionMeta(csvStepMeta,functionalModelMapperStepMeta,"csv_flow","flow_set"));
+        astronomMetaFlow.addTransition(new TransitionMeta(functionalModelMapperStepMeta,rowFilterStepMeta,"mapped_model","to_be_filtred_flow"));
         astronomMetaFlow.addTransition(new TransitionMeta(rowFilterStepMeta,textOutputStepMeta,"valid_csv_flow","valid_csv_flow"));
         astronomMetaFlow.addTransition(new TransitionMeta(rowFilterStepMeta,invalidTextOutputStepMeta,"invalid_csv_flow","invalid_csv_flow"));
 
@@ -78,7 +78,7 @@ public class Main {
                 "    \"parameters\": [\n" +
                 "        {\n" +
                 "            \"name\": \"FILTER_COLUMN\",\n" +
-                "            \"value\": \"Col1\"\n" +
+                "            \"value\": \"FirstName\"\n" +
                 "        },\n" +
                 "        {\n" +
                 "            \"name\": \"FILTER_OPERATOR\",\n" +
@@ -90,7 +90,7 @@ public class Main {
                 "        },\n" +
                 "        {\n" +
                 "            \"name\": \"INPUT_FLOW_NAME\",\n" +
-                "            \"value\": \"csv_flow\"\n" +
+                "            \"value\": \"to_be_filtred_flow\"\n" +
                 "        },\n" +
                 "        {\n" +
                 "            \"name\": \"VALID_OUTPUT_FLOW_NAME\",\n" +
@@ -159,7 +159,7 @@ public class Main {
                 "    \"parameters\": [\n" +
                 "        {\n" +
                 "            \"name\": \"INPUT_FLOW_NAME\",\n" +
-                "            \"value\": \"csv_flow\"\n" +
+                "            \"value\": \"flow_set\"\n" +
                 "        },\n" +
                 "        {\n" +
                 "            \"name\": \"FUNCTIONAL_MODEL_REPOSITORY_NAME\",\n" +
@@ -167,8 +167,16 @@ public class Main {
                 "        },\n" +
                 "        {\n" +
                 "            \"name\": \"FUNCTIONAL_MODEL_META_NAME\",\n" +
-                "            \"value\": \"TheModel\"\n" +
-                "        }\n" +
+                "            \"value\": \"Person\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"MAPPING_MAP\",\n" +
+                "            \"value\": [{\"source\":\"Col1\",\"target\":\"FirstName\"},{\"source\":\"Col2\",\"target\":\"LastName\"}]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"OUTPUT_FLOW_NAME\",\n" +
+                "            \"value\": \"mapped_model\"\n" +
+                "        }"+
                 "    ]\n" +
                 "}");
         stepMeta.setComponentName("FUNCTIONAL_MODEL_MAPPER");

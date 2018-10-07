@@ -22,7 +22,7 @@ public class StepMetaEntity {
     @Column(name = "COMPONENT_NAME")
     private String componentName;
 
-    @Column
+    @Column(name = "PARAMETERS_VALUES")
     private String parametersValues;
 
     @OneToOne(cascade = CascadeType.ALL)
