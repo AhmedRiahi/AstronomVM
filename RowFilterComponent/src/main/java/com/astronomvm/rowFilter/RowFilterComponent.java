@@ -1,6 +1,6 @@
 package com.astronomvm.rowFilter;
 
-import com.astronomvm.component.BaseComponent;
+import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.component.exception.ComponentException;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
@@ -9,6 +9,7 @@ import com.astronomvm.core.data.type.DataType;
 import com.astronomvm.core.data.row.Row;
 import com.astronomvm.core.meta.ComponentMeta;
 import com.astronomvm.core.meta.ParameterMeta;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 
-public class RowFilterComponent extends BaseComponent {
+public class RowFilterComponent extends AstronomBaseComponent {
 
     private static final String INPUT_FLOW_NAME_PARAMETER_NAME = "INPUT_FLOW_NAME";
     private static final String VALID_OUTPUT_FLOW_NAME_PARAMETER_NAME = "VALID_OUTPUT_FLOW_NAME";
@@ -25,6 +26,13 @@ public class RowFilterComponent extends BaseComponent {
     private static final String FILTER_COLUMN_PARAMETER_NAME = "FILTER_COLUMN";
     private static final String FILTER_OPERATOR_PARAMETER_NAME = "FILTER_OPERATOR";
     private static final String FILTER_VALUE_PARAMETER_NAME = "FILTER_VALUE";
+
+    private String filterColumnName;
+    private String filterOperatorString;
+    private String filterValueString;
+    private String validOutputFlowParameterName;
+    private String invalidOutputFlowParameterName;
+    private ResultSet inputFlowResultSet;
 
 
     @Override
@@ -66,20 +74,24 @@ public class RowFilterComponent extends BaseComponent {
     }
 
     @Override
-    public ResultFlow execute() throws ComponentException {
-        String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
-        ResultSet inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
-        String filterColumnName =  this.inputParameters.getParameterByName(FILTER_COLUMN_PARAMETER_NAME).getValue().toString();
-        String filterOperatorString = this.inputParameters.getParameterByName(FILTER_OPERATOR_PARAMETER_NAME).getValue().toString();
-        String filterValueString =  this.inputParameters.getParameterByName(FILTER_VALUE_PARAMETER_NAME).getValue().toString();
-        String validOutputFlowParameterName =  this.inputParameters.getParameterByName(VALID_OUTPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
-        String invalidOutputFlowParameterName =  this.inputParameters.getParameterByName(INVALID_OUTPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
+    public void parseInputParameters(Map<String, JSONObject> parametersValues){
+        String inputFlowParameterName = parametersValues.get(INPUT_FLOW_NAME_PARAMETER_NAME).getString("value");
+        this.inputFlowResultSet = this.getInputResultFlow().getResultSet(inputFlowParameterName);
+        this.filterColumnName =  parametersValues.get(FILTER_COLUMN_PARAMETER_NAME).getString("value");
+        this.filterOperatorString = parametersValues.get(FILTER_OPERATOR_PARAMETER_NAME).getString("value");
+        this.filterValueString =  parametersValues.get(FILTER_VALUE_PARAMETER_NAME).getString("value");
+        this.validOutputFlowParameterName =  parametersValues.get(VALID_OUTPUT_FLOW_NAME_PARAMETER_NAME).getString("value");
+        this.invalidOutputFlowParameterName =  parametersValues.get(INVALID_OUTPUT_FLOW_NAME_PARAMETER_NAME).getString("value");
+    }
 
-        BiFunction<AstronomObject,AstronomObject,Boolean> comparisonOperation = buildComparisonOperation(filterOperatorString);
-        Integer filterColumnIndex = inputFlowResultSet.getRowHeader().getColumnNameIndex(filterColumnName);
-        AstronomObject filterValue = new AstronomObject(filterValueString);
+    @Override
+    public ResultFlow execute() {
 
-        Map<Boolean,List<Row>> filterGroups =  inputFlowResultSet.getRows().stream().collect(Collectors.groupingBy(row -> comparisonOperation.apply(row.getColumnAt(filterColumnIndex).getValue(), filterValue)));
+        BiFunction<AstronomObject,AstronomObject,Boolean> comparisonOperation = buildComparisonOperation(this.filterOperatorString);
+        Integer filterColumnIndex = this.inputFlowResultSet.getRowHeader().getColumnNameIndex(this.filterColumnName);
+        AstronomObject filterValue = new AstronomObject(this.filterValueString);
+
+        Map<Boolean,List<Row>> filterGroups =  this.inputFlowResultSet.getRows().stream().collect(Collectors.groupingBy(row -> comparisonOperation.apply(row.getColumnAt(filterColumnIndex).getValue(), filterValue)));
 
 
         ResultSet validFilterResultSet = new ResultSet();
@@ -89,8 +101,8 @@ public class RowFilterComponent extends BaseComponent {
         invalidFilterResultSet.setRows(filterGroups.get(false) == null ? new ArrayList<>() : filterGroups.get(false));
 
         ResultFlow resultFlow = new ResultFlow();
-        resultFlow.addResultSet(validOutputFlowParameterName,validFilterResultSet);
-        resultFlow.addResultSet(invalidOutputFlowParameterName,invalidFilterResultSet);
+        resultFlow.addResultSet(this.validOutputFlowParameterName,validFilterResultSet);
+        resultFlow.addResultSet(this.invalidOutputFlowParameterName,invalidFilterResultSet);
 
         return resultFlow;
     }

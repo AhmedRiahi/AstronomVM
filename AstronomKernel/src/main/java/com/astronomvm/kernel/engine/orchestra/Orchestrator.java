@@ -1,24 +1,20 @@
 package com.astronomvm.kernel.engine.orchestra;
 
-import com.astronomvm.component.BaseComponent;
+import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.component.exception.ComponentException;
-import com.astronomvm.core.data.input.InputParameter;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.output.ResultStorage;
-import com.astronomvm.core.data.row.AstronomObject;
-import com.astronomvm.core.data.type.DataType;
 import com.astronomvm.core.meta.*;
 import com.astronomvm.core.service.IComponentLogManager;
 import com.astronomvm.kernel.engine.component.ComponentExecutor;
-import com.astronomvm.kernel.workflow.AstronomWorkflow;
+import com.astronomvm.kernel.model.workflow.AstronomWorkflow;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -28,13 +24,19 @@ public class Orchestrator {
     private ResultStorage resultStorage = new ResultStorage();
     private List<IOrchestraListener> orchestraListeners = new ArrayList<>();
     private IComponentLogManager componentLogManager;
+    private AstronomWorkflow workflow;
 
-    public void play(AstronomWorkflow workflow){
+    public Orchestrator(AstronomWorkflow workflow){
+        this.workflow = workflow;
+    }
+
+    public synchronized void play(){
+        log.info("Orchestra starts playing");
         this.orchestraListeners.parallelStream().forEach(IOrchestraListener::onOrchestraStartEvent);
-        HashMap<Integer,List<StepMeta>> stepsIndex = this.buildWorkflowExecutionOrder(workflow.getMetaFlow());
+        HashMap<Integer,List<StepMeta>> stepsIndex = this.buildWorkflowExecutionOrder(this.workflow.getMetaFlow());
         stepsIndex.keySet().forEach(level -> {
             List<StepMeta> steps = stepsIndex.get(level);
-            steps.forEach(step -> this.executeStep(workflow,step));
+            steps.forEach(this::executeStep);
         });
         this.orchestraListeners.parallelStream().forEach(IOrchestraListener::onOrchestraFinishEvent);
     }
@@ -62,15 +64,15 @@ public class Orchestrator {
     }
 
 
-    private void executeStep(AstronomWorkflow workflow,StepMeta stepMeta){
-        BaseComponent component = workflow.getComponentByName(stepMeta.getComponentName());
+    private void executeStep(StepMeta stepMeta){
+        AstronomBaseComponent component = workflow.getComponentByName(stepMeta.getComponentName());
         ComponentExecutor componentExecutor = new ComponentExecutor();
-        componentExecutor.setComponentLogManager(this.componentLogManager);
+        componentExecutor.setLogger(this.componentLogManager);
         try {
-            this.prepareResultFlowParameterInputs(workflow,stepMeta);
+            ResultFlow inputResultFlow = this.prepareInputResultFlow(stepMeta);
             this.orchestraListeners.parallelStream().forEach(orchestraListener -> orchestraListener.onStepStartEvent(stepMeta.getName()));
-            ResultFlow resultFlow = componentExecutor.execute(component,stepMeta.getInputParameters());
-            this.resultStorage.addStepResultFlow(stepMeta.getName(),resultFlow);
+            ResultFlow outputResultFlow = componentExecutor.execute(component,inputResultFlow,stepMeta.getParametersValues(),workflow.getMetaFlow().getEnvironmentVariables());
+            this.resultStorage.addStepResultFlow(stepMeta.getName(),outputResultFlow);
             this.orchestraListeners.parallelStream().forEach(orchestraListener -> orchestraListener.onStepFinishEvent(stepMeta.getName()));
         } catch (ComponentException e) {
             log.error(e.getMessage(),e);
@@ -78,24 +80,18 @@ public class Orchestrator {
     }
 
 
-    private void prepareResultFlowParameterInputs(AstronomWorkflow workflow,StepMeta stepMeta){
-        List<StepMeta> sourceSteps = workflow.getMetaFlow().getSourceSteps(stepMeta);
-        ComponentMeta componentMeta = workflow.getComponentByName(stepMeta.getComponentName()).getComponentMeta();
-        List<ParameterMeta> inputFlowParameterMetas = componentMeta.getParameterMetas().stream().filter(parameterMeta -> parameterMeta.getType().equals(DataType.INPUT_FLOW_NAME)).collect(Collectors.toList());
-        inputFlowParameterMetas.stream().forEach(parameterMeta -> {
-            String inputFlowName = stepMeta.getInputParameters().getParameterByName(parameterMeta.getName()).getValue().toString();
-            Map<String,ResultSet> resultSetMap = sourceSteps.stream().map(sourceStepMeta -> this.resultStorage.getStepMetaResultFlow(sourceStepMeta.getName()).getResultSetMap()).filter(map -> map.containsKey(inputFlowName)).findAny().get();
-            ResultSet inputFlowResultSet = resultSetMap.get(inputFlowName);
-            stepMeta.getInputParameters().addParameter(new InputParameter(inputFlowName,new AstronomObject(inputFlowResultSet)));
+    private ResultFlow prepareInputResultFlow(StepMeta stepMeta){
+        ResultFlow resultFlow = new ResultFlow();
+        List<TransitionMeta> inputTransitions = this.workflow.getMetaFlow().getInputTransitions(stepMeta);
+        inputTransitions.stream().forEach(transitionMeta ->{
+            ResultSet inputResultSet = this.resultStorage.getStepMetaResultSet(transitionMeta.getSource().getName(),transitionMeta.getSourceFlowName());
+            resultFlow.addResultSet(transitionMeta.getTargetFlowName(),inputResultSet);
         });
+        return resultFlow;
     }
 
     public void subscribeOrchestraListener(IOrchestraListener orchestraListener){
         this.orchestraListeners.add(orchestraListener);
-    }
-
-    public void registerComponentLogManager(IComponentLogManager componentLogManager){
-        this.componentLogManager = componentLogManager;
     }
 
 }

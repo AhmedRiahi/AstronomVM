@@ -1,9 +1,9 @@
 package com.astronomvm.kernel.factory;
 
-import com.astronomvm.component.BaseComponent;
+import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.core.meta.MetaFlow;
 import com.astronomvm.kernel.exception.ComponentCreationException;
-import com.astronomvm.kernel.workflow.AstronomWorkflow;
+import com.astronomvm.kernel.model.workflow.AstronomWorkflow;
 
 public class WokflowBuilder {
 
@@ -20,7 +20,7 @@ public class WokflowBuilder {
         AstronomWorkflow astronomWorkflow = new AstronomWorkflow(astronomMetaFlow);
         astronomMetaFlow.getStepMetaList().stream().forEach(step -> {
             try {
-                BaseComponent component = ComponentFactory.getInstance().buildComponent(step.getComponentName());
+                AstronomBaseComponent component = ComponentFactory.getInstance().buildComponent(step.getComponentName());
                 astronomWorkflow.addComponent(component.getComponentMeta().getName(),component);
             } catch (IllegalAccessException | InstantiationException e) {
                 throw new ComponentCreationException();

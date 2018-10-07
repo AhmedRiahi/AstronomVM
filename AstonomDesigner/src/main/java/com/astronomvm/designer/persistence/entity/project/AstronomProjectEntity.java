@@ -1,7 +1,7 @@
 package com.astronomvm.designer.persistence.entity.project;
 
 
-import com.astronomvm.designer.persistence.entity.process.MetaFlowEntity;
+import com.astronomvm.designer.persistence.entity.workflow.MetaFlowEntity;
 import lombok.Data;
 
 import javax.persistence.*;

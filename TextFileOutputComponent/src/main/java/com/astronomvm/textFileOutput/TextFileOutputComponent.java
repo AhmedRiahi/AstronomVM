@@ -1,12 +1,13 @@
 package com.astronomvm.textFileOutput;
 
-import com.astronomvm.component.BaseComponent;
+import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.data.output.ResultSet;
 import com.astronomvm.core.data.type.DataType;
 import com.astronomvm.core.meta.ComponentMeta;
 import com.astronomvm.core.meta.ParameterMeta;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,14 +15,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 
 @Slf4j
-public class TextFileOutputComponent extends BaseComponent {
+public class TextFileOutputComponent extends AstronomBaseComponent {
 
 
     private static final String INPUT_FLOW_NAME_PARAMETER_NAME = "INPUT_FLOW_NAME";
     private static final String FILE_PATH_PARAMETER_NAME = "FILE_PATH";
     private static final String SEPARATOR_PARAMETER_NAME = "SEPARATOR";
+
+    private ResultSet inputFlowResultSet;
+    private String filePath;
+    private String separator;
 
     @Override
     public ComponentMeta getComponentMeta() {
@@ -47,26 +53,29 @@ public class TextFileOutputComponent extends BaseComponent {
     }
 
     @Override
-    public ResultFlow execute() {
-        String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
-        ResultSet inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
-        String filePath = this.inputParameters.getParameterByName(FILE_PATH_PARAMETER_NAME).getValue().toString();
-        String separator = this.inputParameters.getParameterByName(SEPARATOR_PARAMETER_NAME).getValue().toString();
+    public void parseInputParameters(Map<String, JSONObject> parametersValues) {
+        String inputFlowParameterName = parametersValues.get(INPUT_FLOW_NAME_PARAMETER_NAME).getString("value");
+        this.inputFlowResultSet = this.getInputResultFlow().getResultSet(inputFlowParameterName);
+        this.filePath = parametersValues.get(FILE_PATH_PARAMETER_NAME).getString("value");
+        this.separator = parametersValues.get(SEPARATOR_PARAMETER_NAME).getString("value");
+    }
 
+    @Override
+    public ResultFlow execute() {
         File file = new File(filePath);
 
         try {
             Files.deleteIfExists(file.toPath());
 
             if(file.createNewFile()){
-                Path path = Paths.get(filePath);
+                Path path = Paths.get(this.filePath);
 
                 try (BufferedWriter writer = Files.newBufferedWriter(path))
                 {
-                    inputFlowResultSet.getRows().stream().forEach(row -> {
+                    this.inputFlowResultSet.getRows().stream().forEach(row -> {
                         row.getColumns().stream().forEach(column -> {
                             try {
-                                writer.write(column.getValue().getUnderlying()+separator);
+                                writer.write(column.getValue().getUnderlying()+this.separator);
                             } catch (IOException e) {
                                 log.error(e.getMessage(),e);
                             }

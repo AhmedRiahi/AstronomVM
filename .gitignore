@@ -14,3 +14,6 @@ TextFileOutputComponent/target/*
 AstronomSimulator/target/*
 AstronomAgent/target/*
 target/*
+FunctionalModelMapperComponent/target/*
+Examples/target/*
+FunctionalRepositoryService/target/*
