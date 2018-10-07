@@ -1,5 +1,7 @@
 package com.astronomvm.core.data.output;
 
+import com.astronomvm.core.exception.StepMetaNotFoundException;
+import com.astronomvm.core.exception.StepMetaResultSetNotFoundException;
 import lombok.Data;
 
 import java.util.HashMap;
@@ -15,6 +17,7 @@ public class ResultStorage {
     }
 
     public ResultFlow getStepMetaResultFlow(String stepMetaName){
+        if(!this.stepResults.containsKey(stepMetaName)) throw new StepMetaResultSetNotFoundException(stepMetaName);
         return this.stepResults.get(stepMetaName);
     }
 

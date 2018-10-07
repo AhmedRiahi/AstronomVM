@@ -54,10 +54,10 @@ public class TextFileOutputComponent extends AstronomBaseComponent {
 
     @Override
     public void parseInputParameters(Map<String, JSONObject> parametersValues) {
-        /*String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
-        this.inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
-        this.filePath = this.inputParameters.getParameterByName(FILE_PATH_PARAMETER_NAME).getValue().toString();
-        this.separator = this.inputParameters.getParameterByName(SEPARATOR_PARAMETER_NAME).getValue().toString();*/
+        String inputFlowParameterName = parametersValues.get(INPUT_FLOW_NAME_PARAMETER_NAME).getString("value");
+        this.inputFlowResultSet = this.getInputResultFlow().getResultSet(inputFlowParameterName);
+        this.filePath = parametersValues.get(FILE_PATH_PARAMETER_NAME).getString("value");
+        this.separator = parametersValues.get(SEPARATOR_PARAMETER_NAME).getString("value");
     }
 
     @Override

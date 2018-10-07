@@ -2,13 +2,14 @@ package com.astronomvm.kernel.spi;
 
 import com.astronomvm.core.meta.ComponentMeta;
 import com.astronomvm.kernel.exception.ComponentClassNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
+@Slf4j
 public class ComponentsRegistryBoard {
 
     private static final ComponentsRegistryBoard instance = new ComponentsRegistryBoard();
@@ -26,7 +27,7 @@ public class ComponentsRegistryBoard {
     }
 
     public Class getComponentClass(String name){
-        return this.componentMap.entrySet().stream().filter(entry -> entry.getKey().getName().equals(name)).findAny().orElseThrow(ComponentClassNotFoundException::new).getValue();
+        return this.componentMap.entrySet().stream().filter(entry -> entry.getKey().getName().equals(name)).findAny().orElseThrow(() -> new ComponentClassNotFoundException(name)).getValue();
     }
 
     public Set<ComponentMeta> getAllRegisteredComponents(){

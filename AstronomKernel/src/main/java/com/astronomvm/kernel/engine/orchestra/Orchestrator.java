@@ -31,6 +31,7 @@ public class Orchestrator {
     }
 
     public void play(){
+        log.info("Orchestra starts playing");
         this.orchestraListeners.parallelStream().forEach(IOrchestraListener::onOrchestraStartEvent);
         HashMap<Integer,List<StepMeta>> stepsIndex = this.buildWorkflowExecutionOrder(this.workflow.getMetaFlow());
         stepsIndex.keySet().forEach(level -> {

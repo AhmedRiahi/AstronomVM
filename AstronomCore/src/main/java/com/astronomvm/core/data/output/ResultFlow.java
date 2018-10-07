@@ -1,5 +1,6 @@
 package com.astronomvm.core.data.output;
 
+import com.astronomvm.core.exception.ResultSetNotFoundException;
 import lombok.Data;
 
 import java.util.HashMap;
@@ -15,6 +16,7 @@ public class ResultFlow {
     }
 
     public ResultSet getResultSet(String resultSetName){
+        if(!this.resultSetMap.containsKey(resultSetName)) throw new ResultSetNotFoundException(resultSetName);
         return this.resultSetMap.get(resultSetName);
     }
 }
