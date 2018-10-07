@@ -1,5 +1,6 @@
 package com.astronomvm.examples;
 
+import com.astronomvm.core.data.EnvironmentVariables;
 import com.astronomvm.core.data.row.AstronomObject;
 import com.astronomvm.core.data.type.DataType;
 import com.astronomvm.core.data.row.RowHeader;
@@ -19,18 +20,26 @@ public class Main {
         MetaFlow astronomMetaFlow = new MetaFlow();
 
         StepMeta csvStepMeta = buildCSVLoaderMetaStep();
+        StepMeta functionalModelMapperStepMeta = buildFunctionalModelMapperMetaStep();
         StepMeta rowFilterStepMeta = buildRowFilterMetaStep();
         StepMeta textOutputStepMeta = buildTextOutputMetaStep();
         StepMeta invalidTextOutputStepMeta = buildInvalidTextOutputMetaStep();
 
         astronomMetaFlow.addStepMeta(csvStepMeta);
+        astronomMetaFlow.addStepMeta(functionalModelMapperStepMeta);
         astronomMetaFlow.addStepMeta(rowFilterStepMeta);
         astronomMetaFlow.addStepMeta(textOutputStepMeta);
         astronomMetaFlow.addStepMeta(invalidTextOutputStepMeta);
 
+        astronomMetaFlow.addTransition(new TransitionMeta(csvStepMeta,functionalModelMapperStepMeta,"csv_flow","csv_flow"));
         astronomMetaFlow.addTransition(new TransitionMeta(csvStepMeta,rowFilterStepMeta,"csv_flow","csv_flow"));
         astronomMetaFlow.addTransition(new TransitionMeta(rowFilterStepMeta,textOutputStepMeta,"valid_csv_flow","valid_csv_flow"));
         astronomMetaFlow.addTransition(new TransitionMeta(rowFilterStepMeta,invalidTextOutputStepMeta,"invalid_csv_flow","invalid_csv_flow"));
+
+        EnvironmentVariables environmentVariables = new EnvironmentVariables();
+        environmentVariables.setFunctionalRepositoryServiceUrl("http://localhost:11000/");
+        astronomMetaFlow.setEnvironmentVariables(environmentVariables);
+
         AstronomEngine.getInstance().executeWorkflow(astronomMetaFlow);
     }
 
@@ -140,6 +149,29 @@ public class Main {
                 "    ]\n" +
                 "}");
         stepMeta.setComponentName("TEXT_FILE_OUTPUT");
+        return stepMeta;
+    }
+
+    public static StepMeta buildFunctionalModelMapperMetaStep(){
+        StepMeta stepMeta = new StepMeta();
+        stepMeta.setName("FUNCTIONAL_MODEL_MAPPER");
+        stepMeta.setParametersValues("{\n" +
+                "    \"parameters\": [\n" +
+                "        {\n" +
+                "            \"name\": \"INPUT_FLOW_NAME\",\n" +
+                "            \"value\": \"csv_flow\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"FUNCTIONAL_MODEL_REPOSITORY_NAME\",\n" +
+                "            \"value\": \"Test\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"FUNCTIONAL_MODEL_META_NAME\",\n" +
+                "            \"value\": \"TheModel\"\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}");
+        stepMeta.setComponentName("FUNCTIONAL_MODEL_MAPPER");
         return stepMeta;
     }
 

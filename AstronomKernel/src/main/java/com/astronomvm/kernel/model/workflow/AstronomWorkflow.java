@@ -1,4 +1,4 @@
-package com.astronomvm.kernel.workflow;
+package com.astronomvm.kernel.model.workflow;
 
 import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.core.meta.MetaFlow;

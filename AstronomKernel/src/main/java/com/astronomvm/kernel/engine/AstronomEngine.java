@@ -6,7 +6,7 @@ import com.astronomvm.kernel.engine.component.DefaultComponentLogManager;
 import com.astronomvm.kernel.engine.orchestra.IOrchestraListener;
 import com.astronomvm.kernel.engine.orchestra.Orchestrator;
 import com.astronomvm.kernel.factory.WokflowBuilder;
-import com.astronomvm.kernel.workflow.AstronomWorkflow;
+import com.astronomvm.kernel.model.workflow.AstronomWorkflow;
 
 import java.util.ArrayList;
 import java.util.Arrays;

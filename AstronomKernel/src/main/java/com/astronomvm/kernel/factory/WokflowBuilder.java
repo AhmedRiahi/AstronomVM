@@ -3,7 +3,7 @@ package com.astronomvm.kernel.factory;
 import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.core.meta.MetaFlow;
 import com.astronomvm.kernel.exception.ComponentCreationException;
-import com.astronomvm.kernel.workflow.AstronomWorkflow;
+import com.astronomvm.kernel.model.workflow.AstronomWorkflow;
 
 public class WokflowBuilder {
 

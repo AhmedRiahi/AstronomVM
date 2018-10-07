@@ -8,7 +8,7 @@ import com.astronomvm.core.data.output.ResultStorage;
 import com.astronomvm.core.meta.*;
 import com.astronomvm.core.service.IComponentLogManager;
 import com.astronomvm.kernel.engine.component.ComponentExecutor;
-import com.astronomvm.kernel.workflow.AstronomWorkflow;
+import com.astronomvm.kernel.model.workflow.AstronomWorkflow;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,7 +30,7 @@ public class Orchestrator {
         this.workflow = workflow;
     }
 
-    public void play(){
+    public synchronized void play(){
         log.info("Orchestra starts playing");
         this.orchestraListeners.parallelStream().forEach(IOrchestraListener::onOrchestraStartEvent);
         HashMap<Integer,List<StepMeta>> stepsIndex = this.buildWorkflowExecutionOrder(this.workflow.getMetaFlow());
@@ -71,7 +71,7 @@ public class Orchestrator {
         try {
             ResultFlow inputResultFlow = this.prepareInputResultFlow(stepMeta);
             this.orchestraListeners.parallelStream().forEach(orchestraListener -> orchestraListener.onStepStartEvent(stepMeta.getName()));
-            ResultFlow outputResultFlow = componentExecutor.execute(component,inputResultFlow,stepMeta.getParametersValues());
+            ResultFlow outputResultFlow = componentExecutor.execute(component,inputResultFlow,stepMeta.getParametersValues(),workflow.getMetaFlow().getEnvironmentVariables());
             this.resultStorage.addStepResultFlow(stepMeta.getName(),outputResultFlow);
             this.orchestraListeners.parallelStream().forEach(orchestraListener -> orchestraListener.onStepFinishEvent(stepMeta.getName()));
         } catch (ComponentException e) {
@@ -92,10 +92,6 @@ public class Orchestrator {
 
     public void subscribeOrchestraListener(IOrchestraListener orchestraListener){
         this.orchestraListeners.add(orchestraListener);
-    }
-
-    public void registerComponentLogManager(IComponentLogManager componentLogManager){
-        this.componentLogManager = componentLogManager;
     }
 
 }

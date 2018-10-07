@@ -1,5 +1,6 @@
 package com.astronomvm.core.meta;
 
+import com.astronomvm.core.data.EnvironmentVariables;
 import com.astronomvm.core.exception.StepMetaNotFoundException;
 import lombok.Data;
 
@@ -13,6 +14,7 @@ public class MetaFlow {
     private String name;
     private List<StepMeta> stepMetaList = new ArrayList<>();
     private List<TransitionMeta> transitions = new ArrayList<>();
+    private EnvironmentVariables environmentVariables;
 
 
     public void addStepMeta(StepMeta stepMeta){
