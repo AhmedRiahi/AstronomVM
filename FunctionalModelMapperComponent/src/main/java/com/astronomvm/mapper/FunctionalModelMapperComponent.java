@@ -15,7 +15,8 @@ public class FunctionalModelMapperComponent extends AstronomBaseComponent {
 
 
     private static final String INPUT_FLOW_NAME_PARAMETER_NAME = "INPUT_FLOW_NAME";
-    private static final String FUNCTIONAL_MODEL_META_PARAMETER_NAME = "FUNCTIONAL_MODEL_META";
+    private static final String FUNCTIONAL_MODEL_REPOSITORY_NAME_PARAMETER_NAME = "FUNCTIONAL_MODEL_REPOSITORY_NAME";
+    private static final String FUNCTIONAL_MODEL_META_NAME_PARAMETER_NAME = "FUNCTIONAL_MODEL_META_NAME";
     private static final String MAPPING_MAP_PARAMETER_NAME = "MAPPING_MAP";
 
 
@@ -32,8 +33,12 @@ public class FunctionalModelMapperComponent extends AstronomBaseComponent {
         inputFlowParameterMeta.setName(INPUT_FLOW_NAME_PARAMETER_NAME);
         inputFlowParameterMeta.setType(DataType.INPUT_FLOW_NAME);
 
+        ParameterMeta functionalModelRepositoryNameParameterMeta = new ParameterMeta();
+        functionalModelRepositoryNameParameterMeta.setName(FUNCTIONAL_MODEL_REPOSITORY_NAME_PARAMETER_NAME);
+        functionalModelRepositoryNameParameterMeta.setType(DataType.FUNCTIONAl_MODEL);
+
         ParameterMeta functionalModelMetaParameterMeta = new ParameterMeta();
-        functionalModelMetaParameterMeta.setName(FUNCTIONAL_MODEL_META_PARAMETER_NAME);
+        functionalModelMetaParameterMeta.setName(FUNCTIONAL_MODEL_META_NAME_PARAMETER_NAME);
         functionalModelMetaParameterMeta.setType(DataType.FUNCTIONAl_MODEL);
 
         ParameterMeta mappingMapParameterMeta = new ParameterMeta();
@@ -42,6 +47,7 @@ public class FunctionalModelMapperComponent extends AstronomBaseComponent {
 
 
         componentMeta.addParameterMeta(inputFlowParameterMeta);
+        componentMeta.addParameterMeta(functionalModelRepositoryNameParameterMeta);
         componentMeta.addParameterMeta(functionalModelMetaParameterMeta);
         componentMeta.addParameterMeta(mappingMapParameterMeta);
         return componentMeta;
@@ -49,10 +55,12 @@ public class FunctionalModelMapperComponent extends AstronomBaseComponent {
 
     @Override
     public void parseInputParameters(Map<String, JSONObject> parametersValues) {
-        /*String inputFlowParameterName = this.inputParameters.getParameterByName(INPUT_FLOW_NAME_PARAMETER_NAME).getValue().toString();
-        this.inputFlowResultSet = (ResultSet) this.inputParameters.getParameterByName(inputFlowParameterName).getValue().getUnderlying();
-        this.functionalModelMeta = (FunctionalModelMeta) this.inputParameters.getParameterByName(FUNCTIONAL_MODEL_META_PARAMETER_NAME).getValue().getUnderlying();
-        this.mappingMap = (Map<String, String>) this.inputParameters.getParameterByName(MAPPING_MAP_PARAMETER_NAME).getValue().getUnderlying();*/
+        String inputFlowParameterName = parametersValues.get(INPUT_FLOW_NAME_PARAMETER_NAME).getString("value");
+        this.inputFlowResultSet =  this.getInputResultFlow().getResultSet(inputFlowParameterName);
+        String repositoryName = parametersValues.get(FUNCTIONAL_MODEL_REPOSITORY_NAME_PARAMETER_NAME).getString("value");
+        String modelName = parametersValues.get(FUNCTIONAL_MODEL_META_NAME_PARAMETER_NAME).getString("value");
+        this.functionalModelMeta = this.getFunctionalModelMetaRepository().findOne(repositoryName,modelName);
+        //this.mappingMap = (Map<String, String>) this.inputParameters.getParameterByName(MAPPING_MAP_PARAMETER_NAME).getValue().getUnderlying();
     }
 
     @Override

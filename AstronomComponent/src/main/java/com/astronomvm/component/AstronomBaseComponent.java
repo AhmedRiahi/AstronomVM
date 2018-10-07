@@ -3,7 +3,7 @@ package com.astronomvm.component;
 import com.astronomvm.component.exception.ComponentException;
 import com.astronomvm.core.data.output.ResultFlow;
 import com.astronomvm.core.meta.ComponentMeta;
-import com.astronomvm.core.meta.ParameterMeta;
+import com.astronomvm.core.meta.functional.IFunctionalModelMetaRepository;
 import com.astronomvm.core.service.IComponentLogManager;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +17,7 @@ public abstract class AstronomBaseComponent {
 
     private IComponentLogManager logger;
     private ResultFlow inputResultFlow;
+    private IFunctionalModelMetaRepository functionalModelMetaRepository;
 
     public abstract ComponentMeta getComponentMeta();
     public abstract void parseInputParameters(Map<String, JSONObject> parametersValues);

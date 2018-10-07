@@ -24,6 +24,7 @@
         <module>AstronomAgent</module>
         <module>FunctionalModelMapperComponent</module>
         <module>Examples</module>
+        <module>FunctionalRepositoryService</module>
     </modules>
 
     <dependencies>
