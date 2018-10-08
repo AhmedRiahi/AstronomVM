@@ -21,6 +21,9 @@ AstronomVM is a platform that aims to provide the possibility to create, execute
    </li>
 </ul>
 
+<h2>Platform Architecture</h2>
+![Screenshot](AstronomVM.png)
+
 <h2>Documentation</h2>
 To be done
 
@@ -29,5 +32,3 @@ To be done
 
 <h2>Contributing</h2>
 All contributions are welcom :)
-
-![Screenshot](AstronomVM.png)
