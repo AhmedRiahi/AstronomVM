@@ -25,6 +25,7 @@
         <module>FunctionalModelMapperComponent</module>
         <module>Examples</module>
         <module>FunctionalRepositoryService</module>
+        <module>SQLExecutorComponent</module>
     </modules>
 
     <dependencies>
