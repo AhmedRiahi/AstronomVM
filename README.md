@@ -29,6 +29,9 @@ AstronomVM is a platform that aims to provide the possibility to create, execute
 To be done
 
 <h2>Installation instructions</h2>
+<h3>Prerequisites</h3>
+To be done
+<h3>Installation</h3>
 To be done
 
 <h2>Contributing</h2>
