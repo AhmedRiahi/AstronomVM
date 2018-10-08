@@ -22,6 +22,7 @@ AstronomVM is a platform that aims to provide the possibility to create, execute
 </ul>
 
 <h2>Platform Architecture</h2>
+
 ![Screenshot](AstronomVM.png)
 
 <h2>Documentation</h2>
