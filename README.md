@@ -1,6 +1,6 @@
 # AstronomVM [![Build Status](https://travis-ci.org/AhmedRiahi/AstronomVM.svg?branch=master)](https://travis-ci.org/AhmedRiahi/AstronomVM)
 
-AstronomVM is a platform that aims to provide the possibility to create, execute and deploy functional workflows.The main idea is to create workflows basing on pre-built components.
+AstronomVM is a platform that aims to provide the possibility to create, execute and deploy functional workflows.The main objective is to design workflows basing on pre-built components.
 
 <h2>Project Structure</h2>
 <ul>
