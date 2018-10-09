@@ -1,7 +1,7 @@
 package com.astronomvm.functionalRepository.transformer;
 
-import com.astronomvm.core.data.type.DataType;
-import com.astronomvm.core.meta.functional.FunctionalAttributeMeta;
+import com.astronomvm.core.model.data.type.DataType;
+import com.astronomvm.core.model.meta.functional.FunctionalAttributeMeta;
 import com.astronomvm.functionalRepository.persistence.entity.FunctionalAttributeEntity;
 
 public class FunctionalAttributeTransformer {

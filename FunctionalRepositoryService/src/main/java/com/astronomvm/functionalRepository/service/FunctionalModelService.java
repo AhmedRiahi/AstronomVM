@@ -1,7 +1,7 @@
 package com.astronomvm.functionalRepository.service;
 
 
-import com.astronomvm.core.meta.functional.FunctionalModelMeta;
+import com.astronomvm.core.model.meta.functional.FunctionalModelMeta;
 import com.astronomvm.functionalRepository.exception.FunctionalModelNotFoundException;
 import com.astronomvm.functionalRepository.persistence.entity.FunctionalModelEntity;
 import com.astronomvm.functionalRepository.persistence.repository.IFunctionalModelRepository;

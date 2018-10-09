@@ -2,12 +2,12 @@ package com.astronomvm.csvFileLoader;
 
 import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.component.exception.ComponentException;
-import com.astronomvm.core.data.type.DataType;
-import com.astronomvm.core.data.row.*;
-import com.astronomvm.core.data.output.ResultFlow;
-import com.astronomvm.core.data.output.ResultSet;
-import com.astronomvm.core.meta.ComponentMeta;
-import com.astronomvm.core.meta.ParameterMeta;
+import com.astronomvm.core.model.data.type.DataType;
+import com.astronomvm.core.model.data.row.*;
+import com.astronomvm.core.model.data.output.ResultFlow;
+import com.astronomvm.core.model.data.output.ResultSet;
+import com.astronomvm.core.model.meta.ComponentMeta;
+import com.astronomvm.core.model.meta.ParameterMeta;
 import org.json.JSONObject;
 
 import java.io.IOException;

@@ -1,7 +1,7 @@
-package com.astronomvm.core.data.output;
+package com.astronomvm.core.model.data.output;
 
-import com.astronomvm.core.data.row.Row;
-import com.astronomvm.core.data.row.RowHeader;
+import com.astronomvm.core.model.data.row.Row;
+import com.astronomvm.core.model.data.row.RowHeader;
 import lombok.Data;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package com.astronomvm.core.meta;
+package com.astronomvm.core.model.meta;
 
-import com.astronomvm.core.data.EnvironmentVariables;
+import com.astronomvm.core.model.data.EnvironmentVariables;
 import com.astronomvm.core.exception.StepMetaNotFoundException;
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package com.astronomvm.kernel.engine;
 
-import com.astronomvm.core.meta.MetaFlow;
+import com.astronomvm.core.model.meta.MetaFlow;
 import com.astronomvm.core.service.IComponentLogManager;
 import com.astronomvm.kernel.engine.component.DefaultComponentLogManager;
 import com.astronomvm.kernel.engine.orchestra.IOrchestraListener;

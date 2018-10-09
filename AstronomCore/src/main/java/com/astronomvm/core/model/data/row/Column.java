@@ -1,4 +1,4 @@
-package com.astronomvm.core.data.row;
+package com.astronomvm.core.model.data.row;
 
 import lombok.Data;
 

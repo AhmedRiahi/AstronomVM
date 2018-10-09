@@ -3,8 +3,8 @@ package com.astronomvm.kernel.engine.component;
 import com.astronomvm.component.AstronomBaseComponent;
 
 import com.astronomvm.component.exception.ComponentException;
-import com.astronomvm.core.data.EnvironmentVariables;
-import com.astronomvm.core.data.output.ResultFlow;
+import com.astronomvm.core.model.data.EnvironmentVariables;
+import com.astronomvm.core.model.data.output.ResultFlow;
 import com.astronomvm.core.service.IComponentLogManager;
 import lombok.Data;
 import org.json.JSONArray;

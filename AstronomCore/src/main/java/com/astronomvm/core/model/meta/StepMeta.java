@@ -1,4 +1,4 @@
-package com.astronomvm.core.meta;
+package com.astronomvm.core.model.meta;
 
 
 import lombok.Data;

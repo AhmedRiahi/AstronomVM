@@ -1,6 +1,6 @@
 package com.astronomvm.functionalRepository.transformer;
 
-import com.astronomvm.core.meta.functional.FunctionalModelMeta;
+import com.astronomvm.core.model.meta.functional.FunctionalModelMeta;
 import com.astronomvm.functionalRepository.persistence.entity.FunctionalModelEntity;
 
 import java.util.stream.Collectors;

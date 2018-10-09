@@ -1,6 +1,6 @@
 package com.astronomvm.designer.transformer;
 
-import com.astronomvm.core.meta.StepMeta;
+import com.astronomvm.core.model.meta.StepMeta;
 import com.astronomvm.designer.persistence.entity.workflow.StepMetaEntity;
 
 public class StepMetaTransformer {

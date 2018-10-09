@@ -1,4 +1,4 @@
-package com.astronomvm.core.meta.functional;
+package com.astronomvm.core.model.meta.functional;
 
 public interface IFunctionalModelMetaRepository {
 

@@ -1,6 +1,6 @@
 package com.astronomvm.designer.service;
 
-import com.astronomvm.core.data.EnvironmentVariables;
+import com.astronomvm.core.model.data.EnvironmentVariables;
 import com.astronomvm.designer.persistence.entity.configuration.EnvironmentVariablesEntity;
 import com.astronomvm.designer.persistence.repository.IEnvironmentVariablesRepository;
 import com.astronomvm.designer.transformer.EnvironmentVariablesTransformer;

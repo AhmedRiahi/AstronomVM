@@ -2,10 +2,10 @@ package com.astronomvm.kernel.engine.orchestra;
 
 import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.component.exception.ComponentException;
-import com.astronomvm.core.data.output.ResultFlow;
-import com.astronomvm.core.data.output.ResultSet;
-import com.astronomvm.core.data.output.ResultStorage;
-import com.astronomvm.core.meta.*;
+import com.astronomvm.core.model.data.output.ResultFlow;
+import com.astronomvm.core.model.data.output.ResultSet;
+import com.astronomvm.core.model.data.output.ResultStorage;
+import com.astronomvm.core.model.meta.*;
 import com.astronomvm.core.service.IComponentLogManager;
 import com.astronomvm.kernel.engine.component.ComponentExecutor;
 import com.astronomvm.kernel.model.workflow.AstronomWorkflow;

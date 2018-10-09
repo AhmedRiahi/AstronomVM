@@ -1,11 +1,11 @@
 package com.astronomvm.textFileOutput;
 
 import com.astronomvm.component.AstronomBaseComponent;
-import com.astronomvm.core.data.output.ResultFlow;
-import com.astronomvm.core.data.output.ResultSet;
-import com.astronomvm.core.data.type.DataType;
-import com.astronomvm.core.meta.ComponentMeta;
-import com.astronomvm.core.meta.ParameterMeta;
+import com.astronomvm.core.model.data.output.ResultFlow;
+import com.astronomvm.core.model.data.output.ResultSet;
+import com.astronomvm.core.model.data.type.DataType;
+import com.astronomvm.core.model.meta.ComponentMeta;
+import com.astronomvm.core.model.meta.ParameterMeta;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 

@@ -1,6 +1,6 @@
 package com.astronomvm.designer.service;
 
-import com.astronomvm.core.meta.ComponentMeta;
+import com.astronomvm.core.model.meta.ComponentMeta;
 import com.astronomvm.designer.monitoring.ClientsRegistrationService;
 import com.astronomvm.designer.service.requester.SimulatorRequester;
 import de.codecentric.boot.admin.model.Application;

@@ -1,8 +1,8 @@
 package com.astronomvm.core.service;
 
-import com.astronomvm.core.meta.MetaFlow;
-import com.astronomvm.core.meta.StepMeta;
-import com.astronomvm.core.meta.TransitionMeta;
+import com.astronomvm.core.model.meta.MetaFlow;
+import com.astronomvm.core.model.meta.StepMeta;
+import com.astronomvm.core.model.meta.TransitionMeta;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

@@ -1,4 +1,4 @@
-package com.astronomvm.core.data.output;
+package com.astronomvm.core.model.data.output;
 
 import com.astronomvm.core.exception.ResultSetNotFoundException;
 import lombok.Data;

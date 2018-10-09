@@ -1,4 +1,4 @@
-package com.astronomvm.core.data.type;
+package com.astronomvm.core.model.data.type;
 
 import com.astronomvm.core.exception.DataTypeNotFoundException;
 
@@ -10,7 +10,7 @@ public enum DataType {
     INPUT_FLOW_NAME,
     FUNCTIONAl_MODEL,
     FUNCTIONAL_MODEL_REPOSITORY_NAME,
-    DTABASE_CONNECTION_PROPERTIES,
+    DATABASE_CONNECTION_PROPERTIES,
     OBJECT;
 
 
