@@ -7,7 +7,7 @@ AstronomVM is a platform that aims to provide the possibility to create, execute
   <li><b>AstronomKernel :</b> This module provide the implementation of the Core Engine that process workflow provided as input</li>
   <li><b>AstronomCore :</b> Domain module that provide data structures/definitions used by other modules</li> 
   <li><b>AstronomDesigner :</b> UI module</li> 
-  <li><b>AstronomSimulator :</b> Basing on AstronomKernel, this module provide APIs to execute simulate workflows' execution</li> 
+  <li><b>AstronomSimulator :</b> Basing on AstronomKernel, this module provide APIs to execute and simulate workflows' execution</li> 
   <li><b>AstronomAgent :</b> AstronomAgent is similar to AstronomSimulator, it aims to be deployed in order to execute workflows</li>
   <li><b>FunctionalRepositoryService :</b> This module implement the Functional Models CRUD operations</li>
   <li><b>AstronomComponent :</b> This is the abstract specification of Astronom components</li> 
