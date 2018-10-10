@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Entity(name = "AstronomFLow")
+@Entity(name = "META_FLOW")
 public class MetaFlowEntity {
 
     @Id
