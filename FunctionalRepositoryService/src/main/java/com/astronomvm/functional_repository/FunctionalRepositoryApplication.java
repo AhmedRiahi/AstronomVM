@@ -1,4 +1,4 @@
-package com.astronomvm.functionalRepository;
+package com.astronomvm.functional_repository;
 
 
 import org.springframework.boot.SpringApplication;

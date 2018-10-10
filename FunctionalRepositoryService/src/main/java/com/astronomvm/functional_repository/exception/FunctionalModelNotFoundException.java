@@ -1,4 +1,4 @@
-package com.astronomvm.functionalRepository.exception;
+package com.astronomvm.functional_repository.exception;
 
 import com.astronomvm.core.exception.CoreException;
 

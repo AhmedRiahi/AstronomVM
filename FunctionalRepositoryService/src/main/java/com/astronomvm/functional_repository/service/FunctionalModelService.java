@@ -1,11 +1,11 @@
-package com.astronomvm.functionalRepository.service;
+package com.astronomvm.functional_repository.service;
 
 
 import com.astronomvm.core.model.meta.functional.FunctionalModelMeta;
-import com.astronomvm.functionalRepository.exception.FunctionalModelNotFoundException;
-import com.astronomvm.functionalRepository.persistence.entity.FunctionalModelEntity;
-import com.astronomvm.functionalRepository.persistence.repository.IFunctionalModelRepository;
-import com.astronomvm.functionalRepository.transformer.FunctionalModelTransformer;
+import com.astronomvm.functional_repository.exception.FunctionalModelNotFoundException;
+import com.astronomvm.functional_repository.persistence.entity.FunctionalModelEntity;
+import com.astronomvm.functional_repository.persistence.repository.IFunctionalModelRepository;
+import com.astronomvm.functional_repository.transformer.FunctionalModelTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

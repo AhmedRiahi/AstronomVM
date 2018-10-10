@@ -1,6 +1,6 @@
-package com.astronomvm.functionalRepository.persistence.repository;
+package com.astronomvm.functional_repository.persistence.repository;
 
-import com.astronomvm.functionalRepository.persistence.entity.FunctionalModelEntity;
+import com.astronomvm.functional_repository.persistence.entity.FunctionalModelEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

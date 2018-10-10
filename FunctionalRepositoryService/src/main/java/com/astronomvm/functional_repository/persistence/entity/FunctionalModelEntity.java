@@ -1,4 +1,4 @@
-package com.astronomvm.functionalRepository.persistence.entity;
+package com.astronomvm.functional_repository.persistence.entity;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
-package com.astronomvm.functionalRepository.rest;
+package com.astronomvm.functional_repository.rest;
 
 import com.astronomvm.core.model.meta.functional.FunctionalModelMeta;
-import com.astronomvm.functionalRepository.service.FunctionalModelService;
+import com.astronomvm.functional_repository.service.FunctionalModelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

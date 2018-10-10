@@ -39,11 +39,11 @@ public class FunctionalModelMapperComponent extends AstronomBaseComponent {
 
         ParameterMeta functionalModelRepositoryNameParameterMeta = new ParameterMeta();
         functionalModelRepositoryNameParameterMeta.setName(FUNCTIONAL_MODEL_REPOSITORY_NAME_PARAMETER_NAME);
-        functionalModelRepositoryNameParameterMeta.setType(DataType.FUNCTIONAl_MODEL);
+        functionalModelRepositoryNameParameterMeta.setType(DataType.FUNCTIONAL_MODEL);
 
         ParameterMeta functionalModelMetaParameterMeta = new ParameterMeta();
         functionalModelMetaParameterMeta.setName(FUNCTIONAL_MODEL_META_NAME_PARAMETER_NAME);
-        functionalModelMetaParameterMeta.setType(DataType.FUNCTIONAl_MODEL);
+        functionalModelMetaParameterMeta.setType(DataType.STRING);
 
         ParameterMeta mappingMapParameterMeta = new ParameterMeta();
         mappingMapParameterMeta.setName(MAPPING_MAP_PARAMETER_NAME);
