@@ -17,7 +17,6 @@
             <plugin>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok-maven-plugin</artifactId>
-                <version>${project.version}</version>
                 <executions>
                     <execution>
                         <id>delombok</id>
@@ -26,10 +25,7 @@
                             <goal>delombok</goal>
                         </goals>
                         <configuration>
-                            <formatPreferences>
-                                <javaLangAsFQN>skip</javaLangAsFQN>
-                            </formatPreferences>
-                            <verbose>true</verbose>
+                            <encoding>UTF-8</encoding>
                         </configuration>
                     </execution>
                     <execution>
@@ -39,6 +35,7 @@
                             <goal>testDelombok</goal>
                         </goals>
                         <configuration>
+                            <encoding>UTF-8</encoding>
                             <verbose>true</verbose>
                         </configuration>
                     </execution>
