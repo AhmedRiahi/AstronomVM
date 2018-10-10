@@ -1,6 +1,5 @@
 package com.astronomvm.core.model.database;
 
-import lombok.Data;
 
 public enum JDBCDriver {
     MYSQL("com.mysql.jdbc.Driver"),
