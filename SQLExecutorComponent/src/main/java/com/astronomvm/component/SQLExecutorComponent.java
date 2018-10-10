@@ -1,6 +1,5 @@
-package com.astronomvm.sqlExecutor;
+package com.astronomvm.component;
 
-import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.component.exception.ComponentException;
 import com.astronomvm.core.model.data.output.ResultFlow;
 import com.astronomvm.core.model.data.row.AstronomObject;
@@ -71,34 +70,36 @@ public class SQLExecutorComponent extends AstronomBaseComponent {
             try(Statement statement = connection.createStatement()){
                 boolean isSelectQuery = statement.execute(this.sqlQuery);
                 if(isSelectQuery){
-                    ResultSet resultSet = statement.getResultSet();
-                    ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-                    com.astronomvm.core.model.data.output.ResultSet astronomResultSet = new com.astronomvm.core.model.data.output.ResultSet();
-                    RowHeader rowHeader = new RowHeader();
-                    astronomResultSet.setRowHeader(rowHeader);
-                    IntStream.range(1,resultSetMetaData.getColumnCount()+1).forEach(columnIndex -> {
-                        try {
-                            String columnName = resultSetMetaData.getColumnName(columnIndex);
-                            rowHeader.addColumn(columnName,DataType.STRING);
-                        }catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                    while (resultSet.next()){
-                        Row row = new Row();
+                    try(ResultSet resultSet = statement.getResultSet()){
+                        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+                        com.astronomvm.core.model.data.output.ResultSet astronomResultSet = new com.astronomvm.core.model.data.output.ResultSet();
+                        RowHeader rowHeader = new RowHeader();
+                        astronomResultSet.setRowHeader(rowHeader);
                         IntStream.range(1,resultSetMetaData.getColumnCount()+1).forEach(columnIndex -> {
                             try {
-                                Object value = resultSet.getObject(columnIndex);
-                                Column column = new Column();
-                                column.setValue(new AstronomObject(value));
-                                row.addColumn(column);
-                            } catch (SQLException e) {
+                                String columnName = resultSetMetaData.getColumnName(columnIndex);
+                                rowHeader.addColumn(columnName,DataType.STRING);
+                            }catch (SQLException e) {
                                 e.printStackTrace();
                             }
                         });
-                        astronomResultSet.addRow(row);
+                        while (resultSet.next()){
+                            Row row = new Row();
+                            IntStream.range(1,resultSetMetaData.getColumnCount()+1).forEach(columnIndex -> {
+                                try {
+                                    Object value = resultSet.getObject(columnIndex);
+                                    Column column = new Column();
+                                    column.setValue(new AstronomObject(value));
+                                    row.addColumn(column);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+                            });
+                            astronomResultSet.addRow(row);
+                        }
+                        resultFlow.addResultSet("result",astronomResultSet);
                     }
-                    resultFlow.addResultSet("result",astronomResultSet);
+
                 }
             }
 

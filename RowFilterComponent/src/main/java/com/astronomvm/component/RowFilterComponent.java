@@ -1,6 +1,5 @@
-package com.astronomvm.rowFilter;
+package com.astronomvm.component;
 
-import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.core.model.data.output.ResultFlow;
 import com.astronomvm.core.model.data.output.ResultSet;
 import com.astronomvm.core.model.data.row.AstronomObject;

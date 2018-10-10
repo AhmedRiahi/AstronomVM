@@ -1,6 +1,5 @@
-package com.astronomvm.csvFileLoader;
+package com.astronomvm.component;
 
-import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.component.exception.ComponentException;
 import com.astronomvm.core.model.data.type.DataType;
 import com.astronomvm.core.model.data.row.*;

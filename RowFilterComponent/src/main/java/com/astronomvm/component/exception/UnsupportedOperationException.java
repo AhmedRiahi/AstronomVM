@@ -1,4 +1,4 @@
-package com.astronomvm.rowFilter.exception;
+package com.astronomvm.component.exception;
 
 public class UnsupportedOperationException extends RuntimeException {
 }
