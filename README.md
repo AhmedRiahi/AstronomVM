@@ -17,6 +17,7 @@ AstronomVM is a platform that aims to provide the possibility to create, execute
       <li>RowFilterComponent</li>
       <li>TextFileOutputComponent</li>
       <li>FunctionalModelMapperComponent</li>
+      <li>SQLExecutorComponent</li>
     </ul>
    </li>
 </ul>
