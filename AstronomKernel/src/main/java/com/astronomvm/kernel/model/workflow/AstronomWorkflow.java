@@ -1,7 +1,7 @@
 package com.astronomvm.kernel.model.workflow;
 
 import com.astronomvm.component.AstronomBaseComponent;
-import com.astronomvm.core.meta.MetaFlow;
+import com.astronomvm.core.model.meta.MetaFlow;
 import lombok.Data;
 
 import java.util.HashMap;

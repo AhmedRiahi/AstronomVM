@@ -1,7 +1,7 @@
 package com.astronomvm.designer.rest;
 
 
-import com.astronomvm.core.data.EnvironmentVariables;
+import com.astronomvm.core.model.data.EnvironmentVariables;
 import com.astronomvm.designer.service.EnvironmentVariableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

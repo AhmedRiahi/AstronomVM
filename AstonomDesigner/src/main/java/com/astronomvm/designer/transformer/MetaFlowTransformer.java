@@ -1,8 +1,8 @@
 package com.astronomvm.designer.transformer;
 
-import com.astronomvm.core.meta.MetaFlow;
-import com.astronomvm.core.meta.StepMeta;
-import com.astronomvm.core.meta.TransitionMeta;
+import com.astronomvm.core.model.meta.MetaFlow;
+import com.astronomvm.core.model.meta.StepMeta;
+import com.astronomvm.core.model.meta.TransitionMeta;
 import com.astronomvm.designer.persistence.entity.workflow.MetaFlowEntity;
 
 import java.util.stream.Collectors;

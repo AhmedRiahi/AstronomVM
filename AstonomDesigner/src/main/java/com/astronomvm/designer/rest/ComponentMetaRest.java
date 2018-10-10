@@ -1,6 +1,6 @@
 package com.astronomvm.designer.rest;
 
-import com.astronomvm.core.meta.ComponentMeta;
+import com.astronomvm.core.model.meta.ComponentMeta;
 import com.astronomvm.designer.service.ComponentMetaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

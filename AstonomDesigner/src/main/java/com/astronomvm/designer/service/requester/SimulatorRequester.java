@@ -1,7 +1,7 @@
 package com.astronomvm.designer.service.requester;
 
-import com.astronomvm.core.meta.MetaFlow;
-import com.astronomvm.core.meta.ComponentMeta;
+import com.astronomvm.core.model.meta.MetaFlow;
+import com.astronomvm.core.model.meta.ComponentMeta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

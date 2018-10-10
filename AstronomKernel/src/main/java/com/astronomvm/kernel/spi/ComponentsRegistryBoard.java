@@ -1,6 +1,6 @@
 package com.astronomvm.kernel.spi;
 
-import com.astronomvm.core.meta.ComponentMeta;
+import com.astronomvm.core.model.meta.ComponentMeta;
 import com.astronomvm.kernel.exception.ComponentClassNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 

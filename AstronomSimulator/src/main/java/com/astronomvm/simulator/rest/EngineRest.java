@@ -1,6 +1,6 @@
 package com.astronomvm.simulator.rest;
 
-import com.astronomvm.core.meta.MetaFlow;
+import com.astronomvm.core.model.meta.MetaFlow;
 import com.astronomvm.simulator.service.EngineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

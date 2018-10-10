@@ -1,10 +1,7 @@
 package com.astronomvm.examples;
 
-import com.astronomvm.core.data.EnvironmentVariables;
-import com.astronomvm.core.data.row.AstronomObject;
-import com.astronomvm.core.data.type.DataType;
-import com.astronomvm.core.data.row.RowHeader;
-import com.astronomvm.core.meta.*;
+import com.astronomvm.core.model.data.EnvironmentVariables;
+import com.astronomvm.core.model.meta.*;
 import com.astronomvm.kernel.engine.AstronomEngine;
 import com.astronomvm.kernel.spi.ComponentsLoader;
 import lombok.extern.slf4j.Slf4j;
