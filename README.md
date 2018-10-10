@@ -1,4 +1,4 @@
-# AstronomVM [![Build Status](https://travis-ci.org/AhmedRiahi/AstronomVM.svg?branch=master)](https://travis-ci.org/AhmedRiahi/AstronomVM)
+# AstronomVM [![Build Status](https://travis-ci.org/AhmedRiahi/AstronomVM.svg?branch=master)](https://travis-ci.org/AhmedRiahi/AstronomVM) [![Sonar](https://sonarcloud.io/api/project_badges/measure?project=AhmedRiahi_AstronomVM&metric=alert_status)](https://sonarcloud.io/api/project_badges/measure?project=AhmedRiahi_AstronomVM&metric=alert_status)
 
 AstronomVM is a platform that aims to provide the possibility to create, execute and deploy functional workflows.The main objective is to design workflows basing on pre-built components.
 
