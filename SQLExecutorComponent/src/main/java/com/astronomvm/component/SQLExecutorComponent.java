@@ -80,7 +80,7 @@ public class SQLExecutorComponent extends AstronomBaseComponent {
                                 String columnName = resultSetMetaData.getColumnName(columnIndex);
                                 rowHeader.addColumn(columnName,DataType.STRING);
                             }catch (SQLException e) {
-                                e.printStackTrace();
+                                log.error(e.getMessage(),e);
                             }
                         });
                         while (resultSet.next()){
@@ -92,7 +92,7 @@ public class SQLExecutorComponent extends AstronomBaseComponent {
                                     column.setValue(new AstronomObject(value));
                                     row.addColumn(column);
                                 } catch (SQLException e) {
-                                    e.printStackTrace();
+                                    log.error(e.getMessage(),e);
                                 }
                             });
                             astronomResultSet.addRow(row);
@@ -102,7 +102,6 @@ public class SQLExecutorComponent extends AstronomBaseComponent {
 
                 }
             }
-
         } catch (SQLException | ClassNotFoundException e) {
             log.error(e.getMessage(),e);
             throw new ComponentException(e);
