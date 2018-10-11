@@ -8,13 +8,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 public class ComponentsRegistryBoard {
 
     private static final ComponentsRegistryBoard instance = new ComponentsRegistryBoard();
 
-    private Map<ComponentMeta,Class> componentMap = new HashMap<>();
+    private Map<ComponentMeta,Class> componentMap = new ConcurrentHashMap<>();
 
     private ComponentsRegistryBoard(){}
 
@@ -22,7 +23,7 @@ public class ComponentsRegistryBoard {
         return ComponentsRegistryBoard.instance;
     }
 
-    public void registerComponent(ComponentMeta componentMeta,Class clazz){
+    public synchronized void registerComponent(ComponentMeta componentMeta,Class clazz){
         this.componentMap.put(componentMeta,clazz);
     }
 
