@@ -1,4 +1,10 @@
 package com.astronomvm.kernel.exception;
 
-public class ComponentCreationException extends RuntimeException {
+import com.astronomvm.core.exception.CoreException;
+
+public class ComponentCreationException extends CoreException {
+
+    public ComponentCreationException(String name) {
+        super(name);
+    }
 }

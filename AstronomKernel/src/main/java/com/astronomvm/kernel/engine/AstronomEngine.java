@@ -5,7 +5,7 @@ import com.astronomvm.core.service.IComponentLogManager;
 import com.astronomvm.kernel.engine.component.DefaultComponentLogManager;
 import com.astronomvm.kernel.engine.orchestra.IOrchestraListener;
 import com.astronomvm.kernel.engine.orchestra.Orchestrator;
-import com.astronomvm.kernel.factory.WokflowBuilder;
+import com.astronomvm.kernel.factory.WorkflowBuilder;
 import com.astronomvm.kernel.model.workflow.AstronomWorkflow;
 
 import java.util.ArrayList;
@@ -25,12 +25,12 @@ public class AstronomEngine {
     }
 
 
-    public void executeWorkflow(MetaFlow flow,IOrchestraListener... orchestraListeners){
+    public synchronized void executeWorkflow(MetaFlow flow,IOrchestraListener... orchestraListeners){
         this.executeWorkflow(flow,new DefaultComponentLogManager(),orchestraListeners);
     }
 
-    public void executeWorkflow(MetaFlow flow,IComponentLogManager componentLogManager,IOrchestraListener... orchestraListeners){
-        AstronomWorkflow astronomWorkflow = WokflowBuilder.getInstance().buildWorkflow(flow);
+    public synchronized void executeWorkflow(MetaFlow flow,IComponentLogManager componentLogManager,IOrchestraListener... orchestraListeners){
+        AstronomWorkflow astronomWorkflow = WorkflowBuilder.getInstance().buildWorkflow(flow);
         Orchestrator orchestrator = new Orchestrator(astronomWorkflow);
         Arrays.stream(orchestraListeners).forEach(orchestrator::subscribeOrchestraListener);
         orchestrator.setComponentLogManager(componentLogManager);
