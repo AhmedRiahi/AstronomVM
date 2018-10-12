@@ -1,4 +1,4 @@
-package com.astronomvm.kernel.factory;
+package com.astronomvm.kernel.components;
 
 import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.component.exception.ComponentException;

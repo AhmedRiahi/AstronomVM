@@ -2,18 +2,19 @@ package com.astronomvm.kernel.factory;
 
 import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.core.model.meta.MetaFlow;
+import com.astronomvm.kernel.exception.ComponentClassNotFoundException;
 import com.astronomvm.kernel.exception.ComponentCreationException;
 import com.astronomvm.kernel.model.workflow.AstronomWorkflow;
 
-public class WokflowBuilder {
+public class WorkflowBuilder {
 
 
-    private static final WokflowBuilder instance = new WokflowBuilder();
+    private static final WorkflowBuilder instance = new WorkflowBuilder();
 
-    private WokflowBuilder(){}
+    private WorkflowBuilder(){}
 
-    public static WokflowBuilder getInstance(){
-        return WokflowBuilder.instance;
+    public static WorkflowBuilder getInstance(){
+        return WorkflowBuilder.instance;
     }
 
     public static AstronomWorkflow buildWorkflow(MetaFlow metaFlow){
@@ -22,11 +23,10 @@ public class WokflowBuilder {
             try {
                 AstronomBaseComponent component = ComponentFactory.getInstance().buildComponent(step.getComponentName());
                 astronomWorkflow.addComponent(component.getComponentMeta().getName(),component);
-            } catch (IllegalAccessException | InstantiationException e) {
-                throw new ComponentCreationException();
+            } catch (IllegalAccessException | InstantiationException | ComponentClassNotFoundException e) {
+                throw new ComponentCreationException(step.getComponentName());
             }
         });
-
         return astronomWorkflow;
     }
 }
