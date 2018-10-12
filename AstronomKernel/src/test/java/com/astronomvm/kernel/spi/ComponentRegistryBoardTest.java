@@ -5,7 +5,10 @@ import com.astronomvm.kernel.exception.ComponentClassNotFoundException;
 import com.astronomvm.kernel.components.TestComponent;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.modules.junit4.PowerMockRunner;
 
+@RunWith(PowerMockRunner.class)
 public class ComponentRegistryBoardTest {
 
     @Test
