@@ -19,6 +19,6 @@ public class ComponentRegistryBoardTest {
 
     @Test(expected = ComponentClassNotFoundException.class)
     public void testGetNotRegisteredComponentClass(){
-        Class clazz = ComponentsRegistryBoard.getInstance().getComponentClass("TestComponent");
+        Class clazz = ComponentsRegistryBoard.getInstance().getComponentClass("UnknownTestComponent");
     }
 }
