@@ -38,7 +38,6 @@
                                 <configuration>
                                     <encoding>UTF-8</encoding>
                                     <sourceDirectory>src/main/java</sourceDirectory>
-                                    <verbose>true</verbose>
                                 </configuration>
                             </execution>
                             <execution>
