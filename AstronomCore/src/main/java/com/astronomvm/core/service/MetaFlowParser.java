@@ -11,7 +11,6 @@ public class MetaFlowParser {
     private MetaFlowParser(){}
 
     public static MetaFlow parseMetaFlow(String fileContent){
-
         MetaFlow metaFlow = new MetaFlow();
         JSONObject jsonObject = new JSONObject(fileContent);
         metaFlow.setName(jsonObject.getString("name"));
