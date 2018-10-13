@@ -5,16 +5,14 @@ import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.component.exception.ComponentException;
 import com.astronomvm.core.model.data.EnvironmentVariables;
 import com.astronomvm.core.model.data.output.ResultFlow;
-import com.astronomvm.core.service.IComponentLogManager;
+import com.astronomvm.core.interfaces.IComponentLogManager;
 import com.astronomvm.kernel.exception.InvalidComponentParameterFormat;
-import com.google.common.base.Preconditions;
 import lombok.Data;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Data
 public class ComponentExecutor {

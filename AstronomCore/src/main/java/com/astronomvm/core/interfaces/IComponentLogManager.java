@@ -1,4 +1,4 @@
-package com.astronomvm.core.service;
+package com.astronomvm.core.interfaces;
 
 public interface IComponentLogManager {
 

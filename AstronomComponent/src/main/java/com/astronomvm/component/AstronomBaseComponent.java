@@ -2,9 +2,9 @@ package com.astronomvm.component;
 
 import com.astronomvm.component.exception.ComponentException;
 import com.astronomvm.core.model.data.output.ResultFlow;
-import com.astronomvm.core.model.meta.ComponentMeta;
-import com.astronomvm.core.model.meta.functional.IFunctionalModelMetaRepository;
-import com.astronomvm.core.service.IComponentLogManager;
+import com.astronomvm.core.model.meta.component.ComponentMeta;
+import com.astronomvm.core.interfaces.IFunctionalModelMetaRepository;
+import com.astronomvm.core.interfaces.IComponentLogManager;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;

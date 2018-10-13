@@ -1,7 +1,7 @@
 package com.astronomvm.kernel.engine.component;
 
 import com.astronomvm.core.model.meta.functional.FunctionalModelMeta;
-import com.astronomvm.core.model.meta.functional.IFunctionalModelMetaRepository;
+import com.astronomvm.core.interfaces.IFunctionalModelMetaRepository;
 import org.springframework.web.client.RestTemplate;
 
 public class FunctionalModelMetaRepository implements IFunctionalModelMetaRepository {

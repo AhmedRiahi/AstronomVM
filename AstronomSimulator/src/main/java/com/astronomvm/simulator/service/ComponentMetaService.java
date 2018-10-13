@@ -1,6 +1,6 @@
 package com.astronomvm.simulator.service;
 
-import com.astronomvm.core.model.meta.ComponentMeta;
+import com.astronomvm.core.model.meta.component.ComponentMeta;
 import com.astronomvm.kernel.spi.ComponentsLoader;
 import com.astronomvm.kernel.spi.ComponentsRegistryBoard;
 import org.springframework.stereotype.Service;

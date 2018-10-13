@@ -3,7 +3,7 @@ package com.astronomvm.kernel.components;
 import com.astronomvm.component.AstronomBaseComponent;
 import com.astronomvm.component.exception.ComponentException;
 import com.astronomvm.core.model.data.output.ResultFlow;
-import com.astronomvm.core.model.meta.ComponentMeta;
+import com.astronomvm.core.model.meta.component.ComponentMeta;
 import org.json.JSONObject;
 
 import java.util.Map;

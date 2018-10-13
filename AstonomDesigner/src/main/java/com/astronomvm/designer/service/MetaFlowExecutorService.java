@@ -2,7 +2,7 @@ package com.astronomvm.designer.service;
 
 
 import com.astronomvm.core.model.data.EnvironmentVariables;
-import com.astronomvm.core.model.meta.MetaFlow;
+import com.astronomvm.core.model.meta.flow.MetaFlow;
 import com.astronomvm.designer.monitoring.ClientsRegistrationService;
 import com.astronomvm.designer.persistence.entity.configuration.EnvironmentVariablesEntity;
 import com.astronomvm.designer.persistence.entity.workflow.MetaFlowEntity;

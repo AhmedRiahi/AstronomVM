@@ -1,8 +1,8 @@
 package com.astronom.core.meta;
 
 import com.astronomvm.core.exception.StepMetaNotFoundException;
-import com.astronomvm.core.model.meta.MetaFlow;
-import com.astronomvm.core.model.meta.StepMeta;
+import com.astronomvm.core.model.meta.flow.MetaFlow;
+import com.astronomvm.core.model.meta.flow.StepMeta;
 import org.junit.Assert;
 import org.junit.Test;
 

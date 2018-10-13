@@ -1,6 +1,6 @@
 package com.astronomvm.kernel.spi;
 
-import com.astronomvm.core.model.meta.ComponentMeta;
+import com.astronomvm.core.model.meta.component.ComponentMeta;
 import com.astronomvm.kernel.exception.ComponentClassNotFoundException;
 import com.astronomvm.kernel.components.TestComponent;
 import org.junit.Assert;

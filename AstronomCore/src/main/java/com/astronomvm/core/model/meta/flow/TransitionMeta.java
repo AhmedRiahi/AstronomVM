@@ -1,4 +1,4 @@
-package com.astronomvm.core.model.meta;
+package com.astronomvm.core.model.meta.flow;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
