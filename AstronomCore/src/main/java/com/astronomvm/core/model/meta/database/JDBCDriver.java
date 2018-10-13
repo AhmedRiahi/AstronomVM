@@ -1,4 +1,4 @@
-package com.astronomvm.core.model.database;
+package com.astronomvm.core.model.meta.database;
 
 
 public enum JDBCDriver {

@@ -1,7 +1,7 @@
 package com.astronomvm.simulator.rest;
 
 import com.astronomvm.simulator.service.ComponentMetaService;
-import com.astronomvm.core.model.meta.ComponentMeta;
+import com.astronomvm.core.model.meta.component.ComponentMeta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

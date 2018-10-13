@@ -4,8 +4,8 @@ import com.astronomvm.core.model.data.output.ResultFlow;
 import com.astronomvm.core.model.data.output.ResultSet;
 import com.astronomvm.core.model.data.row.RowHeader;
 import com.astronomvm.core.model.data.type.DataType;
-import com.astronomvm.core.model.meta.ComponentMeta;
-import com.astronomvm.core.model.meta.ParameterMeta;
+import com.astronomvm.core.model.meta.component.ComponentMeta;
+import com.astronomvm.core.model.meta.component.ComponentParameterMeta;
 import com.astronomvm.core.model.meta.functional.FunctionalModelMeta;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -33,23 +33,23 @@ public class FunctionalModelMapperComponent extends AstronomBaseComponent {
         ComponentMeta componentMeta = new ComponentMeta();
         componentMeta.setName("FUNCTIONAL_MODEL_MAPPER");
 
-        ParameterMeta inputFlowParameterMeta = new ParameterMeta();
+        ComponentParameterMeta inputFlowParameterMeta = new ComponentParameterMeta();
         inputFlowParameterMeta.setName(INPUT_FLOW_NAME_PARAMETER_NAME);
         inputFlowParameterMeta.setType(DataType.INPUT_FLOW_NAME);
 
-        ParameterMeta functionalModelRepositoryNameParameterMeta = new ParameterMeta();
+        ComponentParameterMeta functionalModelRepositoryNameParameterMeta = new ComponentParameterMeta();
         functionalModelRepositoryNameParameterMeta.setName(FUNCTIONAL_MODEL_REPOSITORY_NAME_PARAMETER_NAME);
         functionalModelRepositoryNameParameterMeta.setType(DataType.FUNCTIONAL_MODEL);
 
-        ParameterMeta functionalModelMetaParameterMeta = new ParameterMeta();
+        ComponentParameterMeta functionalModelMetaParameterMeta = new ComponentParameterMeta();
         functionalModelMetaParameterMeta.setName(FUNCTIONAL_MODEL_META_NAME_PARAMETER_NAME);
         functionalModelMetaParameterMeta.setType(DataType.STRING);
 
-        ParameterMeta mappingMapParameterMeta = new ParameterMeta();
+        ComponentParameterMeta mappingMapParameterMeta = new ComponentParameterMeta();
         mappingMapParameterMeta.setName(MAPPING_MAP_PARAMETER_NAME);
         mappingMapParameterMeta.setType(DataType.OBJECT);
 
-        ParameterMeta outputFlowParameterMeta = new ParameterMeta();
+        ComponentParameterMeta outputFlowParameterMeta = new ComponentParameterMeta();
         outputFlowParameterMeta.setName(OUTPUT_FLOW_NAME_PARAMETER_NAME);
         outputFlowParameterMeta.setType(DataType.STRING);
 

@@ -1,7 +1,7 @@
 package com.astronomvm.simulator.service;
 
 
-import com.astronomvm.core.model.meta.MetaFlow;
+import com.astronomvm.core.model.meta.flow.MetaFlow;
 import com.astronomvm.kernel.engine.AstronomEngine;
 import com.astronomvm.simulator.monitoring.ComponentLogManager;
 import com.astronomvm.simulator.monitoring.OrchestraEventsPublisher;

@@ -1,4 +1,4 @@
-package com.astronomvm.core.model.meta;
+package com.astronomvm.core.model.meta.flow;
 
 import com.astronomvm.core.model.data.EnvironmentVariables;
 import com.astronomvm.core.exception.StepMetaNotFoundException;

@@ -1,8 +1,8 @@
 package com.astronomvm.examples;
 
 import com.astronomvm.core.model.data.EnvironmentVariables;
-import com.astronomvm.core.model.meta.MetaFlow;
-import com.astronomvm.core.model.meta.StepMeta;
+import com.astronomvm.core.model.meta.flow.MetaFlow;
+import com.astronomvm.core.model.meta.flow.StepMeta;
 import com.astronomvm.kernel.engine.AstronomEngine;
 import com.astronomvm.kernel.spi.ComponentsLoader;
 

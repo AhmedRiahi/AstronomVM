@@ -3,8 +3,8 @@ package com.astronomvm.component;
 import com.astronomvm.core.model.data.output.ResultFlow;
 import com.astronomvm.core.model.data.output.ResultSet;
 import com.astronomvm.core.model.data.type.DataType;
-import com.astronomvm.core.model.meta.ComponentMeta;
-import com.astronomvm.core.model.meta.ParameterMeta;
+import com.astronomvm.core.model.meta.component.ComponentMeta;
+import com.astronomvm.core.model.meta.component.ComponentParameterMeta;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 
@@ -33,15 +33,15 @@ public class TextFileOutputComponent extends AstronomBaseComponent {
         ComponentMeta componentMeta = new ComponentMeta();
         componentMeta.setName("TEXT_FILE_OUTPUT");
 
-        ParameterMeta filePathParameterMeta = new ParameterMeta();
+        ComponentParameterMeta filePathParameterMeta = new ComponentParameterMeta();
         filePathParameterMeta.setName(FILE_PATH_PARAMETER_NAME);
         filePathParameterMeta.setType(DataType.STRING);
 
-        ParameterMeta separatorParameterMeta = new ParameterMeta();
+        ComponentParameterMeta separatorParameterMeta = new ComponentParameterMeta();
         separatorParameterMeta.setName(SEPARATOR_PARAMETER_NAME);
         separatorParameterMeta.setType(DataType.STRING);
 
-        ParameterMeta inputFlowNameParameterMeta = new ParameterMeta();
+        ComponentParameterMeta inputFlowNameParameterMeta = new ComponentParameterMeta();
         inputFlowNameParameterMeta.setName(INPUT_FLOW_NAME_PARAMETER_NAME);
         inputFlowNameParameterMeta.setType(DataType.INPUT_FLOW_NAME);
 

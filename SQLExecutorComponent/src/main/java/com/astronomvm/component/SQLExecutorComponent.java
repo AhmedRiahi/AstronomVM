@@ -7,10 +7,10 @@ import com.astronomvm.core.model.data.row.Column;
 import com.astronomvm.core.model.data.row.Row;
 import com.astronomvm.core.model.data.row.RowHeader;
 import com.astronomvm.core.model.data.type.DataType;
-import com.astronomvm.core.model.database.DatabaseConnectionProperties;
-import com.astronomvm.core.model.database.JDBCDriver;
-import com.astronomvm.core.model.meta.ComponentMeta;
-import com.astronomvm.core.model.meta.ParameterMeta;
+import com.astronomvm.core.model.meta.database.DatabaseConnectionProperties;
+import com.astronomvm.core.model.meta.database.JDBCDriver;
+import com.astronomvm.core.model.meta.component.ComponentMeta;
+import com.astronomvm.core.model.meta.component.ComponentParameterMeta;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 
@@ -34,11 +34,11 @@ public class SQLExecutorComponent extends AstronomBaseComponent {
         ComponentMeta componentMeta = new ComponentMeta();
         componentMeta.setName("SQL_EXECUTOR");
 
-        ParameterMeta sqlQueryParameterMeta = new ParameterMeta();
+        ComponentParameterMeta sqlQueryParameterMeta = new ComponentParameterMeta();
         sqlQueryParameterMeta.setName(SQL_QUERY_PARAMETER_NAME);
         sqlQueryParameterMeta.setType(DataType.STRING);
 
-        ParameterMeta databaseConnectionPropertiesParameterMeta = new ParameterMeta();
+        ComponentParameterMeta databaseConnectionPropertiesParameterMeta = new ComponentParameterMeta();
         databaseConnectionPropertiesParameterMeta.setName(DATABASE_CONNECTION_PROPERTIES_PARAMETER_NAME);
         databaseConnectionPropertiesParameterMeta.setType(DataType.DATABASE_CONNECTION_PROPERTIES);
 

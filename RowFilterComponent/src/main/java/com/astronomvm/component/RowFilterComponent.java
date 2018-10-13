@@ -5,8 +5,8 @@ import com.astronomvm.core.model.data.output.ResultSet;
 import com.astronomvm.core.model.data.row.AstronomObject;
 import com.astronomvm.core.model.data.type.DataType;
 import com.astronomvm.core.model.data.row.Row;
-import com.astronomvm.core.model.meta.ComponentMeta;
-import com.astronomvm.core.model.meta.ParameterMeta;
+import com.astronomvm.core.model.meta.component.ComponentMeta;
+import com.astronomvm.core.model.meta.component.ComponentParameterMeta;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -38,27 +38,27 @@ public class RowFilterComponent extends AstronomBaseComponent {
         ComponentMeta componentMeta = new ComponentMeta();
         componentMeta.setName("ROW_FILTER");
 
-        ParameterMeta filterColumnParameterMeta = new ParameterMeta();
+        ComponentParameterMeta filterColumnParameterMeta = new ComponentParameterMeta();
         filterColumnParameterMeta.setName(FILTER_COLUMN_PARAMETER_NAME);
         filterColumnParameterMeta.setType(DataType.STRING);
 
-        ParameterMeta filterOperatorParameterMeta = new ParameterMeta();
+        ComponentParameterMeta filterOperatorParameterMeta = new ComponentParameterMeta();
         filterOperatorParameterMeta.setName(FILTER_OPERATOR_PARAMETER_NAME);
         filterOperatorParameterMeta.setType(DataType.STRING);
 
-        ParameterMeta filterValueParameterMeta = new ParameterMeta();
+        ComponentParameterMeta filterValueParameterMeta = new ComponentParameterMeta();
         filterValueParameterMeta.setName(FILTER_VALUE_PARAMETER_NAME);
         filterValueParameterMeta.setType(DataType.STRING);
 
-        ParameterMeta inputFlowNameParameterMeta = new ParameterMeta();
+        ComponentParameterMeta inputFlowNameParameterMeta = new ComponentParameterMeta();
         inputFlowNameParameterMeta.setName(INPUT_FLOW_NAME_PARAMETER_NAME);
         inputFlowNameParameterMeta.setType(DataType.INPUT_FLOW_NAME);
 
-        ParameterMeta validOutputFlowParameterMeta = new ParameterMeta();
+        ComponentParameterMeta validOutputFlowParameterMeta = new ComponentParameterMeta();
         validOutputFlowParameterMeta.setName(VALID_OUTPUT_FLOW_NAME_PARAMETER_NAME);
         validOutputFlowParameterMeta.setType(DataType.STRING);
 
-        ParameterMeta invalidOutputFlowParameterMeta = new ParameterMeta();
+        ComponentParameterMeta invalidOutputFlowParameterMeta = new ComponentParameterMeta();
         invalidOutputFlowParameterMeta.setName(INVALID_OUTPUT_FLOW_NAME_PARAMETER_NAME);
         invalidOutputFlowParameterMeta.setType(DataType.STRING);
 

@@ -1,7 +1,9 @@
 package com.astronomvm.examples;
 
 import com.astronomvm.core.model.data.EnvironmentVariables;
-import com.astronomvm.core.model.meta.*;
+import com.astronomvm.core.model.meta.flow.MetaFlow;
+import com.astronomvm.core.model.meta.flow.StepMeta;
+import com.astronomvm.core.model.meta.flow.TransitionMeta;
 import com.astronomvm.kernel.engine.AstronomEngine;
 import com.astronomvm.kernel.spi.ComponentsLoader;
 import lombok.extern.slf4j.Slf4j;
