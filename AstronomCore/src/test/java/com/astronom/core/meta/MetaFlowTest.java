@@ -32,6 +32,6 @@ public class MetaFlowTest {
         StepMeta stepMeta = new StepMeta();
         stepMeta.setName("StepName");
         metaFlow.addStepMeta(stepMeta);
-        StepMeta resultStepMeta = metaFlow.getStepMetaByName("StepNameX");
+        metaFlow.getStepMetaByName("StepNameX");
     }
 }
