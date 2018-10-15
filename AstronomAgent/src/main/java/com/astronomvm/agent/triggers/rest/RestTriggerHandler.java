@@ -6,7 +6,6 @@ import com.astronomvm.agent.triggers.TriggersManager;
 import com.astronomvm.core.model.meta.operation.trigger.RestMetaFlowTrigger;
 import com.sun.net.httpserver.HttpExchange;
 
-import java.io.IOException;
 
 public class RestTriggerHandler extends TriggerHandler {
 

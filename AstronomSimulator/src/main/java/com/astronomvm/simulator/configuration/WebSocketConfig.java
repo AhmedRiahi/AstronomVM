@@ -16,8 +16,6 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
         config.enableSimpleBroker("/topic");
         // Prefix for messages FROM client TO server
         config.setApplicationDestinationPrefixes("/app");
-        // /app wird beim client - sendName verwendet: stompClient.send("/app/hello", {}, JSON.stringify({ 'name': name
-        // }));
     }
 
     @Override

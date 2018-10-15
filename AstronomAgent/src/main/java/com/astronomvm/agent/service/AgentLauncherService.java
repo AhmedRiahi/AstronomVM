@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Slf4j
@@ -47,8 +48,11 @@ public class AgentLauncherService {
 
     private OperationMeta loadOperationMeta() throws IOException {
         Path path = Paths.get(this.flowFilePath);
-        String content = Files.lines(path).collect(Collectors.joining("\n"));
-        return OperationMetaParser.parseOperationMeta(content);
+        try(Stream stream = Files.lines(path)){
+            String content = stream.collect(Collectors.joining("\n")).toString();
+            return OperationMetaParser.parseOperationMeta(content);
+        }
+
     }
 
     private void buildOperationTrigger(MetaFlowTrigger metaFlowTrigger){

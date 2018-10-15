@@ -7,7 +7,7 @@ public class StepMetaTransformer {
 
     private StepMetaTransformer(){}
 
-    public static StepMeta fromEntity(StepMetaEntity stepMetaEntity){
+    public static synchronized StepMeta fromEntity(StepMetaEntity stepMetaEntity){
         StepMeta stepMeta = new StepMeta();
         stepMeta.setName(stepMetaEntity.getName());
         stepMeta.setComponentName(stepMetaEntity.getComponentName());

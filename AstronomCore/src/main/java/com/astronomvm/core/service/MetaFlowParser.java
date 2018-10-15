@@ -11,44 +11,34 @@ import java.util.List;
 
 public class MetaFlowParser {
 
-    private final static MetaFlowParser instance = new MetaFlowParser();
 
     private MetaFlowParser(){}
 
-    public static MetaFlowParser getInstance(){
-        return MetaFlowParser.instance;
-    }
-
-    public static MetaFlow parseMetaFlow(String content){
-        JSONObject jsonObject = new JSONObject(content);
-        return parseMetaFlow(jsonObject);
-    }
-
-    public static MetaFlow parseMetaFlow(JSONObject jsonObject){
+    public static synchronized MetaFlow parseMetaFlow(JSONObject jsonObject){
         MetaFlow metaFlow = new MetaFlow();
         metaFlow.setName(jsonObject.getString("name"));
         JSONArray stepsArray = jsonObject.getJSONArray("steps");
         for(int i=0; i < stepsArray.length(); i++){
-            StepMeta stepMeta = instance.parseStepMeta(stepsArray.getJSONObject(i));
+            StepMeta stepMeta = MetaFlowParser.parseStepMeta(stepsArray.getJSONObject(i));
             metaFlow.addStepMeta(stepMeta);
         }
 
         JSONArray transitionsArray = jsonObject.getJSONArray("transitions");
         for(int i=0; i < transitionsArray.length(); i++){
-            TransitionMeta transitionMeta = instance.parseTransitionMeta(transitionsArray.getJSONObject(i),metaFlow.getStepMetaList());
+            TransitionMeta transitionMeta = MetaFlowParser.parseTransitionMeta(transitionsArray.getJSONObject(i),metaFlow.getStepMetaList());
             metaFlow.addTransition(transitionMeta);
         }
         return metaFlow;
     }
 
-    private StepMeta parseStepMeta(JSONObject jsonObject){
+    private static synchronized StepMeta parseStepMeta(JSONObject jsonObject){
         StepMeta stepMeta = new StepMeta();
         stepMeta.setComponentName(jsonObject.getString("componentName"));
         stepMeta.setParametersValues(jsonObject.getJSONObject("parameters").toString());
         return stepMeta;
     }
 
-    private TransitionMeta parseTransitionMeta(JSONObject jsonObject,List<StepMeta> steps){
+    private static synchronized TransitionMeta parseTransitionMeta(JSONObject jsonObject,List<StepMeta> steps){
         TransitionMeta transitionMeta = new TransitionMeta();
         String sourceStepName = jsonObject.getString("sourceStepName");
         String targetStepName = jsonObject.getString("targetStepName");

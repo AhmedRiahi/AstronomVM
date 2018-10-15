@@ -7,12 +7,9 @@ import org.json.JSONObject;
 
 public class OperationMetaParser {
 
-
-    private static final OperationMetaParser instance = new OperationMetaParser();
-
     private OperationMetaParser(){}
 
-    public synchronized static OperationMeta parseOperationMeta(String content){
+    public static synchronized OperationMeta parseOperationMeta(String content){
         OperationMeta operationMeta = new OperationMeta();
         JSONObject jsonObject = new JSONObject(content);
         JSONObject triggersJson = jsonObject.getJSONObject("triggers");

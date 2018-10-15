@@ -12,7 +12,7 @@ public class MetaFlowTransformer {
     private MetaFlowTransformer(){}
 
 
-    public static MetaFlow fromEntity(MetaFlowEntity metaFlowEntity){
+    public static synchronized MetaFlow fromEntity(MetaFlowEntity metaFlowEntity){
         MetaFlow metaFlow = new MetaFlow();
         metaFlow.setName(metaFlowEntity.getName());
         metaFlow.setStepMetaList(metaFlowEntity.getSteps().stream().map(StepMetaTransformer::fromEntity).collect(Collectors.toList()));

@@ -7,16 +7,14 @@ import org.json.JSONObject;
 
 public class MetaFlowTriggerParser {
 
-    private static final MetaFlowTriggerParser instance = new MetaFlowTriggerParser();
-
     private MetaFlowTriggerParser(){}
 
-    public synchronized static MetaFlowTrigger parseMetaFlowTrigger(String content){
+    public static synchronized MetaFlowTrigger parseMetaFlowTrigger(String content){
         JSONObject jsonObject = new JSONObject(content);
         return parseMetaFlowTrigger(jsonObject);
     }
 
-    public synchronized static MetaFlowTrigger parseMetaFlowTrigger(JSONObject jsonObject){
+    public static synchronized MetaFlowTrigger parseMetaFlowTrigger(JSONObject jsonObject){
         MetaFlowTrigger metaFlowTrigger;
         String triggerType = jsonObject.getString("type");
         switch (triggerType){
