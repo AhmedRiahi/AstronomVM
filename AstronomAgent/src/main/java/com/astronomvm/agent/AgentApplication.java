@@ -1,17 +1,20 @@
 package com.astronomvm.agent;
 
+import com.astronomvm.agent.service.AgentLauncherService;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @ComponentScan
-@EnableSwagger2
+@EnableAutoConfiguration
 public class AgentApplication {
 
 
     public static void main(String[] args){
-        SpringApplication.run(AgentApplication.class,args);
+        ConfigurableApplicationContext context = SpringApplication.run(AgentApplication.class,args);
+        context.getBean(AgentLauncherService.class).bootstrap();
     }
 }

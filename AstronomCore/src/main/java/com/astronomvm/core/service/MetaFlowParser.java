@@ -19,9 +19,13 @@ public class MetaFlowParser {
         return MetaFlowParser.instance;
     }
 
-    public static MetaFlow parseMetaFlow(String fileContent){
+    public static MetaFlow parseMetaFlow(String content){
+        JSONObject jsonObject = new JSONObject(content);
+        return parseMetaFlow(jsonObject);
+    }
+
+    public static MetaFlow parseMetaFlow(JSONObject jsonObject){
         MetaFlow metaFlow = new MetaFlow();
-        JSONObject jsonObject = new JSONObject(fileContent);
         metaFlow.setName(jsonObject.getString("name"));
         JSONArray stepsArray = jsonObject.getJSONArray("steps");
         for(int i=0; i < stepsArray.length(); i++){
