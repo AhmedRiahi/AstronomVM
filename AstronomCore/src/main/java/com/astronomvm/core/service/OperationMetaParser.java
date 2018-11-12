@@ -2,7 +2,7 @@ package com.astronomvm.core.service;
 
 import com.astronomvm.core.model.meta.flow.MetaFlow;
 import com.astronomvm.core.model.meta.operation.OperationMeta;
-import com.astronomvm.core.model.meta.operation.trigger.MetaFlowTrigger;
+import com.astronomvm.core.model.meta.operation.trigger.MetaFlowTriggerMeta;
 import org.json.JSONObject;
 
 public class OperationMetaParser {
@@ -13,7 +13,7 @@ public class OperationMetaParser {
         OperationMeta operationMeta = new OperationMeta();
         JSONObject jsonObject = new JSONObject(content);
         JSONObject triggersJson = jsonObject.getJSONObject("triggers");
-        MetaFlowTrigger metaFlowTrigger = MetaFlowTriggerParser.parseMetaFlowTrigger(triggersJson);
+        MetaFlowTriggerMeta metaFlowTrigger = MetaFlowTriggerParser.parseMetaFlowTrigger(triggersJson);
         JSONObject metaFlowJson = jsonObject.getJSONObject("metaFlows");
         MetaFlow metaFlow = MetaFlowParser.parseMetaFlow(metaFlowJson);
 

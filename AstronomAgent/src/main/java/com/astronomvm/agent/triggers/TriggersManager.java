@@ -2,7 +2,7 @@ package com.astronomvm.agent.triggers;
 
 import com.astronomvm.agent.service.MetaFlowExecutorService;
 import com.astronomvm.agent.triggers.rest.RestTriggerInterceptor;
-import com.astronomvm.core.model.meta.operation.trigger.RestMetaFlowTrigger;
+import com.astronomvm.core.model.meta.operation.trigger.RestMetaFlowTriggerMeta;
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpServer;
 
@@ -21,7 +21,7 @@ public class TriggersManager {
         this.metaFlowExecutorService.executeMetaFlow(metaFlowName);
     }
 
-    public void initRestTriggerContext(RestMetaFlowTrigger restMetaFlowTrigger) throws IOException {
+    public void initRestTriggerContext(RestMetaFlowTriggerMeta restMetaFlowTrigger) throws IOException {
         HttpServer httpServer = HttpServer.create(new InetSocketAddress(35000),0);
         HttpContext context = httpServer.createContext(restMetaFlowTrigger.getEndpointName());
         RestTriggerInterceptor restTriggerHandler = new RestTriggerInterceptor(this,restMetaFlowTrigger);

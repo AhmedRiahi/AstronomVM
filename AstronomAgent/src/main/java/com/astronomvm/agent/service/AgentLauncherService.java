@@ -1,10 +1,11 @@
 package com.astronomvm.agent.service;
 
 import com.astronomvm.agent.exception.TriggerInitException;
+import com.astronomvm.agent.exception.UnknowTriggerException;
 import com.astronomvm.agent.triggers.TriggersManager;
 import com.astronomvm.core.model.meta.operation.OperationMeta;
-import com.astronomvm.core.model.meta.operation.trigger.MetaFlowTrigger;
-import com.astronomvm.core.model.meta.operation.trigger.RestMetaFlowTrigger;
+import com.astronomvm.core.model.meta.operation.trigger.MetaFlowTriggerMeta;
+import com.astronomvm.core.model.meta.operation.trigger.RestMetaFlowTriggerMeta;
 import com.astronomvm.core.service.OperationMetaParser;
 import com.astronomvm.kernel.spi.ComponentsLoader;
 import lombok.extern.slf4j.Slf4j;
@@ -55,13 +56,18 @@ public class AgentLauncherService {
 
     }
 
-    private void buildOperationTrigger(MetaFlowTrigger metaFlowTrigger){
-        if(metaFlowTrigger instanceof RestMetaFlowTrigger){
-            try {
-                this.triggersManager.initRestTriggerContext((RestMetaFlowTrigger) metaFlowTrigger);
-            } catch (IOException e) {
-                throw new TriggerInitException(e);
-            }
+    private void buildOperationTrigger(MetaFlowTriggerMeta metaFlowTrigger){
+        switch(metaFlowTrigger.getTriggerType()){
+            case REST:
+                try {
+                    this.triggersManager.initRestTriggerContext((RestMetaFlowTriggerMeta) metaFlowTrigger);
+                } catch (IOException e) {
+                    throw new TriggerInitException(e);
+                }
+                break;
+            default:
+                throw new UnknowTriggerException(metaFlowTrigger.toString());
+
         }
     }
 

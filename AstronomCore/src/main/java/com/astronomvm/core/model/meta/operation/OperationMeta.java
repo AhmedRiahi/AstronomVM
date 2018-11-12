@@ -1,12 +1,12 @@
 package com.astronomvm.core.model.meta.operation;
 
 import com.astronomvm.core.model.meta.flow.MetaFlow;
-import com.astronomvm.core.model.meta.operation.trigger.MetaFlowTrigger;
+import com.astronomvm.core.model.meta.operation.trigger.MetaFlowTriggerMeta;
 import lombok.Data;
 
 @Data
 public class OperationMeta {
 
-    private MetaFlowTrigger metaFlowTrigger;
+    private MetaFlowTriggerMeta metaFlowTrigger;
     private MetaFlow metaFlow;
 }
