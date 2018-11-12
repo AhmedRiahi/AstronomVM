@@ -1,10 +1,10 @@
 package com.astronomvm.agent.triggers;
 
-public abstract class TriggerHandler {
+public abstract class TriggerInterceptor {
 
     protected TriggersManager triggersManager;
 
-    public TriggerHandler(TriggersManager triggersManager){
+    public TriggerInterceptor(TriggersManager triggersManager){
         this.triggersManager = triggersManager;
     }
 
