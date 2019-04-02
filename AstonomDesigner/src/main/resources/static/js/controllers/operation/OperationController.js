@@ -17,7 +17,7 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 		self.operationPlotter = new OperationPlotter();
 		self.operationPlotter.init($scope);
 
-		$scope.selectedOperation = null
+		$scope.selectedOperation = null;
 
 		$scope.project.metaFlows.forEach(function(operation){
 			if(operation.name == $stateParams.operationName){
@@ -30,6 +30,19 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 			$scope.project.metaFlows = new Array();
 		}
 
+		
+		for(var i=0 ; i < $scope.project.metaFlows.length; i++){
+			for(var j=0 ; j< $scope.project.metaFlows[i].steps.length ; j++){
+				if($scope.project.metaFlows[i].steps[j].parametersValues == undefined){
+					$scope.project.metaFlows[i].steps[j].parametersValues = new Array();
+				}else{
+					$scope.project.metaFlows[i].steps[j].parametersValues = JSON.parse($scope.project.metaFlows[i].steps[j].parametersValues).parameters;
+				}
+			}
+		}
+		
+
+		
 		DataService.get(serverURL,'simulator',true).then(function(simulators){
 			$scope.simulators = simulators;
 			console.log($scope.componentsMeta);
@@ -48,10 +61,42 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 	}
 
 	$scope.saveProject = function(){
-		EntityWS.post(serverURL,'project',$scope.project).then(function(data){
-			console.log(data)
+		var tmpProject = JSON.parse(JSON.stringify($scope.project));
+		for(var i=0 ; i < tmpProject.metaFlows.length; i++){
+
+			for(var j=0 ; j< tmpProject.metaFlows[i].steps.length ; j++){
+				tmpProject.metaFlows[i].steps[j].parametersValues = {}
+				tmpProject.metaFlows[i].steps[j].parametersValues.parameters = new Array();
+				for(var k=0 ; k < $scope.getComponentMeta(tmpProject.metaFlows[i].steps[j].componentName).parameterMetas.length ; k++){
+					if($scope.project.metaFlows[i].steps[j].parametersValues == undefined){
+						$scope.project.metaFlows[i].steps[j].parametersValues = new Array();
+					}
+
+					var parameterValue = $scope.project.metaFlows[i].steps[j].parametersValues[k] == undefined ? "" : $scope.project.metaFlows[i].steps[j].parametersValues[k].value;
+					
+					tmpProject.metaFlows[i].steps[j].parametersValues.parameters.push({
+						name : $scope.getComponentMeta(tmpProject.metaFlows[i].steps[j].componentName).parameterMetas[k].name,
+						value : parameterValue
+					})
+				}
+				tmpProject.metaFlows[i].steps[j].parametersValues = JSON.stringify(tmpProject.metaFlows[i].steps[j].parametersValues);
+			}
+
+
+			for(var j=0 ; j< tmpProject.metaFlows[i].transitions.length ; j++){
+				tmpProject.metaFlows[i].transitions[j].fromStep.parametersValues = "";
+				tmpProject.metaFlows[i].transitions[j].toStep.parametersValues = "";
+			}
+		}
+
+		
+
+
+		EntityWS.post(serverURL,'project',tmpProject).then(function(data){
+			console.log(data);
 		})
 	}
+
 
 	$scope.addOperation = function(name){
 		var operation = {};

@@ -23,13 +23,13 @@ public class MetaFlowExecutorService {
     @Autowired
     private SimulatorRequester simulatorRequester;
     @Autowired
-    private IMetaFlowRepository operationRepository;
+    private IMetaFlowRepository metaFlowRepository;
 
     @Autowired
     private EnvironmentVariableService environmentVariableService;
 
     public void executeFlow(Integer operationId,String simulatorId){
-        MetaFlowEntity metaFlowEntity = this.operationRepository.findOne(operationId);
+        MetaFlowEntity metaFlowEntity = this.metaFlowRepository.findOne(operationId);
         MetaFlow metaFlow = MetaFlowTransformer.fromEntity(metaFlowEntity);
         //TODO Environment variable should be provided by UI
         EnvironmentVariablesEntity environmentVariablesEntity = this.environmentVariableService.findAll().get(0);

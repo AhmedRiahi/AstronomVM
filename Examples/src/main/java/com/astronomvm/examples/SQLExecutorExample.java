@@ -33,7 +33,7 @@ public class SQLExecutorExample {
                 "    \"parameters\": [\n" +
                 "        {\n" +
                 "            \"name\": \"SQL_QUERY\",\n" +
-                "            \"value\": \"update AstronomFLow set name='ok'\"\n" +
+                "            \"value\": \"update test set hello='ok'\"\n" +
                 "        },\n" +
                 "        {\n" +
                 "            \"name\": \"DATABASE_CONNECTION_PROPERTIES\",\n" +

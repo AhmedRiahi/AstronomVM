@@ -16,7 +16,7 @@ public class ResultFlow {
     }
 
     public ResultSet getResultSet(String resultSetName){
-        if(!this.resultSetMap.containsKey(resultSetName)) throw new ResultSetNotFoundException(resultSetName);
+        if(!this.resultSetMap.containsKey(resultSetName)) throw new ResultSetNotFoundException("ResultSet with name "+resultSetName+" not found");
         return this.resultSetMap.get(resultSetName);
     }
 }
