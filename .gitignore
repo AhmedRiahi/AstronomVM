@@ -20,3 +20,4 @@ FunctionalRepositoryService/target/*
 SQLExecutorComponent/target/*
 logs/*
 RestConsumerComponent/target/*
+JsonPathSelectorComponent/target/*

@@ -142,7 +142,7 @@ var OperationPlotter = function(){
   }
 
   self.drawOperation = function(operation){
-    console.log('draw operation')
+    console.log('draw operation');
     self.steps = operation.steps;
     self.transitions = operation.transitions;
     self.redraw();
