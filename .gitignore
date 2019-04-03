@@ -19,3 +19,4 @@ Examples/target/*
 FunctionalRepositoryService/target/*
 SQLExecutorComponent/target/*
 logs/*
+RestConsumerComponent/target/*
