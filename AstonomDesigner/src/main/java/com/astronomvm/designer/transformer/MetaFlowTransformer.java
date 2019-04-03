@@ -22,6 +22,8 @@ public class MetaFlowTransformer {
             TransitionMeta transitionMeta = new TransitionMeta();
             transitionMeta.setSource(fromStep);
             transitionMeta.setTarget(toStep);
+            transitionMeta.setSourceFlowName(transitionMetaEntity.getSourceFlowName());
+            transitionMeta.setTargetFlowName(transitionMetaEntity.getTargetFlowName());
             metaFlow.addTransition(transitionMeta);
         } );
         return metaFlow;

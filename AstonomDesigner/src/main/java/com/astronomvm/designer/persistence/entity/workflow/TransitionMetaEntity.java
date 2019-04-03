@@ -21,4 +21,10 @@ public class TransitionMetaEntity {
 
     @Column
     private Boolean isErrorTransition;
+
+    @Column
+    private String sourceFlowName;
+
+    @Column
+    private String targetFlowName;
 }

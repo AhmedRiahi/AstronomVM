@@ -42,13 +42,26 @@
 		</div>
 		<div class="row" style="margin-top: 10px">
 			<div class="col-md-12">
-				<div class="card bg-dark text-white" ng-show="selectedStep">
+				<div class="card bg-dark text-white" ng-show="selectedTransition">
 					<div class="card-header">
 						<b>Transition Parameters</b>
 					</div>
 					<div class="card-body bg-white text-dark">
-						{{selectedTransition.fromStep.name}} -> {{selectedTransition.toStep.name}}
-						<input type="checkbox" ng-model="selectedTransition.isErrorTransition"/>Error transition
+						<p>From <b><{{selectedTransition.fromStep.name}}></b></p>
+						<p>To <b><{{selectedTransition.toStep.name}}></b></p>
+						<div class="form-group">
+							<input type="checkbox" ng-model="selectedTransition.isErrorTransition"/>Error transition
+						</div>
+
+						<div class="form-group">
+							<label>Source Flow Name</label>
+							<input type="text" ng-model="selectedTransition.sourceFlowName" class="form-control" placeholder="Source Flow Name">
+						</div>
+
+						<div class="form-group">
+							<label>Target Flow Name</label>
+							<input type="text" ng-model="selectedTransition.targetFlowName" class="form-control" placeholder="Target Flow Name">
+						</div>
 					</div>
 				</div>
 			</div>

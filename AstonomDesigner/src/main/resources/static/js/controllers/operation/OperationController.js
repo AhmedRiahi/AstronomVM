@@ -136,8 +136,10 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 
 	$scope.connectSteps = function(){
 		var transition = {}
-		transition.fromStep = self.operationPlotter.getSelectedNodes()[0]
-		transition.toStep = self.operationPlotter.getSelectedNodes()[1]
+		transition.fromStep = self.operationPlotter.getSelectedNodes()[0];
+		transition.toStep = self.operationPlotter.getSelectedNodes()[1];
+		transition.sourceFlowName = "";
+		transition.targetFlowName = "";
 		if($scope.selectedOperation.transitions == undefined){
 			$scope.selectedOperation.transitions = new Array();
 		}
