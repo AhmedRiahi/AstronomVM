@@ -1,0 +1,83 @@
+{
+  "triggers": {
+    "type": "Rest",
+    "endpoint": {
+      "name": "/test"
+    },
+    "metaFlowName": "Operation_0"
+  },
+  "metaFlows": {
+    "name": "Operation_0",
+    "steps": [
+      {
+        "id": 31,
+        "name": "CSV_FILE_LOADER_0",
+        "componentName": "CSV_FILE_LOADER",
+        "parametersValues": {
+          "parameters": [
+            {
+              "name": "OUTPUT_FLOW_NAME",
+              "value": "csv_flow"
+            },
+            {
+              "name": "SEPARATOR",
+              "value": ","
+            },
+            {
+              "name": "ROW_HEADER_COLUMNS_LENGTH",
+              "value": "2"
+            },
+            {
+              "name": "FILE_PATH",
+              "value": "c:\\\\astronom\\\\file.txt"
+            }
+          ]
+        },
+        "graphicsProperties": {
+          "id": 30,
+          "x": 297,
+          "y": 201
+        },
+        "$$hashKey": "object:16"
+      },
+      {
+        "id": 33,
+        "name": "TEXT_FILE_OUTPUT_1",
+        "componentName": "TEXT_FILE_OUTPUT",
+        "parametersValues": {
+          "parameters": [
+            {
+              "name": "SEPARATOR",
+              "value": "::"
+            },
+            {
+              "name": "INPUT_FLOW_NAME",
+              "value": "txt_flow"
+            },
+            {
+              "name": "FILE_PATH",
+              "value": "c:\\\\astronom\\\\out.txt"
+            }
+          ]
+        },
+        "graphicsProperties": {
+          "id": 32,
+          "x": 711,
+          "y": 240
+        },
+        "$$hashKey": "object:17"
+      }
+    ],
+    "transitions": [
+      {
+        "id": 35,
+        "sourceStepName": "CSV_FILE_LOADER_0",
+        "targetStepName": "TEXT_FILE_OUTPUT_1",
+        "isErrorTransition": null,
+        "sourceFlowName": "csv_flow",
+        "targetFlowName": "txt_flow"
+      }
+    ],
+    "$$hashKey": "object:12"
+  }
+}

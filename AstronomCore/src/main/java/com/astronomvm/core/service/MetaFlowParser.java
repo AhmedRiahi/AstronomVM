@@ -33,8 +33,9 @@ public class MetaFlowParser {
 
     private static synchronized StepMeta parseStepMeta(JSONObject jsonObject){
         StepMeta stepMeta = new StepMeta();
+        stepMeta.setName(jsonObject.getString("name"));
         stepMeta.setComponentName(jsonObject.getString("componentName"));
-        stepMeta.setParametersValues(jsonObject.getJSONObject("parameters").toString());
+        stepMeta.setParametersValues(jsonObject.getJSONObject("parametersValues").toString());
         return stepMeta;
     }
 
@@ -48,7 +49,7 @@ public class MetaFlowParser {
         transitionMeta.setSource(sourceStep);
         transitionMeta.setTarget(targetStep);
         transitionMeta.setSourceFlowName(jsonObject.getString("sourceFlowName"));
-        transitionMeta.setSourceFlowName(jsonObject.getString("targetFlowName"));
+        transitionMeta.setTargetFlowName(jsonObject.getString("targetFlowName"));
         return transitionMeta;
     }
 }

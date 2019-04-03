@@ -7,13 +7,13 @@ import org.json.JSONObject;
 
 public class OperationMetaParser {
 
-    private OperationMetaParser(){}
+    private MetaFlowTriggerParser metaFlowTriggerParser = new MetaFlowTriggerParser();
 
-    public static synchronized OperationMeta parseOperationMeta(String content){
+    public synchronized OperationMeta parseOperationMeta(String content){
         OperationMeta operationMeta = new OperationMeta();
         JSONObject jsonObject = new JSONObject(content);
         JSONObject triggersJson = jsonObject.getJSONObject("triggers");
-        MetaFlowTriggerMeta metaFlowTrigger = MetaFlowTriggerParser.parseMetaFlowTrigger(triggersJson);
+        MetaFlowTriggerMeta metaFlowTrigger = this.metaFlowTriggerParser.parseMetaFlowTrigger(triggersJson);
         JSONObject metaFlowJson = jsonObject.getJSONObject("metaFlows");
         MetaFlow metaFlow = MetaFlowParser.parseMetaFlow(metaFlowJson);
 

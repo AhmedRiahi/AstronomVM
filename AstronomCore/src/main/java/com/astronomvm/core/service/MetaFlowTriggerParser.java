@@ -5,23 +5,23 @@ import com.astronomvm.core.model.meta.operation.trigger.MetaFlowTriggerMeta;
 import com.astronomvm.core.model.meta.operation.trigger.RestMetaFlowTriggerMeta;
 import org.json.JSONObject;
 
+
 public class MetaFlowTriggerParser {
 
-    private MetaFlowTriggerParser(){}
 
-    public static synchronized MetaFlowTriggerMeta parseMetaFlowTrigger(String content){
-        JSONObject jsonObject = new JSONObject(content);
-        return parseMetaFlowTrigger(jsonObject);
-    }
+    public synchronized MetaFlowTriggerMeta parseMetaFlowTrigger(JSONObject jsonObject){
 
-    public static synchronized MetaFlowTriggerMeta parseMetaFlowTrigger(JSONObject jsonObject){
-        MetaFlowTriggerMeta metaFlowTrigger;
         String triggerType = jsonObject.getString("type");
         switch (triggerType){
-            case "Rest": metaFlowTrigger = new RestMetaFlowTriggerMeta();break;
-            default: throw  new MetaFlowTriggerNotFoundException(triggerType);
+            case "Rest": return this.parseRestMetaFlowTriggerMeta(jsonObject);
+            default: throw new MetaFlowTriggerNotFoundException(triggerType);
         }
+    }
 
-        return metaFlowTrigger;
+    private RestMetaFlowTriggerMeta parseRestMetaFlowTriggerMeta(JSONObject jsonObject){
+        RestMetaFlowTriggerMeta restMetaFlowTriggerMeta = new RestMetaFlowTriggerMeta();
+        restMetaFlowTriggerMeta.setEndpointName(jsonObject.getJSONObject("endpoint").getString("name"));
+        restMetaFlowTriggerMeta.setMetaFlowName(jsonObject.getString("metaFlowName"));
+        return restMetaFlowTriggerMeta;
     }
 }

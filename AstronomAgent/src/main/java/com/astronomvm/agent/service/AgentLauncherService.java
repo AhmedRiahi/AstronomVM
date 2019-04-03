@@ -29,10 +29,12 @@ public class AgentLauncherService {
 
     private TriggersManager triggersManager;
     private MetaFlowExecutorService metaFlowExecutorService = new MetaFlowExecutorService();
+    private OperationMetaParser operationMetaParser = new OperationMetaParser();
 
     public void bootstrap() {
         try {
             log.info("Bootstrapping Astronom Agent");
+            log.info("Loading components...");
             ComponentsLoader.getInstance().loadComponents();
             log.info("Loading operation meta");
             OperationMeta operationMeta = this.loadOperationMeta();
@@ -51,23 +53,20 @@ public class AgentLauncherService {
         Path path = Paths.get(this.flowFilePath);
         try(Stream stream = Files.lines(path)){
             String content = stream.collect(Collectors.joining("\n")).toString();
-            return OperationMetaParser.parseOperationMeta(content);
+            return this.operationMetaParser.parseOperationMeta(content);
         }
 
     }
 
     private void buildOperationTrigger(MetaFlowTriggerMeta metaFlowTrigger){
-        switch(metaFlowTrigger.getTriggerType()){
-            case REST:
-                try {
-                    this.triggersManager.initRestTriggerContext((RestMetaFlowTriggerMeta) metaFlowTrigger);
-                } catch (IOException e) {
-                    throw new TriggerInitException(e);
-                }
-                break;
-            default:
-                throw new UnknowTriggerException(metaFlowTrigger.toString());
-
+        if(metaFlowTrigger instanceof RestMetaFlowTriggerMeta) {
+            try {
+                this.triggersManager.initRestTriggerContext((RestMetaFlowTriggerMeta) metaFlowTrigger);
+            } catch (IOException e) {
+                throw new TriggerInitException(e);
+            }
+        }else{
+            throw new UnknowTriggerException(metaFlowTrigger.getClass().toString());
         }
     }
 

@@ -1,6 +1,7 @@
 package com.astronomvm.agent.service;
 
 import com.astronomvm.core.exception.MetaFlowNotFoundException;
+import com.astronomvm.core.model.data.EnvironmentVariables;
 import com.astronomvm.core.model.meta.flow.MetaFlow;
 import com.astronomvm.kernel.engine.AstronomEngine;
 import lombok.Data;
@@ -14,6 +15,7 @@ public class MetaFlowExecutorService {
 
     public void executeMetaFlow(String metaFlowName){
         MetaFlow metaFlow = this.findMetaFlowByName(metaFlowName);
+        metaFlow.setEnvironmentVariables(new EnvironmentVariables());
         AstronomEngine.getInstance().executeWorkflow(metaFlow);
     }
 

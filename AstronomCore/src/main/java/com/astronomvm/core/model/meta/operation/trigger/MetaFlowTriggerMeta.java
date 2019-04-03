@@ -6,5 +6,4 @@ import lombok.Data;
 public abstract class MetaFlowTriggerMeta {
 
     private String metaFlowName;
-    private TriggerType triggerType;
 }

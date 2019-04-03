@@ -18,3 +18,4 @@ FunctionalModelMapperComponent/target/*
 Examples/target/*
 FunctionalRepositoryService/target/*
 SQLExecutorComponent/target/*
+logs/*

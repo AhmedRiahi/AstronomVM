@@ -5,7 +5,9 @@ import com.astronomvm.core.model.meta.flow.MetaFlow;
 import com.astronomvm.kernel.exception.ComponentClassNotFoundException;
 import com.astronomvm.kernel.exception.ComponentCreationException;
 import com.astronomvm.kernel.model.workflow.AstronomWorkflow;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class WorkflowBuilder {
 
 
@@ -24,6 +26,7 @@ public class WorkflowBuilder {
                 AstronomBaseComponent component = ComponentFactory.getInstance().buildComponent(step.getComponentName());
                 astronomWorkflow.addComponent(component.getComponentMeta().getName(),component);
             } catch (IllegalAccessException | InstantiationException | ComponentClassNotFoundException e) {
+                log.error(e.getMessage(),e);
                 throw new ComponentCreationException(step.getComponentName());
             }
         });
