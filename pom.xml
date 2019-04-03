@@ -26,6 +26,8 @@
         <module>Examples</module>
         <module>FunctionalRepositoryService</module>
         <module>SQLExecutorComponent</module>
+        <module>RestConsumerComponent</module>
+        <module>JsonPathSelectorComponent</module>
     </modules>
 
     <dependencies>
