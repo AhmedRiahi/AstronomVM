@@ -32,7 +32,7 @@
 							<input type="text" class="form-control form-control-sm" ng-model="selectedStep.name" placeholder="Step Name">
 						</div>
 						<div class="form-group"
-							 ng-repeat="(i,parameterMeta) in getComponentMeta(selectedStep.componentName).parameterMetas">
+							 ng-repeat="(i,parameterMeta) in getComponentMeta(selectedStep.componentName).parameterMetas track by $index">
 							<label>{{parameterMeta.name}}</label>
 							<input type="text" class="form-control form-control-sm" ng-model="selectedStep.parametersValues[i].value" placeholder="{{parameterMeta.name}}">
 						</div>

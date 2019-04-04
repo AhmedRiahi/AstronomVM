@@ -2,6 +2,9 @@ package com.astronomvm.component;
 
 import com.astronomvm.core.model.data.output.ResultFlow;
 import com.astronomvm.core.model.data.output.ResultSet;
+import com.astronomvm.core.model.data.row.AstronomObject;
+import com.astronomvm.core.model.data.row.Column;
+import com.astronomvm.core.model.data.row.Row;
 import com.astronomvm.core.model.data.type.DataType;
 import com.astronomvm.core.model.meta.component.ComponentMeta;
 import com.astronomvm.core.model.meta.component.ComponentParameterMeta;
@@ -10,6 +13,7 @@ import com.jayway.jsonpath.JsonPath;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -62,12 +66,22 @@ public class JsonPathSelectorComponent extends AstronomBaseComponent {
         Object jsonContent = this.inputFlowResultSet.getRows().get(0).getColumns().get(0).getValue().getUnderlying();
         DocumentContext jsonContext = JsonPath.parse(jsonContent);
         Object selectedObject = jsonContext.read(this.jsonSelector);
-        if(selectedObject instanceof JSONArray){
+        ResultSet resultSet = new ResultSet();
 
+        if(selectedObject instanceof ArrayList){
+            ArrayList jsonArray = (ArrayList) selectedObject;
+            jsonArray.stream().forEachOrdered(jsonElement -> {
+                Row row = new Row();
+                row.addColumn(new Column(new AstronomObject(jsonElement)));
+                resultSet.addRow(row);
+            });
         }else{
-
+            Row row = new Row();
+            row.addColumn(new Column(new AstronomObject(selectedObject)));
+            resultSet.addRow(row);
         }
 
+        resultFlow.addResultSet(this.outputFlowName,resultSet);
         return resultFlow;
     }
 }
