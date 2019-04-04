@@ -32,8 +32,10 @@ li.list-group-item{
 
 
 .selectedNode{
+	fill: rgb(51, 137, 236);
 	stroke: black;
     stroke-width: 3px;
+    r:24;
 }
 
 
@@ -50,4 +52,23 @@ li.list-group-item{
 
 .big-icon{
 	font-size: 20px;
+}
+
+
+
+.hovered-component{
+	fill:'orange';
+	cursor: grab;
+	stroke: rgba(0,0,0,0.2);
+    stroke-width: 7px;
+}
+
+
+.clicked-link{
+	stroke: #739019;
+	stroke-width: 3px;
+}
+
+.hovered-link{
+	stroke-width: 3px;
 }

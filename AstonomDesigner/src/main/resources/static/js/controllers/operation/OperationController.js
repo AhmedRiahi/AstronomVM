@@ -5,6 +5,12 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 	var self = this;
 
 	$scope.project = DataService.find('project','name',$stateParams.projectName);
+	if($scope.project == undefined){
+		DataService.get(serverURL,'project',true).then(function(){
+			$scope.project = DataService.find('project','name',$stateParams.projectName);
+			self.init();
+		});
+	}
 	
 	$scope.selectedStep = null;
 	$scope.selectedTransition = null;
@@ -42,15 +48,13 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 		}
 		
 
-		
 		DataService.get(serverURL,'simulator',true).then(function(simulators){
 			$scope.simulators = simulators;
-			console.log($scope.componentsMeta);
+			$scope.selectedSimulator = simulators[0];
+			$scope.simulatorSelectionChanged();
 		});
 	};
 
-
-	self.init();
 
 	$scope.simulatorSelectionChanged = function(){
 		console.log($scope.selectedSimulator)

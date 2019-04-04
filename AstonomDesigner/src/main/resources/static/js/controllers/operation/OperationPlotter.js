@@ -19,7 +19,8 @@ var OperationPlotter = function(){
                   .attr("height", self.displayProps.height)
                   .attr("pointer-events", "all");
 
-    self.svg.append("svg:defs").append("svg:marker")
+    self.svg.append("svg:defs")
+    .append("svg:marker")
     .attr("id", "triangle")
     .attr("refX", 30)
     .attr("refY", 4)
@@ -48,7 +49,13 @@ var OperationPlotter = function(){
     .append("svg:line")
     .attr('class','link')
     .attr("marker-end", "url(#triangle)")
-    .on('click',self.linkClicked)
+    .on('dblclick',self.linkClicked)
+    .on("mouseover", function(d,i){
+      d3.select(this).classed('hovered-link',true);
+    })
+    .on("mouseout", function(d,i){
+      d3.select(this).classed('hovered-link',false);
+    })
     .attr("x1", function(d){
       var fromStep = self.findStepById(d.fromStep.id)
       return fromStep.graphicsProperties.x;
@@ -67,35 +74,44 @@ var OperationPlotter = function(){
     })
     .style("fill", function(d, i) { return 'red' })
 
-      self.link.exit().remove()
+    self.link.exit().remove()
 
     self.node = self.svg.selectAll("g.node")
     .data(self.steps)
     .enter()
     .append("svg:g")
-      .attr('class','node')
-      .attr("transform", function(d){
-        return 'translate('+d.graphicsProperties.x+','+d.graphicsProperties.y+')';
-      })
-      .call(d3.drag()
-          .on("start", self.dragstarted)
-          .on("drag", self.dragged)
-          .on("end", self.dragended));
+    .attr('class','node')
+    .attr("transform", function(d){
+      return 'translate('+d.graphicsProperties.x+','+d.graphicsProperties.y+')';
+    }).call(
+      d3.drag()
+      .on("start", self.dragstarted)
+      .on("drag", self.dragged)
+      .on("end", self.dragended)
+    ).on("mouseover", function(d,i){
+      d3.select(this).select('.component-circle').classed('hovered-component',true);
+    })
+    .on("mouseout", function(d,i){
+      d3.select(this).select('.component-circle').classed('hovered-component',false);
+    })
+    .on('dblclick',self.selectNode)
+    .on('click',self.nodeClicked)
 
-    self.node.append("svg:circle")
+
+
+    var circles = self.node.append("svg:circle")
       .attr("r", 20)
+      .attr('class','component-circle')
       .style("fill", function(d, i) { return '#93cfff' })
-      .on('dblclick',self.selectNode)
-      .on('click',self.nodeClicked);
+      
+      
 
-    self.node.append("svg:image")
+    circles.append("svg:image")
       .attr('x', -13)
       .attr('y', -13)
       .attr('width', 26)
       .attr('height', 26)
       .attr("xlink:href", "/image/file.png")
-      .on('dblclick',self.nodeImageDblClicked)
-      .on('click',self.nodeClicked);
 
     self.node.exit().remove()
       
@@ -106,7 +122,7 @@ var OperationPlotter = function(){
     })
     .attr("text-anchor", "middle")
     .attr("y", "38")
-    .style("fill", "#555").style("font-family", "Arial").style("font-size", 12);
+    .style("fill", "rgb(167, 167, 167)").style("font-family", "Arial").style("font-size", 12);
     
   }
 
@@ -153,11 +169,11 @@ var OperationPlotter = function(){
     console.log(d)
     if(d.isSelected == undefined || !d.isSelected){
       d.isSelected = true;
-      d3.select(this).classed('selectedNode',true)
+      d3.select(this).select('.component-circle').classed('selectedNode',true)
       self.selectedNodes.push(d)
     }else{
       d.isSelected = false;
-      d3.select(this).classed('selectedNode',false)
+      d3.select(this).select('.component-circle').classed('selectedNode',false)
       var index = self.selectedNodes.indexOf(d)
       self.selectedNodes.splice(index,1)
     }
@@ -178,6 +194,7 @@ var OperationPlotter = function(){
   }
 
   self.nodeClicked = function(d){
+    console.log('click')
     console.log(d)
     if(self.clickedNode != null){
       d3.select(self.clickedNode).classed('clickedNode',false)
@@ -190,10 +207,10 @@ var OperationPlotter = function(){
   self.linkClicked = function(d){
     console.log(d)
     if(self.clickedLink != null){
-      d3.select(self.clickedNode).classed('clickedLink',false)
+      d3.select(self.clickedLink).classed('clicked-link',false)
     }
     self.clickedLink = this;
-    d3.select(self.clickedLink).classed('clickedLink',true)
+    d3.select(self.clickedLink).classed('clicked-link',true)
     self.scope.transitionClicked(d);
   }
 

@@ -9,12 +9,12 @@
 					</div>
 					<div class="card-body bg-white text-dark" style="padding: 0px;">
 					  	<ul class="list-group list-group-flush">
-					    	<li class="list-group-item" 
-					    		ng-repeat="step in selectedOperation.steps"
-					    		ng-click="selectStepFromList(step)">
-					    		{{step.name}}
+							<li class="list-group-item small" 
+								ng-repeat="step in selectedOperation.steps"
+								ng-click="selectStepFromList(step)">
+								{{step.name}}
 
-					    	</li>
+							</li>
 					  	</ul>
 					</div>
 				</div>
@@ -79,11 +79,6 @@
 					<button class="btn btn-success btn-sm" ng-click="exportOperation()">Export Operation</button>
 					<button class="btn btn-success btn-sm" ng-click="executeOperation()">Execute</button>
 					<button class="btn btn-success btn-sm" ng-click="saveProject()">Save Project</button>
-					<select class="form-control"
-						ng-options="simulator.name for simulator in simulators" 
-						ng-model="selectedSimulator" 
-						ng-change="simulatorSelectionChanged()"
-						ng-init="selectedSimulator = {}"></select>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -101,22 +96,48 @@
 	</div>
 
 	<div class="col-md-2">
-		<div class="card bg-dark text-white">
-			<div class="card-header">
-				<b>Astronom Components</b>
-			</div>
-			<div class="card-body bg-white text-dark" style="padding: 0px;">
-			  	<ul class="list-group list-group-flush">
-			    	<li class="list-group-item" 
-			    		ng-repeat="componentMeta in componentsMeta">
-			    		{{componentMeta.name}}
-			    		<div class="pull-right">
-							<i class="icon-button fas fa-plus-square text-success" ng-click="addComponent(componentMeta)"></i>
-						</div>
-			    	</li>
-			  	</ul>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white">
+					<div class="card-header">
+						<b>Astronom Components</b>
+					</div>
+					<div class="card-body bg-white text-dark" style="padding: 0px;">
+					  	<ul class="list-group list-group-flush">
+							<li class="list-group-item small" 
+								ng-repeat="componentMeta in componentsMeta">
+								{{componentMeta.name}}
+								<div class="pull-right">
+									<i class="icon-button fas fa-plus-square text-success" ng-click="addComponent(componentMeta)"></i>
+								</div>
+							</li>
+					  	</ul>
+					</div>
+				</div>
 			</div>
 		</div>
+
+		<div class="row" style="margin-top: 10px">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white">
+					<div class="card-header">
+						<b>Available Simulators</b>
+					</div>
+					<div class="card-body bg-white text-dark" style="padding: 0px;">
+					  	<ul class="list-group list-group-flush">
+							<li class="list-group-item small" 
+								ng-repeat="simulator in simulators" 
+								ng-model="selectedSimulator" 
+								ng-click="simulatorSelectionChanged()"
+								ng-class="simulator == selectedSimulator?'list-group-item-success':''">
+								{{simulator.name}}
+							</li>
+					  	</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 	</div>
 	
 </div>

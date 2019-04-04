@@ -56,7 +56,7 @@ var DataService = function($q,EntityWS){
 				}
 			}
 		}else{
-			throw "Data not found "+name+" "+filter+" "+value
+			return undefined;
 		}
 		
 	}

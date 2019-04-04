@@ -61,17 +61,17 @@ public class JsonToModelComponent extends AstronomBaseComponent {
                 jsonObject.keySet();
             }else{
                 if(object instanceof LinkedHashMap){
-                    LinkedHashMap jsonHashmMap = (LinkedHashMap) object;
+                    LinkedHashMap jsonHashMap = (LinkedHashMap) object;
 
                     RowHeader rowHeader = new RowHeader();
-                    jsonHashmMap.keySet().stream().forEach(key -> {
+                    jsonHashMap.keySet().stream().forEach(key -> {
                         rowHeader.addColumn(key.toString(),DataType.UNKNOWN);
                     });
 
                     resultSet.setRowHeader(rowHeader);
 
                     Row rowResult = new Row();
-                    jsonHashmMap.values().stream().forEach(entry -> {
+                    jsonHashMap.values().stream().forEach(entry -> {
                         Column column = new Column(new AstronomObject(entry));
                         rowResult.addColumn(column);
                     });
