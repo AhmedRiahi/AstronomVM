@@ -11,7 +11,8 @@ public enum DataType {
     FUNCTIONAL_MODEL,
     FUNCTIONAL_MODEL_REPOSITORY_NAME,
     DATABASE_CONNECTION_PROPERTIES,
-    OBJECT;
+    OBJECT,
+    UNKNOWN;
 
 
     public static DataType findByName(String name){

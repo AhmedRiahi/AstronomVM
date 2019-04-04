@@ -28,6 +28,7 @@
         <module>SQLExecutorComponent</module>
         <module>RestConsumerComponent</module>
         <module>JsonPathSelectorComponent</module>
+        <module>JsonToModelComponent</module>
     </modules>
 
     <dependencies>

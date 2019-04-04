@@ -21,3 +21,4 @@ SQLExecutorComponent/target/*
 logs/*
 RestConsumerComponent/target/*
 JsonPathSelectorComponent/target/*
+JsonToModelComponent/target/*

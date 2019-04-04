@@ -2,14 +2,13 @@ package com.astronomvm.core.model.meta.component;
 
 import lombok.Data;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Data
 public class ComponentMeta {
 
     private String name;
-    private Set<ComponentParameterMeta> parameterMetas = new HashSet<>();
+    private List<ComponentParameterMeta> parameterMetas = new ArrayList<>();
 
     public void addParameterMeta(ComponentParameterMeta parameterMeta){
         this.parameterMetas.add(parameterMeta);
