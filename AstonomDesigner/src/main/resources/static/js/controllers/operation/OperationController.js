@@ -4,21 +4,6 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 
 	var self = this;
 
-	$scope.project = DataService.find('project','name',$stateParams.projectName);
-	if($scope.project == undefined){
-		DataService.get(serverURL,'project',true).then(function(){
-			$scope.project = DataService.find('project','name',$stateParams.projectName);
-			self.init();
-		});
-	}
-	
-	$scope.selectedStep = null;
-	$scope.selectedTransition = null;
-	$scope.selectedSimulator = null;
-	$scope.logs = "";
-	
-
-
 	self.init = function(){
 		self.operationPlotter = new OperationPlotter();
 		self.operationPlotter.init($scope);
@@ -54,6 +39,26 @@ var OperationController = function($scope,$http,$state,$location,DataService,Ent
 			$scope.simulatorSelectionChanged();
 		});
 	};
+
+
+	$scope.project = DataService.find('project','name',$stateParams.projectName);
+	if($scope.project == undefined){
+		DataService.get(serverURL,'project',true).then(function(){
+			$scope.project = DataService.find('project','name',$stateParams.projectName);
+			self.init();
+		});
+	}else{
+		self.init();
+	}
+	
+	$scope.selectedStep = null;
+	$scope.selectedTransition = null;
+	$scope.selectedSimulator = null;
+	$scope.logs = "";
+	
+
+
+	
 
 
 	$scope.simulatorSelectionChanged = function(){
