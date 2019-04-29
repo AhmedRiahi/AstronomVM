@@ -18,6 +18,9 @@ AstronomVM is a platform that aims to provide the possibility to create, execute
       <li>TextFileOutputComponent</li>
       <li>FunctionalModelMapperComponent</li>
       <li>SQLExecutorComponent</li>
+      <li>JsonToModelComponent</li>
+      <li>JsonPathSelectorComponent</li>
+      <li>RestConsumerComponent</li>
     </ul>
    </li>
 </ul>
